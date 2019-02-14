@@ -8,6 +8,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { SearchBusinessComponent } from './search-business/search-business.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
 import { UserAreaComponent } from './user-area/user-area.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from './material.module';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { UserAreaComponent } from './user-area/user-area.component';
     UserAreaComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    BrowserAnimationsModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
