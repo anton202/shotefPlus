@@ -2,12 +2,23 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { SubmitDelyComponent } from './submit-dely/submit-dely.component';
+import { SubmitDelayComponent } from './submit-delay/submit-delay.component';
+import { SignInComponent } from './sign-in/sign-in.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { SearchBusinessComponent } from './search-business/search-business.component';
+import { SearchResultsComponent } from './search-results/search-results.component';
+import { UserAreaComponent } from './user-area/user-area.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    SubmitDelyComponent
+    SubmitDelayComponent,
+    SignInComponent,
+    SignUpComponent,
+    SearchBusinessComponent,
+    SearchResultsComponent,
+    UserAreaComponent
   ],
   imports: [
     BrowserModule
