@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {MatDialogRef} from '@angular/material';
+
+
 
 @Component({
   selector: 'app-sign-in',
@@ -7,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignInComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialogRef: MatDialogRef<SignInComponent>) { }
 
   ngOnInit() {
   }

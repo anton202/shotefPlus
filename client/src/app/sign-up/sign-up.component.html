@@ -1,3 +1,34 @@
-<p>
-  sign-up works!
-</p>
+<form (ngSubmit)="signUp(form.value)" #form="ngForm">
+  <mat-form-field>
+    <input matInput name="email" type="email" placeholder="דואר אלקטרוני" email required ngModel>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput name="password" type="text" placeholder="סיסמא" minlength="6" required ngModel>
+    <mat-hint>מינימום 6 תווים</mat-hint>
+  </mat-form-field>
+
+  <mat-radio-group class="chooseEmploymentType" name="employmentType" required ngModel>
+    <mat-radio-button value="selfEmployed">עצמאי</mat-radio-button>
+    <mat-radio-button class="employmentType" value="company">חברה בע"מ</mat-radio-button>
+  </mat-radio-group>
+
+
+  <mat-form-field *ngIf="form.value.employmentType === 'selfEmployed'">
+    <input matInput name="idNumber" minlength="9" maxlength="9" placeholder="מספר עוסק פטור/מורשה" required ngModel>
+    <mat-hint>מספר תעודת זהות</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field *ngIf="form.value.employmentType === 'company'">
+    <input matInput name="companyNumber" type="number" placeholder="מספר חברה" required ngModel>
+  </mat-form-field>
+
+  <button type="submit" [disabled]="!form.valid" mat-flat-button color="primary">הרשם</button>
+</form>
+
+<div *ngIf="registretitonCompleated" class="successfulRegistretion">
+  <p style="color:green;">
+    הרישום עבר בהצלחה, נשלח לך מייל ברגע שהמשתמש יאומת
+  </p>
+
+</div>

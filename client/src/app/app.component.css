@@ -26,6 +26,7 @@ ul{
 
 ul>li{
     display: inline-block;
+    cursor: pointer;
 }
 
 ul>li{
