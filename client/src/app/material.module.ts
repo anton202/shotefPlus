@@ -3,6 +3,7 @@ import { BrowserAnimationsModule}  from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms'
 
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { SignInComponent } from "./sign-in/sign-in.component";
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -12,7 +13,8 @@ import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
     declarations:[
-        SignUpComponent
+        SignUpComponent,
+        SignInComponent
     ],
     imports:[
         FormsModule,
@@ -25,6 +27,7 @@ import { MatButtonModule } from '@angular/material/button';
     ],
     exports:[
         SignUpComponent,
+        SignInComponent,
         BrowserAnimationsModule,
         MatDialogModule,
         MatFormFieldModule,
@@ -32,6 +35,6 @@ import { MatButtonModule } from '@angular/material/button';
         MatRadioModule,
         MatButtonModule
     ],
-    entryComponents: [SignUpComponent]
+    entryComponents: [SignUpComponent,SignInComponent]
 })
 export class MaterialModule{}

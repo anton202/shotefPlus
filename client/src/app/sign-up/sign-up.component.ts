@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {MatDialogRef} from '@angular/material';
+import { Component } from '@angular/core';
 
-// This component is a material dialog. 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -10,7 +8,7 @@ import {MatDialogRef} from '@angular/material';
 export class SignUpComponent  {
   registretitonCompleated = false;
 
-  constructor(public dialogRef: MatDialogRef<SignUpComponent>) { }
+  constructor() { }
 
   signUp(formValues){
     console.log(formValues);

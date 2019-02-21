@@ -1,3 +1,11 @@
-<form >
-  <input type="text" name="" id="">סיסמא
+<form (ngSubmit)="signIn(form.value)" #form="ngForm" >
+  <mat-form-field>
+    <input matInput name="email" type="email" placeholder="דואר אלקטרוני" email required ngModel>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input class="password" matInput name="password" type="text" placeholder="סיסמא" minlength="6" required ngModel>
+  </mat-form-field>
+
+  <button type="submit" [disabled]="!form.valid" mat-flat-button color="primary">הכנס</button>
 </form>

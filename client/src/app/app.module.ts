@@ -6,7 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { SubmitDelayComponent } from './submit-delay/submit-delay.component';
-import { SignInComponent } from './sign-in/sign-in.component';
 import { SearchBusinessComponent } from './search-business/search-business.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
 import { UserAreaComponent } from './user-area/user-area.component';
@@ -16,7 +15,6 @@ import { UserAreaComponent } from './user-area/user-area.component';
   declarations: [
     AppComponent,
     SubmitDelayComponent,
-    SignInComponent,
     SearchBusinessComponent,
     SearchResultsComponent,
     UserAreaComponent
