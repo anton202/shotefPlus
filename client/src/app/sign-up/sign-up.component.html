@@ -1,3 +1,4 @@
+<div class="container">
 <form (ngSubmit)="signUp(form.value)" #form="ngForm">
   <mat-form-field>
     <input matInput name="email" type="email" placeholder="דואר אלקטרוני" email required ngModel>
@@ -26,9 +27,16 @@
   <button type="submit" [disabled]="!form.valid" mat-flat-button color="primary">הרשם</button>
 </form>
 
-<div *ngIf="registretitonCompleated" class="successfulRegistretion">
+<div *ngIf="isRegisterClicked && successfullyRegistrated" class="successfulRegistretion">
   <p style="color:green;">
     הרישום עבר בהצלחה, נשלח לך מייל ברגע שהמשתמש יאומת
   </p>
+</div>
+
+<div *ngIf="isRegisterClicked && !successfullyRegistrated">
+  <p class="error">
+    משהו השתבש, נסה עוד פעם או דווח למפתח האתר.
+  </p>
+</div>
 
 </div>
