@@ -1,15 +1,26 @@
-<form (ngSubmit)="signIn(form.value)" #form="ngForm" >
-  <mat-form-field>
-    <input matInput name="email" type="email" placeholder="דואר אלקטרוני" email required ngModel>
-  </mat-form-field>
+<div class="container">
+  <i (click)="onClose()" class="material-icons">clear</i>
 
-  <mat-form-field>
-    <input class="password" matInput name="password" type="text" placeholder="סיסמא" minlength="6" required ngModel>
-  </mat-form-field>
+  <form (ngSubmit)="onSignIn(form.value)" #form="ngForm">
+    <mat-form-field>
+      <input matInput name="email" type="email" placeholder="דואר אלקטרוני" email required ngModel>
+    </mat-form-field>
 
-  <button type="submit" [disabled]="!form.valid" mat-flat-button color="primary">הכנס</button>
-</form>
+    <mat-form-field>
+      <input class="password" matInput name="password" type="text" placeholder="סיסמא" minlength="6" required ngModel>
+    </mat-form-field>
 
-<div class="error">
-  <p>{{errorMessage}}</p>
+    <button type="submit" [disabled]="!form.valid" mat-flat-button color="primary">הכנס</button>
+  </form>
+
+  <div class="error">
+    <p>{{errorMessage}}</p>
+  </div>
+
+  <div *ngIf="successfullyLogedIn" class="successfullyLogedIn">
+    <p style="color:green">
+      התחברתה בהצלחה
+    </p>
+  </div>
+
 </div>

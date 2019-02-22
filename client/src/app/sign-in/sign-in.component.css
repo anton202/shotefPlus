@@ -7,3 +7,8 @@ form{
 input{
     width: 100%;
 }
+
+i{
+    margin-right: 95%;
+    cursor: pointer;
+}

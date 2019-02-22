@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { SignUpService } from './sign-up.service';
+import { MatDialogRef } from '@angular/material';
+
 
 @Component({
   selector: 'app-sign-up',
@@ -11,9 +13,13 @@ export class SignUpComponent  {
   successfullyRegistrated 
   isRegisterClicked = false;
 
-  constructor(private signUpService: SignUpService) { }
+  constructor(private signUpService: SignUpService, private dialogRef:MatDialogRef<SignUpComponent>) { }
 
-  signUp(formValues){
+  onClose(){
+    this.dialogRef.close()
+  }
+
+  onSignUp(formValues){
     this.isRegisterClicked = true;
     
     this.signUpService.registerAccount(formValues)

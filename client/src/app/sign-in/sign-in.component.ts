@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SignInService } from './sign-in.service';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-sign-in',
@@ -7,13 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignInComponent implements OnInit {
   errorMessage
-  constructor() { }
+  successfullyLogedIn = false
+
+  constructor(private signInService: SignInService, private dialogRef:MatDialogRef<SignInComponent>) { }
 
   ngOnInit() {
   }
 
-  signIn(formValues){
-    console.log(formValues)
+  onClose(){
+    this.dialogRef.close()
+  }
+
+  onSignIn(loginValues){
+    this.signInService.login(loginValues)
+    .subscribe((response)=>{
+      this.successfullyLogedIn = true;
+    },
+    error => {}
+    )
   }
 
 }
