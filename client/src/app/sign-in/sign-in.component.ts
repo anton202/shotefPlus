@@ -16,7 +16,7 @@ export class SignInComponent implements OnInit {
   ngOnInit() {
   }
 
-  onClose(){
+  closeDialog(){
     this.dialogRef.close()
   }
 
@@ -24,6 +24,9 @@ export class SignInComponent implements OnInit {
     this.signInService.login(loginValues)
     .subscribe((response)=>{
       this.successfullyLogedIn = true;
+      setTimeout(()=>{
+        this.closeDialog()
+      },1500)
     },
     error => {}
     )
