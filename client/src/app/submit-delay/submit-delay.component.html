@@ -1,26 +1,35 @@
 <div class="container">
-  <header> 
+  <header>
     <h1>דווח על איחור בתשלום</h1>
   </header>
 
   <main>
     <form #f="ngForm">
-        <mat-form-field>
-          <input matInput type="number" name="shotef_plus"  placeholder="שוטף פלוס שסוכם בעסקה (30,40,60...)" ngModel>
-        </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" name="company_name" placeholder="שם החברה" ngModel>
+      </mat-form-field>
 
-        <mat-form-field>
-            <input matInput type="numer" name="days_of_delay" placeholder="ימיי איחור אחרי תקופת שוטף פלוס" ngModel>
-        </mat-form-field>
+      <mat-form-field>
+        <input matInput type="number" name="shotef_plus" placeholder="שוטף פלוס שסוכם בעסקה (30,40,60...)" ngModel>
+      </mat-form-field>
 
-        <mat-form-field>
-          <input matInput type="date" name="start_date_of_shotef_pLus" placeholder="תאריך תחילת שוטף פלוס" ngModel >
-        </mat-form-field>
+      <mat-form-field>
+        <input matInput type="date" name="start_date_of_shotef_pLus" placeholder="תאריך תחילת שוטף פלוס" ngModel>
+      </mat-form-field>
 
-        <mat-form-field>
-          <input matInput type="date" name="date_of_reciving_the_money" placeholder="תאריך קבלץ התשלום" ngModel>
-        </mat-form-field>
-        <button mat-raised-button color="warn">דווח על איחור</button>
-      </form>
+      <mat-form-field>
+        <input matInput type="date" name="date_of_reciving_the_money" placeholder="תאריך קבלת התשלום" ngModel>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="numer" name="days_of_delay" placeholder="ימיי איחור אחרי תקופת שוטף פלוס" ngModel>
+      </mat-form-field>
+
+      <mat-form-field>
+        <textarea matInput name="comment" placeholder="הוסף הערה"  cdkTextareaAutosize ngModel></textarea>
+      </mat-form-field>
+
+      <button mat-raised-button color="warn">דווח על איחור</button>
+    </form>
   </main>
 </div>
