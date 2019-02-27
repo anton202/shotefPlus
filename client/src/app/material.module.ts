@@ -9,6 +9,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+
 
 
 @NgModule({
@@ -23,7 +25,8 @@ import { MatButtonModule } from '@angular/material/button';
         MatFormFieldModule,
         MatInputModule,
         MatRadioModule,
-        MatButtonModule
+        MatButtonModule,
+        MatAutocompleteModule
     ],
     exports:[
         SignUpComponent,
@@ -33,7 +36,8 @@ import { MatButtonModule } from '@angular/material/button';
         MatFormFieldModule,
         MatInputModule,
         MatRadioModule,
-        MatButtonModule
+        MatButtonModule,
+        MatAutocompleteModule
     ],
     entryComponents: [SignUpComponent,SignInComponent]
 })
