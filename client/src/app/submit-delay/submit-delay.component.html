@@ -7,16 +7,19 @@
     <form (ngSubmit)="submitDelay()" [formGroup]="submitDelayForm">
       <mat-form-field>
         <input (keypress)="searchForCompanyName()" matInput type="text" formControlName="company_name"
-        [matAutocomplete]="auto" placeholder="שם חברה/מספר חברה המאחרת בתשלום">
-        <mat-error *ngIf="submitDelayForm.get('company_name').hasError('companyNameDoesNotExist')">החברה לא נמצאת במאגר רשם החברות</mat-error>
+          [matAutocomplete]="auto" placeholder="שם חברה/מספר חברה המאחרת בתשלום" required>
+        <mat-error *ngIf="submitDelayForm.get('company_name').hasError('companyNameDoesNotExist')">החברה לא נמצאת במאגר
+          רשם החברות</mat-error>
       </mat-form-field>
 
       <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let name of companyNameSuggestion" [value]="name['שם חברה']">{{name["שם חברה"]}}</mat-option>
-        </mat-autocomplete>
-      
+        <mat-option *ngFor="let name of companyNameSuggestion" [value]="name['שם חברה']">{{name["שם חברה"]}}
+        </mat-option>
+      </mat-autocomplete>
+
       <mat-form-field>
-        <input matInput type="number" formControlName="shotef_plus" placeholder="שוטף פלוס שסוכם בעסקה (30,40,60...)">
+        <input matInput type="number" formControlName="shotef_plus" required
+          placeholder="שוטף פלוס שסוכם בעסקה (30,40,60...)">
       </mat-form-field>
 
       <mat-form-field>
@@ -28,14 +31,20 @@
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput type="numer" formControlName="days_of_delay" placeholder="ימיי איחור אחרי תקופת שוטף פלוס">
+        <input matInput type="number" required formControlName="days_of_delay"
+          placeholder="ימיי איחור אחרי תקופת שוטף פלוס">
       </mat-form-field>
 
       <mat-form-field>
         <textarea matInput formControlName="comment" placeholder="הוסף הערה" cdkTextareaAutosize></textarea>
       </mat-form-field>
 
-      <button mat-raised-button color="warn">דווח על איחור</button>
+      <button mat-raised-button type="submit" [disabled]="!submitDelayForm.valid" color="warn">דווח על איחור</button>
     </form>
+   
+      <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <div class="submitStatus">
+      <p>{{submitionStatus}}</p>
+    </div>
   </main>
 </div>

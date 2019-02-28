@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
@@ -26,7 +27,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
         MatInputModule,
         MatRadioModule,
         MatButtonModule,
-        MatAutocompleteModule
+        MatAutocompleteModule,
+        MatProgressSpinnerModule
     ],
     exports:[
         SignUpComponent,
@@ -37,7 +39,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
         MatInputModule,
         MatRadioModule,
         MatButtonModule,
-        MatAutocompleteModule
+        MatAutocompleteModule,
+        MatProgressSpinnerModule
     ],
     entryComponents: [SignUpComponent,SignInComponent]
 })

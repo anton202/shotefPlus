@@ -30,17 +30,31 @@ form > button{
     cursor: pointer;
 }
 
+mat-spinner{
+    margin: auto;
+}
+
+.submitStatus > p{
+    width: 40%;
+    margin: auto;
+    text-align: center;
+}
+
 @media (min-width: 320px) and (max-width: 480px) {
     h1{
-        font-size: 18px;
+        font-size: 24px;
+        margin-top: 5%;
+        margin-bottom: 5%;
         width: 80%;
-        align-content: center;
     }
       
     main{
         width:90%;
     }
 
+    .submitStatus > p{
+        width: 100%;
+    }
   
   }
   
