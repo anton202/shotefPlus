@@ -4,13 +4,22 @@
   </header>
 
   <main>
-    <form>
-    <mat-form-field appearance="outline">
+    <form (ngSubmit)="submitDelay()" [formGroup]="submitDelayForm">
+      <mat-form-field appearance="outline">
         <mat-label>הזן שם חברה</mat-label>
-      <input type="search" matInput placeholder="הזן שם חברה">
-    </mat-form-field>
-    <button mat-raised-button type="submit" color="primary">חפש חברה</button>
-  </form>
+        <input (keypress)="searchForCompanyName()" type="search" [matAutocomplete]="auto" formControlName="company_name"
+          matInput placeholder="הזן שם חברה">
+        <mat-error *ngIf="submitDelayForm.get('company_name').hasError('companyNameDoesNotExist')">החברה לא נמצאת במאגר
+          רשם החברות</mat-error>
+      </mat-form-field>
+
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let name of companyNameSuggestion" [value]="name['שם חברה']">{{name["שם חברה"]}}
+        </mat-option>
+      </mat-autocomplete>
+
+      <button mat-raised-button type="submit" color="primary">חפש חברה</button>
+    </form>
 
   </main>
 </div>

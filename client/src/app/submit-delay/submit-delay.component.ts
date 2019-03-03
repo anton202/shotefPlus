@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SubmitDelayService } from './submit-delay.service'
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
+import { SearchBusinessService } from '../search-business/search-business.service';
 
 @Component({
   selector: 'app-submit-delay',
@@ -12,7 +13,7 @@ export class SubmitDelayComponent implements OnInit {
   submitDelayForm: FormGroup;
   isLoading = false;
   submitionStatus;
-  constructor(private submitDelayService: SubmitDelayService) { }
+  constructor(private submitDelayService: SubmitDelayService, private searchBusinessService: SearchBusinessService) { }
 
   ngOnInit() {
     //initialize reactive form in ngOnInit for maitaining readabilety 
@@ -39,7 +40,7 @@ export class SubmitDelayComponent implements OnInit {
   }
 
   searchForCompanyName() {
-    this.submitDelayService.requestCompanyNameFromApi(this.submitDelayForm.get('company_name').value)
+    this.searchBusinessService.requestCompanyNameFromApi(this.submitDelayForm.get('company_name').value)
       .subscribe(companyRecord => {
         this.companyNameSuggestion = companyRecord.result.records;
       },

@@ -6,7 +6,7 @@
   <main>
     <form (ngSubmit)="submitDelay()" [formGroup]="submitDelayForm">
       <mat-form-field>
-        <input (keypress)="searchForCompanyName()" matInput type="text" formControlName="company_name"
+        <input (keypress)="searchForCompanyName()" matInput type="search" formControlName="company_name"
           [matAutocomplete]="auto" placeholder="שם חברה/מספר חברה המאחרת בתשלום" required>
         <mat-error *ngIf="submitDelayForm.get('company_name').hasError('companyNameDoesNotExist')">החברה לא נמצאת במאגר
           רשם החברות</mat-error>

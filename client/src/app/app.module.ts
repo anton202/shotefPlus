@@ -10,6 +10,8 @@ import { SubmitDelayComponent } from './submit-delay/submit-delay.component';
 import { SearchBusinessComponent } from './search-business/search-business.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
 import { UserAreaComponent } from './user-area/user-area.component';
+import { SearchBusinessService } from './search-business/search-business.service';
+
 
 
 @NgModule({
