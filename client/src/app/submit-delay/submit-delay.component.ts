@@ -29,12 +29,11 @@ export class SubmitDelayComponent implements OnInit {
   submitDelay() {
     this.isLoading = true
     this.submitDelayService.submitDelayToApi(this.submitDelayForm.value)
-        .subscribe(response =>{
+        .subscribe(() =>{
           this.isLoading = false;
           this.submitionStatus = 'האיחור בתשלום דווח בהצלחה';
-          console.log('האיחור דווח בהצלחה')
         },
-        error => this.submitionStatus = 'האיחור בתשלום לא דווח, נסה שנית'
+        () => this.submitionStatus = 'האיחור בתשלום לא דווח, נסה שנית'
         )
    
   }
