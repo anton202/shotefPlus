@@ -17,8 +17,6 @@ form{
     flex-direction: column;
 }
 
-
-
 form > button {
     display: block;
     width: 50%;
