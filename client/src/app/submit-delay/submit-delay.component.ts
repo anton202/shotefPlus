@@ -49,12 +49,6 @@ export class SubmitDelayComponent implements OnInit {
         })
   }
 
-  setFormControlCompanyNameValue(companyName) {
-    this.submitDelayForm.patchValue({
-      'company_name': companyName
-    })
-  }
-
   //form control company_name validator
   componyNameDoesNotExist(control: FormControl) {
     if (this.companyNameSuggestion.length === 0) {

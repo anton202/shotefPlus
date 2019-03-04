@@ -10,18 +10,22 @@ import { SearchBusinessService } from './search-business.service';
 })
 export class SearchBusinessComponent implements OnInit {
   companyNameSuggestion = []
-  submitDelayForm: FormGroup;
+  searchCompanyNameForm: FormGroup;
   constructor(private searchBusinessService: SearchBusinessService) { }
 
   ngOnInit() {
     //initialize reactive form in ngOnInit for maitaining readabilety 
-    this.submitDelayForm = new FormGroup({
+    this.searchCompanyNameForm = new FormGroup({
       'company_name': new FormControl(null,this.componyNameDoesNotExist.bind(this))
     })
   }
   
+  onSearchSubmit(){
+    console.log(this.searchCompanyNameForm.get('company_name').value)
+  }
+
   searchForCompanyName() {
-    this.searchBusinessService.requestCompanyNameFromApi(this.submitDelayForm.get('company_name').value)
+    this.searchBusinessService.requestCompanyNameFromApi(this.searchCompanyNameForm.get('company_name').value)
       .subscribe(companyRecord => {
         this.companyNameSuggestion = companyRecord.result.records;
       },

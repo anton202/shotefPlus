@@ -1,3 +1,25 @@
-<p>
-  search-results works!
-</p>
+
+<table dir="rtl" mat-table [dataSource]="dummyData" class="mat-elevation-z8">
+  <ng-container matColumnDef="שם מפרסם הדוח">
+    <th mat-header-cell *matHeaderCellDef> שם מפרסם הדוח </th>
+    <td mat-cell *matCellDef="let company"> {{company.publisherName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="שוטף פלוס">
+    <th mat-header-cell *matHeaderCellDef> שוטף פלוס </th>
+    <td mat-cell *matCellDef="let company"> {{company.shotefPlus}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="יימי איחור אחרי תקופת שוטף פלוס">
+    <th mat-header-cell *matHeaderCellDef> יימי איחור אחרי תקופת שוטף פלוס </th>
+    <td mat-cell *matCellDef="let company"> {{company.daysOfPAymentDelay}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="הערה">
+    <th mat-header-cell *matHeaderCellDef> הערה </th>
+    <td mat-cell *matCellDef="let company"> {{company.comment}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let company; columns: columnsToDisplay"></tr>
+</table>

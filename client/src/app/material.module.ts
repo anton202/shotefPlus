@@ -11,8 +11,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-
-
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
     declarations:[
@@ -28,7 +27,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
         MatRadioModule,
         MatButtonModule,
         MatAutocompleteModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatTableModule
     ],
     exports:[
         SignUpComponent,
@@ -40,7 +40,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
         MatRadioModule,
         MatButtonModule,
         MatAutocompleteModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatTableModule
     ],
     entryComponents: [SignUpComponent,SignInComponent]
 })

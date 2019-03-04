@@ -4,12 +4,12 @@
   </header>
 
   <main>
-    <form (ngSubmit)="submitDelay()" [formGroup]="submitDelayForm">
+    <form (ngSubmit)="onSearchSubmit()" [formGroup]="searchCompanyNameForm">
       <mat-form-field appearance="outline">
         <mat-label>הזן שם חברה</mat-label>
         <input (keypress)="searchForCompanyName()" type="search" [matAutocomplete]="auto" formControlName="company_name"
           matInput placeholder="הזן שם חברה">
-        <mat-error *ngIf="submitDelayForm.get('company_name').hasError('companyNameDoesNotExist')">החברה לא נמצאת במאגר
+        <mat-error *ngIf="searchCompanyNameForm.get('company_name').hasError('companyNameDoesNotExist')">החברה לא נמצאת במאגר
           רשם החברות</mat-error>
       </mat-form-field>
 
