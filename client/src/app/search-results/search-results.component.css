@@ -1,4 +1,13 @@
 table {
     width: 100%;
     margin-top: 5%;
+    text-align: right;
+  }
+
+  th.mat-header-cell{
+    text-align: center;
+  }
+
+  td.mat-cell{
+    text-align: center;
   }
