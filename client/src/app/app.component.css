@@ -43,6 +43,7 @@ ul>li{
 .searchResults{
     width: 80%;
     margin: auto;
+    height: 700px;
 }
 
 @media (min-width: 320px) and (max-width: 480px) {
