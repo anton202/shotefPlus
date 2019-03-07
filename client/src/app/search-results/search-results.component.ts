@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {MatPaginator, MatTableDataSource} from '@angular/material';
 
 @Component({
   selector: 'app-search-results',
@@ -13,20 +14,20 @@ export class SearchResultsComponent implements OnInit {
     comment:'החברה תמיד מאחרת בתשלומים שלה ממולץ לעלות להם את המחיר על העבודה עקב האיחרוים בתשלומים'
   },{
     publisherName:'שלג הנדסה',
-    shotefPlus: 60,
-    daysOfPAymentDelay: 30,
+    shotefPlus: 40,
+    daysOfPAymentDelay: 70,
     comment:'החברה תמיד מאחרת בתשלומים שלה ממולץ לעלות להם את המחיר על העבודה עקב האיחרוים בתשלומים'
   },
   {
     publisherName:'שלג הנדסה',
-    shotefPlus: 60,
-    daysOfPAymentDelay: 30,
+    shotefPlus: 30,
+    daysOfPAymentDelay: 20,
     comment:'החברה תמיד מאחרת בתשלומים שלה ממולץ לעלות להם את המחיר על העבודה עקב האיחרוים בתשלומים'
   },
   {
     publisherName:'שלג הנדסה',
-    shotefPlus: 60,
-    daysOfPAymentDelay: 30,
+    shotefPlus: 50,
+    daysOfPAymentDelay: 88,
     comment:'החברה תמיד מאחרת בתשלומים שלה ממולץ לעלות להם את המחיר על העבודה עקב האיחרוים בתשלומים'
   },{
     publisherName:'שלג הנדסה',
@@ -36,8 +37,31 @@ export class SearchResultsComponent implements OnInit {
   },
   {
     publisherName:'שלג הנדסה',
-    shotefPlus: 60,
-    daysOfPAymentDelay: 30,
+    shotefPlus: 120,
+    daysOfPAymentDelay: 15,
+    comment:'החברה תמיד מאחרת בתשלומים שלה ממולץ לעלות להם את המחיר על העבודה עקב האיחרוים בתשלומים'
+  },
+  {
+    publisherName:'שלג הנדסה',
+    shotefPlus: 90,
+    daysOfPAymentDelay: 100,
+    comment:'החברה תמיד מאחרת בתשלומים שלה ממולץ לעלות להם את המחיר על העבודה עקב האיחרוים בתשלומים'
+  },{
+    publisherName:'שלג הנדסה',
+    shotefPlus: 100,
+    daysOfPAymentDelay: 65,
+    comment:'החברה תמיד מאחרת בתשלומים שלה ממולץ לעלות להם את המחיר על העבודה עקב האיחרוים בתשלומים'
+  },
+  {
+    publisherName:'שלג הנדסה',
+    shotefPlus: 33,
+    daysOfPAymentDelay: 15,
+    comment:'החברה תמיד מאחרת בתשלומים שלה ממולץ לעלות להם את המחיר על העבודה עקב האיחרוים בתשלומים'
+  },
+  {
+    publisherName:'שלג הנדסה',
+    shotefPlus: 40,
+    daysOfPAymentDelay: 10,
     comment:'החברה תמיד מאחרת בתשלומים שלה ממולץ לעלות להם את המחיר על העבודה עקב האיחרוים בתשלומים'
   }
 ]
@@ -45,9 +69,16 @@ export class SearchResultsComponent implements OnInit {
 
   columnsToDisplay = ['שם מפרסם הדוח','שוטף פלוס','יימי איחור אחרי תקופת שוטף פלוס','הערה'];
   headerColumns = ['שם חברה','מספר חברה','ממוצע שוטף פלוס','ממוצע ימיי איחור'];
+  //paginattor length should be the length of the array that is fetched from the server with the compnay delays.
+  //paginatorLength = 100;
+  pageSize = 10;
+  dataSource =  new MatTableDataSource(this.dummyData);
+
+  @ViewChild(MatPaginator) paginator: MatPaginator
   constructor() { }
 
   ngOnInit() {
+    this.dataSource.paginator = this.paginator;
   }
 
 }

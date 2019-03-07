@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
     declarations:[
@@ -28,7 +29,8 @@ import { MatTableModule } from '@angular/material/table';
         MatButtonModule,
         MatAutocompleteModule,
         MatProgressSpinnerModule,
-        MatTableModule
+        MatTableModule,
+        MatPaginatorModule
     ],
     exports:[
         SignUpComponent,
@@ -41,7 +43,8 @@ import { MatTableModule } from '@angular/material/table';
         MatButtonModule,
         MatAutocompleteModule,
         MatProgressSpinnerModule,
-        MatTableModule
+        MatTableModule,
+        MatPaginatorModule
     ],
     entryComponents: [SignUpComponent,SignInComponent]
 })
