@@ -29,6 +29,7 @@ export class SubmitDelayComponent implements OnInit {
 
   submitDelay() {
     this.isLoading = true
+    console.log(this.submitDelayForm.value)
     this.submitDelayService.submitDelayToApi(this.submitDelayForm.value)
         .subscribe(() =>{
           this.isLoading = false;

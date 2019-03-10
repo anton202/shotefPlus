@@ -10,6 +10,10 @@ h1{
     color: #000000;
 }
 
+header{
+    margin-top: 5%;
+}
+
 main{
     width:50%;
     margin: auto;

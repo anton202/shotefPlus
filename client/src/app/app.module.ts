@@ -10,6 +10,7 @@ import { SubmitDelayComponent } from './submit-delay/submit-delay.component';
 import { SearchBusinessComponent } from './search-business/search-business.component';
 import { SearchResultsComponent } from './search-results/search-results.component';
 import { UserAreaComponent } from './user-area/user-area.component';
+import { ShortenCommentPipe } from './search-results/shortenComment.pipe'
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { UserAreaComponent } from './user-area/user-area.component';
     SubmitDelayComponent,
     SearchBusinessComponent,
     SearchResultsComponent,
-    UserAreaComponent
+    UserAreaComponent,
+    ShortenCommentPipe
   ],
   imports: [
     BrowserModule,

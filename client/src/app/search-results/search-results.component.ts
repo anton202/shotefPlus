@@ -1,10 +1,18 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatPaginator, MatTableDataSource} from '@angular/material';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-search-results',
   templateUrl: './search-results.component.html',
-  styleUrls: ['./search-results.component.css']
+  styleUrls: ['./search-results.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0', display: 'none'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],  
 })
 export class SearchResultsComponent implements OnInit {
    dummyData = [{
@@ -22,7 +30,10 @@ export class SearchResultsComponent implements OnInit {
     publisherName:'שלג הנדסה',
     shotefPlus: 30,
     daysOfPAymentDelay: 20,
-    comment:'החברה תמיד מאחרת בתשלומים שלה ממולץ לעלות להם את המחיר על העבודה עקב האיחרוים בתשלומים'
+    comment:`החברה לא שילמה לי את הכסף בזמן כרגיל....
+    כל הפעמים שעבדתי איתם לא קיבלתי את הכסף בזמן
+    החברה לא שילמה לי את הכסף בזמן כרגיל....
+כל הפעמים שעבדתי איתם ל `
   },
   {
     publisherName:'שלג הנדסה',
@@ -69,16 +80,16 @@ export class SearchResultsComponent implements OnInit {
 
   columnsToDisplay = ['שם מפרסם הדוח','שוטף פלוס','יימי איחור אחרי תקופת שוטף פלוס','הערה'];
   headerColumns = ['שם חברה','מספר חברה','ממוצע שוטף פלוס','ממוצע ימיי איחור'];
-  //paginattor length should be the length of the array that is fetched from the server with the compnay delays.
-  //paginatorLength = 100;
-  pageSize = 10;
   dataSource =  new MatTableDataSource(this.dummyData);
+  expandedElement:any
+
+  
 
   @ViewChild(MatPaginator) paginator: MatPaginator
   constructor() { }
 
   ngOnInit() {
-    this.dataSource.paginator = this.paginator;
+   this.dataSource.paginator = this.paginator;
   }
 
 }

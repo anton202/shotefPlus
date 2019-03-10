@@ -11,3 +11,27 @@ table {
   td.mat-cell{
     text-align: center;
   }
+
+  .example-element-detail {
+    overflow: hidden;
+    display: flex;
+    padding-top: 10px;
+   
+    width: 60%
+  }
+
+  tr.example-detail-row {
+    height: 0;
+  }
+  
+  tr.example-element-row:not(.example-expanded-row):hover {
+    background: #f5f5f5;
+  }
+  
+  tr.example-element-row:not(.example-expanded-row):active {
+    background: #efefef;
+  }
+  
+  .example-element-row td {
+    border-bottom-width: 0;
+  }
