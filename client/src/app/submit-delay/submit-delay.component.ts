@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { SubmitDelayService } from './submit-delay.service'
 import { FormGroup, FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material';
+
 import { SearchBusinessService } from '../search-business/search-business.service';
+import { AppService } from '../app.service';
+import { SignInComponent } from '../sign-in/sign-in.component';
 
 @Component({
   selector: 'app-submit-delay',
@@ -13,12 +17,18 @@ export class SubmitDelayComponent implements OnInit {
   submitDelayForm: FormGroup;
   isLoading = false;
   submitionStatus;
-  constructor(private submitDelayService: SubmitDelayService, private searchBusinessService: SearchBusinessService) { }
+
+  constructor(
+    private submitDelayService: SubmitDelayService,
+    private searchBusinessService: SearchBusinessService,
+    private dialog: MatDialog,
+    private appService: AppService
+    ) {}
 
   ngOnInit() {
     //initialize reactive form in ngOnInit for maitaining readabilety 
     this.submitDelayForm = new FormGroup({
-      'company_name': new FormControl(null,this.componyNameDoesNotExist.bind(this)),
+      'company_name': new FormControl(null, this.componyNameDoesNotExist.bind(this)),
       'shotef_plus': new FormControl(null),
       'start_date_of_shotef_plus': new FormControl(null),
       'date_of_reciving_the_money': new FormControl(null),
@@ -28,16 +38,19 @@ export class SubmitDelayComponent implements OnInit {
   }
 
   submitDelay() {
+    if(!this.appService.isAuthenticated){
+      return this.dialog.open(SignInComponent)
+    }
+    //console.log(this.submitDelayForm.value);
     this.isLoading = true
-    console.log(this.submitDelayForm.value)
     this.submitDelayService.submitDelayToApi(this.submitDelayForm.value)
-        .subscribe(() =>{
-          this.isLoading = false;
-          this.submitionStatus = 'האיחור בתשלום דווח בהצלחה';
-        },
+      .subscribe(() => {
+        this.isLoading = false;
+        this.submitionStatus = 'האיחור בתשלום דווח בהצלחה';
+      },
         () => this.submitionStatus = 'האיחור בתשלום לא דווח, נסה שנית'
-        )
-   
+      )
+
   }
 
   searchForCompanyName() {

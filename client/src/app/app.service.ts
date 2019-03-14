@@ -6,7 +6,7 @@ import { environment } from '../environments/environment';
     providedIn: 'root'
 })
 export class AppService {
-    isAuthenticated: true;
+    isAuthenticated: boolean;
     apiUrl = environment.apiUrl;
 
     constructor(private http: HttpClient) { }
@@ -17,5 +17,6 @@ export class AppService {
             this.http.get(this.apiUrl, { headers: new HttpHeaders().set('Authorization', token) })
                 .subscribe(() => this.isAuthenticated = true)
         }
+        //setTimeout((()=>this.isAuthenticated = true),3000)
     }
 }
