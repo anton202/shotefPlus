@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatPaginator, MatTableDataSource} from '@angular/material';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { SearchResultsService } from './search-results.service';
 
 @Component({
   selector: 'app-search-results',
@@ -77,19 +78,24 @@ export class SearchResultsComponent implements OnInit {
   }
 ]
   headerData = [{name:'בתי זיקוק בעמ',number:51000043,shotefPlusAvrg:90,avrgDaysOfDelay:100}];
-
   columnsToDisplay = ['שם מפרסם הדוח','שוטף פלוס','יימי איחור אחרי תקופת שוטף פלוס','הערה'];
   headerColumns = ['שם חברה','מספר חברה','ממוצע שוטף פלוס','ממוצע ימיי איחור'];
   dataSource =  new MatTableDataSource(this.dummyData);
   expandedElement:any
-
-  
+  companyRecords ;
 
   @ViewChild(MatPaginator) paginator: MatPaginator
-  constructor() { }
+
+  constructor(public searchResultsService: SearchResultsService) { }
 
   ngOnInit() {
    this.dataSource.paginator = this.paginator;
+   
+   this.searchResultsService.getCompanyRecords()
+        .subscribe(companyRecords => {
+          this.searchResultsService.searchingCompanyRecords = false;
+          this.companyRecords = companyRecords
+        })
   }
 
 }

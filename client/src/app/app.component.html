@@ -1,13 +1,13 @@
 <header>
   <nav>
   <ul>
-    <li (click)="openSignInDialog()">
+    <li (click)="openDialog()">
       <i class="material-icons">account_circle</i>
-      <a>התחבר</a>
+      <span>{{appService.isAuthenticated?"אזור אישי":"התחבר"}}</span>
     </li>
     <li (click)="openSignUpDialog()">
       <i class="material-icons">person_add</i>
-      <a>הרשם</a>
+      <span>הרשם</span>
     </li>
   </ul>
 </nav>

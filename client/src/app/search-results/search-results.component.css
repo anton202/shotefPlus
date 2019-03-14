@@ -15,9 +15,9 @@ table {
   .example-element-detail {
     overflow: hidden;
     display: flex;
-    padding-top: 10px;
-   
-    width: 60%
+    /*padding-top: 10px;*/
+    justify-content: flex-end;
+    padding-right: 50%;
   }
 
   tr.example-detail-row {
@@ -34,4 +34,9 @@ table {
   
   .example-element-row td {
     border-bottom-width: 0;
+  }
+
+  mat-spinner{
+    margin: auto;
+    margin-top: 5%;
   }

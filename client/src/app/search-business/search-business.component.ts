@@ -21,7 +21,8 @@ export class SearchBusinessComponent implements OnInit {
   }
   
   onSearchSubmit(){
-    console.log(this.searchCompanyNameForm.get('company_name').value)
+    const companyName = this.searchCompanyNameForm.get('company_name').value;
+    this.searchBusinessService.companyName.next(companyName);
   }
 
   searchForCompanyName() {
