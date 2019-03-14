@@ -38,10 +38,11 @@ export class SubmitDelayComponent implements OnInit {
   }
 
   submitDelay() {
+    // check if user is loged in. if not prompt sign-in dialog
     if(!this.appService.isAuthenticated){
       return this.dialog.open(SignInComponent)
     }
-    //console.log(this.submitDelayForm.value);
+    console.log(this.submitDelayForm.value);
     this.isLoading = true
     this.submitDelayService.submitDelayToApi(this.submitDelayForm.value)
       .subscribe(() => {

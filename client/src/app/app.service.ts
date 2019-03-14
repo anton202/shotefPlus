@@ -12,11 +12,11 @@ export class AppService {
     constructor(private http: HttpClient) { }
 
     authenticateUser() {
-        const token = localStorage.getItem('token')
-        if (token) {
-            this.http.get(this.apiUrl, { headers: new HttpHeaders().set('Authorization', token) })
-                .subscribe(() => this.isAuthenticated = true)
-        }
-        //setTimeout((()=>this.isAuthenticated = true),3000)
+        // const token = localStorage.getItem('token')
+        // if (token) {
+        //     this.http.get(this.apiUrl, { headers: new HttpHeaders().set('Authorization', token) })
+        //         .subscribe(() => this.isAuthenticated = true)
+        // }
+        setTimeout((()=>this.isAuthenticated = true),3000)
     }
 }

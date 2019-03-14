@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms'
 
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignInComponent } from "./sign-in/sign-in.component";
+import { UserAreaComponent } from "./user-area/user-area.component";
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -13,11 +14,14 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatExpansionModule } from '@angular/material/expansion';
+
 
 @NgModule({
     declarations:[
         SignUpComponent,
-        SignInComponent
+        SignInComponent,
+        UserAreaComponent
     ],
     imports:[
         FormsModule,
@@ -30,7 +34,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
         MatAutocompleteModule,
         MatProgressSpinnerModule,
         MatTableModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        MatExpansionModule
     ],
     exports:[
         SignUpComponent,
@@ -44,8 +49,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
         MatAutocompleteModule,
         MatProgressSpinnerModule,
         MatTableModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        MatExpansionModule
     ],
-    entryComponents: [SignUpComponent,SignInComponent]
+    entryComponents: [SignUpComponent,SignInComponent, UserAreaComponent]
 })
 export class MaterialModule{}

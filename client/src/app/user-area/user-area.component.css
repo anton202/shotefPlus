@@ -1,3 +1,16 @@
+main{
+    width: 500px;
+    height: 600px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+}
+
+.formActionButtons{
+    margin-right: 50%;
+}
 @media (min-width: 320px) and (max-width: 480px) {
   
     

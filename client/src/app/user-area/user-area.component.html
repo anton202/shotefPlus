@@ -1,3 +1,49 @@
-<p>
-  user-area works!
-</p>
+<main>
+  <h1>הדיווחים שלי</h1>
+  <div>
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            דיווח אחרון
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            כל הדיווחים
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              בתי זיקוק לנפט בעמ
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <form>
+            <mat-form-field>
+              <input matInput type="number"  
+                placeholder="שוטף פלוס שסוכם בעסקה (30,40,60...)">
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput type="number"  
+                placeholder="ימיי איחור אחרי תקופת שוטף פלוס">
+            </mat-form-field>
+
+            <mat-form-field>
+              <textarea matInput placeholder="הוסף הערה" cdkTextareaAutosize></textarea>
+            </mat-form-field>
+          </form>
+          <div class="formActionButtons">
+          <button mat-raised-button style="margin-left:2%" color="primary">שמור שינויים</button>
+          <button mat-raised-button color="warn">מחק דיווח</button>
+        </div>
+        </mat-expansion-panel>
+      </mat-expansion-panel>
+    
+    </mat-accordion>
+  </div>
+</main>

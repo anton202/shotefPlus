@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material';
 import { SignUpComponent } from './sign-up/sign-up.component'
 import { SignInComponent } from './sign-in/sign-in.component';
 import { AppService } from './app.service';
+import { UserAreaComponent } from './user-area/user-area.component';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +27,7 @@ export class AppComponent implements OnInit {
   openDialog() {
     if (this.appService.isAuthenticated) {
       // user area component
-      this.dailog.open(SignInComponent)
+      this.dailog.open(UserAreaComponent)
     } else {
       this.dailog.open(SignInComponent)
     }
