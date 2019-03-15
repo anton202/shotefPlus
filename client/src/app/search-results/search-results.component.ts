@@ -82,7 +82,7 @@ export class SearchResultsComponent implements OnInit {
   headerColumns = ['שם חברה','מספר חברה','ממוצע שוטף פלוס','ממוצע ימיי איחור'];
   dataSource =  new MatTableDataSource(this.dummyData);
   expandedElement:any
-  companyRecords ;
+  companyRecords  ;
 
   @ViewChild(MatPaginator) paginator: MatPaginator
 
