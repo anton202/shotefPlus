@@ -15,13 +15,15 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { ConfirmActionComponent } from './confirm-action/confirm-action.component';
 
 
 @NgModule({
     declarations:[
         SignUpComponent,
         SignInComponent,
-        UserAreaComponent
+        UserAreaComponent,
+        ConfirmActionComponent
     ],
     imports:[
         FormsModule,
@@ -52,6 +54,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
         MatPaginatorModule,
         MatExpansionModule
     ],
-    entryComponents: [SignUpComponent,SignInComponent, UserAreaComponent]
+    entryComponents: [SignUpComponent,SignInComponent, UserAreaComponent, ConfirmActionComponent]
 })
 export class MaterialModule{}

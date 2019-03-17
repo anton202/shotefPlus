@@ -29,7 +29,7 @@
               </form>
               <div class="formActionButtons">
                 <button mat-raised-button style="margin-left:2%" color="primary">שמור שינויים</button>
-                <button mat-raised-button color="warn">מחק דיווח</button>
+                <button mat-raised-button color="warn" (click)="onDelete(record._id)">מחק דיווח</button>
               </div>
         </mat-expansion-panel>
       </mat-expansion-panel>
