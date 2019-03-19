@@ -11,6 +11,18 @@ form{
 .formActionButtons{
     margin-right: 50%;
 }
+
+.successMessage{
+    color: green;
+    text-align: center;
+    font-size: 16px;
+}
+
+.errorMessage{
+    color: red;
+    text-align: center;
+    font-size: 16px;
+}
 @media (min-width: 320px) and (max-width: 480px) {
   
     
