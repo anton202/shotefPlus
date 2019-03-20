@@ -8,7 +8,7 @@
             {{company.name}}
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <mat-expansion-panel *ngFor="let record of company.records">
+        <mat-expansion-panel *ngFor="let record of company.records; let index = i">
           <mat-expansion-panel-header>
             <mat-panel-title>
               {{record.createdAt}}
@@ -48,7 +48,7 @@
               <div class="formActionButtons">
                 <button mat-raised-button style="margin-left:2%" color="primary" 
                 (click)="onButtonClick(record._id,'לשמור שינויים?','saveChanges', f.value)">שמור שינויים</button>
-                <button mat-raised-button color="warn" (click)="onButtonClick(record._id,'למחוק דוח?','deleteReport')">מחק דיווח</button>
+                <button mat-raised-button color="warn" (click)="onButtonClick(record._id,'למחוק דוח?','deleteReport',index)">מחק דיווח</button>
               </div>
             </div>  
         </mat-expansion-panel>

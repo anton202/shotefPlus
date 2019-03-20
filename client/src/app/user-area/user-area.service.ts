@@ -14,6 +14,7 @@ export class UserAreaService {
     proccesingSpinner = false;
     successMessage = false;
     errorMessage = false;
+    records = [{ name: 'בתי זיקוק לנפט בעמ', records: [{ shotefPlus: 30, delay: 60, comment: 'פעם אחת לא קיבלתי את התשלום מהחברה הזאת בזמן', createdAt: '20/3/2019', _id: '1543hnxsjo45' }] }];
     constructor(private http: HttpClient, private dailog: MatDialog) { }
 
     confirmAction(text){
@@ -21,7 +22,7 @@ export class UserAreaService {
        return dialogRef.afterClosed()
     }
 
-    changeReportSet(actionType,reportId,record){
+    changeReportSet(actionType,reportId,record,index){
         this.proccesingSpinner = true;
         setTimeout(()=>{
             this[actionType](reportId,record)
@@ -30,6 +31,9 @@ export class UserAreaService {
                     this.proccesingSpinner = false
                     this.successMessage = true;
                     setTimeout(()=>{
+                        if(actionType = 'deleteReport'){
+                            this.records.splice(index,1)
+                        }
                         this.successMessage = false
                     },2500)
                 },
@@ -44,7 +48,8 @@ export class UserAreaService {
     }
 
     getRecords(){
-        return this.http.get(this.apiUrl,{headers: this.headers})
+         this.http.get(this.apiUrl,{headers: this.headers})
+            .subscribe(()=>console.log('success'),error => console.log('error'))
     }
    
     deleteReport(reportId){
