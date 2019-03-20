@@ -1,6 +1,12 @@
 <main>
   <h1>הדיווחים שלי</h1>
   <div>
+    <div class="errorMessage" *ngIf="userAreaService.fetchREportsErrorMessage">
+        <p>הפעולה נכשלה, נסה שוב או פנה לתמיכה טכנית</p>
+        <i class="material-icons">
+          highlight_off
+          </i>
+    </div>
     <mat-accordion>
       <mat-expansion-panel *ngFor="let company of records">
         <mat-expansion-panel-header>

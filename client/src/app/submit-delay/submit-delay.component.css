@@ -45,6 +45,15 @@ mat-spinner{
     text-align: center;
 }
 
+
+@media (min-width: 768px) and (max-width: 1024px)  {
+
+ header{
+     margin-top: 10%;
+ }
+  
+}
+
 @media (min-width: 320px) and (max-width: 480px) {
     h1{
         font-size: 24px;
@@ -55,17 +64,20 @@ mat-spinner{
       
     main{
         width:90%;
+       
     }
 
     .submitStatus > p{
         width: 100%;
     }
+
+    header{
+        margin-top: 20%;
+    }
   
+    button[type="submit"]{
+        margin-bottom: 5%;
+    }
   }
   
   
-  @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-  
-   
-    
-  }

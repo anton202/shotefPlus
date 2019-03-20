@@ -14,6 +14,7 @@ export class UserAreaService {
     proccesingSpinner = false;
     successMessage = false;
     errorMessage = false;
+    fetchREportsErrorMessage = false;
     records = [{ name: 'בתי זיקוק לנפט בעמ', records: [{ shotefPlus: 30, delay: 60, comment: 'פעם אחת לא קיבלתי את התשלום מהחברה הזאת בזמן', createdAt: '20/3/2019', _id: '1543hnxsjo45' }] }];
     constructor(private http: HttpClient, private dailog: MatDialog) { }
 
@@ -49,7 +50,7 @@ export class UserAreaService {
 
     getRecords(){
          this.http.get(this.apiUrl,{headers: this.headers})
-            .subscribe(()=>console.log('success'),error => console.log('error'))
+            .subscribe(()=>console.log('success'),error => this.fetchREportsErrorMessage = true)
     }
    
     deleteReport(reportId){

@@ -11,6 +11,7 @@
     </mat-form-field>
 
     <button type="submit" [disabled]="!form.valid" mat-flat-button color="primary">הכנס</button>
+    <button style="margin-top:10px" mat-button (click)="openSignInDialog()">צור משתמש</button>
   </form>
 
   <div class="error">

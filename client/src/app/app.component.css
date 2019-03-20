@@ -44,9 +44,9 @@ ul>li{
 }
 
 .searchResults{
-    width: 80%;
+    width: 90%;
     margin: auto;
-    height: 300px;
+    height: auto;
 }
 
 @media (min-width: 320px) and (max-width: 480px) {
