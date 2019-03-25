@@ -53,6 +53,10 @@ table {
    mat-paginator{
     margin-bottom: 10%;
   }
+
+  .example-element-detail{
+    padding: 0;
+  }
   }
   
   

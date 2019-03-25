@@ -1,5 +1,6 @@
-<mat-spinner *ngIf="searchResultsService.searchingCompanyRecords"></mat-spinner>
-<main *ngIf="!companyRecords">
+<mat-spinner *ngIf="searchResultsService.showSppiner"></mat-spinner>
+<app-status-message *ngIf="searchStatus" [messageType]="searchStatus" [message]="statusMessage"></app-status-message>
+<main >
 <table mat-table [dataSource]="headerData">
     <ng-container matColumnDef="שם חברה">
         <th mat-header-cell *matHeaderCellDef> שם חברה </th>
@@ -66,5 +67,5 @@
 </tr>
 <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>  
 </table>
-<mat-paginator  [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+<mat-paginator [pageSize]="5" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </main>

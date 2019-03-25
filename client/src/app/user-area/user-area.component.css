@@ -1,39 +1,54 @@
-main{
-    width: 500px;
-    height: 600px;
+.userAreaContainer {
+  width: 500px;
+  height: 600px;
 }
 
-form{
-    display: flex;
-    flex-direction: column;
+form {
+  display: flex;
+  flex-direction: column;
 }
 
-.formActionButtons{
-    margin-right: 50%;
+.formActionButtons {
+  margin-right: 50%;
 }
 
-.successMessage{
-    color: green;
-    text-align: center;
-    font-size: 16px;
+.successMessage {
+  color: green;
+  text-align: center;
+  font-size: 16px;
 }
 
-.errorMessage{
-    color: red;
-    text-align: center;
-    font-size: 16px;
+.errorMessage {
+  color: red;
+  text-align: center;
+  font-size: 16px;
 }
+
+.saveCangesBtn {
+  margin-left: 2%;
+}
+
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {}
+
 @media (min-width: 320px) and (max-width: 480px) {
-  
-    
-    
+  .userAreaContainer {
+    width: auto;
+    height: auto;
+    padding: 0;
+  }
+
+
+  div.mat-expansion-panel-body {
+    padding: 0px 10px 5px;
+  }
+
+  .formActionButtons {
+    margin-right: 0;
+  }
+
+  .saveCangesBtn {
+    margin-left: 1%;
+  }
+
 }
-
-
-@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-
- 
-  
-}
-
-

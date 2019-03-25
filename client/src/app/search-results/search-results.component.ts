@@ -82,7 +82,9 @@ export class SearchResultsComponent implements OnInit {
   headerColumns = ['שם חברה','מספר חברה','ממוצע שוטף פלוס','ממוצע ימיי איחור'];
   dataSource =  new MatTableDataSource(this.dummyData);
   expandedElement:any
-  companyRecords  ;
+  companyRecords;
+  searchStatus;
+  statusMessage;
 
   @ViewChild(MatPaginator) paginator: MatPaginator
 
@@ -93,9 +95,15 @@ export class SearchResultsComponent implements OnInit {
    
    this.searchResultsService.getCompanyRecords()
         .subscribe(companyRecords => {
-          this.searchResultsService.searchingCompanyRecords = false;
+          this.searchResultsService.showSppiner = false;
           this.companyRecords = companyRecords
-        })
+        },
+        error =>{
+          console.log('error')
+          this.searchResultsService.showSppiner = false
+          this.searchStatus = 'fail'
+          this.statusMessage = 'משהו התשבש, נסה שוב או פנה למפתח האתר'
+        } )
   }
 
 }

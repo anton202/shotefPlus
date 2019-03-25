@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { UserAreaService } from './user-area.service';
 
 @Component({
   selector: 'app-user-area',
   templateUrl: './user-area.component.html',
-  styleUrls: ['./user-area.component.css']
+  styleUrls: ['./user-area.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class UserAreaComponent implements OnInit {
   errorMessage;
@@ -13,11 +14,6 @@ export class UserAreaComponent implements OnInit {
   constructor(private userAreaService: UserAreaService) { }
 
   ngOnInit() {
-    // this.userAreaService.getRecords()
-    //   .subscribe(
-    //     records => this.records = records,
-    //     ()=> this.errorMessage = "משהו השתבש נסה לטעון את הדף מחדש" 
-    //     )
     this.userAreaService.getRecords();
     this.records = this.userAreaService.records
   }

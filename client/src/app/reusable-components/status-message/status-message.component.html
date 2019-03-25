@@ -1,0 +1,9 @@
+<div [ngStyle]="{color:setColor()}">
+    <p>{{message}}</p>
+    <i class="material-icons" *ngIf="messageType === 'fail'">
+        highlight_off
+        </i>
+        <i class="material-icons" *ngIf="messageType === 'success'">
+            check_circle_outline
+            </i>
+</div>

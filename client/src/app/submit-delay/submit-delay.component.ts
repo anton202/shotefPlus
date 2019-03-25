@@ -17,13 +17,14 @@ export class SubmitDelayComponent implements OnInit {
   submitDelayForm: FormGroup;
   isLoading = false;
   submitionStatus;
+  statusMessage
 
   constructor(
     private submitDelayService: SubmitDelayService,
     private searchBusinessService: SearchBusinessService,
     private dialog: MatDialog,
     private appService: AppService
-    ) {}
+  ) { }
 
   ngOnInit() {
     //initialize reactive form in ngOnInit for maitaining readabilety 
@@ -39,7 +40,7 @@ export class SubmitDelayComponent implements OnInit {
 
   submitDelay() {
     // check if user is loged in. if not prompt sign-in dialog
-    if(!this.appService.isAuthenticated){
+    if (!this.appService.isAuthenticated) {
       return this.dialog.open(SignInComponent)
     }
     console.log(this.submitDelayForm.value);
@@ -47,9 +48,17 @@ export class SubmitDelayComponent implements OnInit {
     this.submitDelayService.submitDelayToApi(this.submitDelayForm.value)
       .subscribe(() => {
         this.isLoading = false;
-        this.submitionStatus = 'האיחור בתשלום דווח בהצלחה';
+        
+        this.submitionStatus = 'success';
+        this.statusMessage = 'הדוח דווח בהצלחה'
+        setTimeout(() => this.submitionStatus = null, 4000)
       },
-        () => this.submitionStatus = 'האיחור בתשלום לא דווח, נסה שנית'
+        () => {
+          this.isLoading = false
+          this.submitionStatus = 'fail';
+          this.statusMessage = 'משהו השתבש בעת הדיווח,נסה שוב או פנה למפתח האתר'
+          setTimeout(() => this.submitionStatus = null, 4000)
+        }
       )
 
   }

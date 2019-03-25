@@ -9,11 +9,11 @@ import { flatMap } from 'rxjs/operators';
 })
 export class SearchResultsService {
     apiUrl = environment.apiUrl;
-    searchingCompanyRecords = false;
+    showSppiner = false;
     constructor(private http: HttpClient, private searchBusinessService: SearchBusinessService) { }
 
     searchCompanyRecords(companyName) {
-        this.searchingCompanyRecords = true;
+        this.showSppiner = true;
         return this.http.get(`${this.apiUrl}/${companyName}`)
     }
 

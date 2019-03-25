@@ -43,8 +43,7 @@
     </form>
 
     <mat-spinner *ngIf="isLoading"></mat-spinner>
-    <div class="submitStatus">
-      <p>{{submitionStatus}}</p>
-    </div>
+    <app-status-message *ngIf="submitionStatus" [messageType]="submitionStatus" [message]="statusMessage"></app-status-message>
+    
   </main>
 </div>

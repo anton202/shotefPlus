@@ -1,12 +1,7 @@
-<main>
+<div class="userAreaContainer">
   <h1>הדיווחים שלי</h1>
   <div>
-    <div class="errorMessage" *ngIf="userAreaService.fetchREportsErrorMessage">
-        <p>הפעולה נכשלה, נסה שוב או פנה לתמיכה טכנית</p>
-        <i class="material-icons">
-          highlight_off
-          </i>
-    </div>
+    <app-status-message *ngIf="userAreaService.isReportsFetched" [messageType]="userAreaService.isReportsFetched" [message]="userAreaService.statusMessage" ></app-status-message>
     <mat-accordion>
       <mat-expansion-panel *ngFor="let company of records">
         <mat-expansion-panel-header>
@@ -14,7 +9,7 @@
             {{company.name}}
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <mat-expansion-panel *ngFor="let record of company.records; let index = i">
+        <mat-expansion-panel class="test" *ngFor="let record of company.records; let index = i">
           <mat-expansion-panel-header>
             <mat-panel-title>
               {{record.createdAt}}
@@ -23,21 +18,11 @@
 
           <mat-spinner style="margin:auto" *ngIf="userAreaService.proccesingSpinner"></mat-spinner> 
 
-          <div class="successMessage" *ngIf="userAreaService.successMessage">
-            <p>הפעולה בוצעה בהצלה</p>
-            <i class="material-icons">
-              check_circle_outline
-              </i>
-          </div>
+          <app-status-message *ngIf="userAreaService.isReportSetManipulated"
+           [messageType]="userAreaService.isReportSetManipulated" 
+           [message]="userAreaService.statusMessage" ></app-status-message>
 
-          <div class="errorMessage" *ngIf="userAreaService.errorMessage">
-            <p>הפעולה נכשלה, נסה שוב או פנה לתמיכה טכנית</p>
-            <i class="material-icons">
-              highlight_off
-              </i>
-          </div>     
-
-          <div class="form" *ngIf="!userAreaService.proccesingSpinner && !userAreaService.successMessage && !userAreaService.errorMessage ">
+          <div class="form" *ngIf="!userAreaService.proccesingSpinner && !userAreaService.isReportSetManipulated  ">
               <form #f="ngForm">
                 <mat-form-field>
                   <input matInput type="number" [ngModel]="record.shotefPlus"  name="shotef_plus" placeholder="שוטף פלוס שסוכם בעסקה (30,40,60...)">
@@ -52,7 +37,7 @@
                 </mat-form-field>
               </form>
               <div class="formActionButtons">
-                <button mat-raised-button style="margin-left:2%" color="primary" 
+                <button mat-raised-button class="saveCangesBtn" color="primary" 
                 (click)="onButtonClick(record._id,'לשמור שינויים?','saveChanges', f.value)">שמור שינויים</button>
                 <button mat-raised-button color="warn" (click)="onButtonClick(record._id,'למחוק דוח?','deleteReport',index)">מחק דיווח</button>
               </div>
@@ -62,4 +47,4 @@
 
     </mat-accordion>
   </div>
-</main>
+</div>
