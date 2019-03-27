@@ -52,6 +52,10 @@ mat-spinner{
     margin: auto;
     text-align: center;
 }
+
+p{
+    font-size: 14px;
+}
 @media (min-width: 768px) and (max-width: 1024px)  {
 
  header{

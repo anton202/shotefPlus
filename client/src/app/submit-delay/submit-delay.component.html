@@ -4,6 +4,7 @@
   </header>
 
   <main>
+    <p>*ניתן לדווח על תשלום שכן עמד בזמנים. לשם כך הזינו 0 בשורה: "ימיי איחור אחרי תקופת שוטף פלוס" וצרפו לפחות שני קבצי הוכחה.</p>
     <form (ngSubmit)="submitDelay()" [formGroup]="submitDelayForm">
       <mat-form-field>
         <input (keypress)="searchForCompanyName()" matInput type="search" formControlName="company_name"
@@ -28,11 +29,7 @@
       </mat-form-field>
 
       <!-- <mat-form-field>
-        <input matInput type="date" formControlName="start_date_of_shotef_plus" placeholder="תאריך תחילת שוטף פלוס">
-      </mat-form-field>
-
-      <mat-form-field>
-        <input matInput type="date" formControlName="date_of_reciving_the_money" placeholder="תאריך קבלת התשלום">
+        <input matInput type="file">
       </mat-form-field> -->
 
       <mat-form-field>
