@@ -11,6 +11,7 @@ import { SignUpComponent } from '../sign-up/sign-up.component';
 export class SignInComponent implements OnInit {
   statusMessage;
   isSuccessfullyLogedIn;
+  displaySpinner = false;
 
   constructor(
     private signInService: SignInService,
@@ -26,8 +27,10 @@ export class SignInComponent implements OnInit {
   }
 
   onSignIn(loginValues) {
+    this.displaySpinner = true;
     this.signInService.login(loginValues)
       .subscribe((response) => {
+        this.displaySpinner = false;
         this.isSuccessfullyLogedIn = 'success';
         this.statusMessage = 'התחברתה בהצלחה'
         setTimeout(() => {
@@ -35,6 +38,7 @@ export class SignInComponent implements OnInit {
         }, 1500)
       },
         error => {
+          this.displaySpinner = false;
           this.isSuccessfullyLogedIn = 'fail';
           this.statusMessage = 'ההתחברות נכשלה, נסה שוב או פנה למפתח האתר'
          }

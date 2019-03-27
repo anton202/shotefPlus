@@ -14,6 +14,8 @@
     <button style="margin-top:10px" mat-button (click)="openSignInDialog()">צור משתמש</button>
   </form>
 
+  <mat-spinner *ngIf="displaySpinner"></mat-spinner>
+  
   <app-status-message *ngIf="isSuccessfullyLogedIn"
    [messageType]="isSuccessfullyLogedIn" [message]="statusMessage"></app-status-message>
 
