@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { SignInService } from './sign-in.service';
 import { MatDialogRef, MatDialog } from '@angular/material';
 import { SignUpComponent } from '../sign-up/sign-up.component';
@@ -9,8 +9,8 @@ import { SignUpComponent } from '../sign-up/sign-up.component';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
-  errorMessage
-  successfullyLogedIn = false
+  statusMessage;
+  isSuccessfullyLogedIn;
 
   constructor(
     private signInService: SignInService,
@@ -28,12 +28,16 @@ export class SignInComponent implements OnInit {
   onSignIn(loginValues) {
     this.signInService.login(loginValues)
       .subscribe((response) => {
-        this.successfullyLogedIn = true;
+        this.isSuccessfullyLogedIn = 'success';
+        this.statusMessage = 'התחברתה בהצלחה'
         setTimeout(() => {
           this.closeDialog()
         }, 1500)
       },
-        error => { }
+        error => {
+          this.isSuccessfullyLogedIn = 'fail';
+          this.statusMessage = 'ההתחברות נכשלה, נסה שוב או פנה למפתח האתר'
+         }
       )
   }
 
