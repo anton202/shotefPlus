@@ -15,7 +15,6 @@
       <mat-radio-button class="employmentType" value="company">חברה בע"מ</mat-radio-button>
     </mat-radio-group>
 
-
     <mat-form-field *ngIf="form.value.employmentType === 'selfEmployed'">
       <input matInput name="idNumber" minlength="9" maxlength="9" placeholder="מספר עוסק פטור/מורשה" required ngModel>
       <mat-hint>מספר תעודת זהות</mat-hint>
@@ -28,7 +27,10 @@
     <button type="submit" [disabled]="!form.valid" mat-flat-button color="primary">הרשם</button>
   </form>
 
-  <div *ngIf="isRegisterClicked && successfullyRegistrated" class="successfulRegistretion">
+  <app-status-message *ngIf="isSuccessfullyRegistrated" [messageType]="isSuccessfullyRegistrated"
+  [message]="statusMessage"></app-status-message>
+
+  <!-- <div *ngIf="isRegisterClicked && successfullyRegistrated" class="successfulRegistretion">
     <p style="color:green;">
       הרישום עבר בהצלחה, נשלח לך מייל ברגע שהמשתמש יאומת
     </p>
@@ -38,6 +40,6 @@
     <p class="error">
       משהו השתבש, נסה עוד פעם או דווח למפתח האתר.
     </p>
-  </div>
+  </div> -->
 
 </div>

@@ -10,8 +10,9 @@ import { MatDialogRef } from '@angular/material';
   providers: [ SignUpService ]
 })
 export class SignUpComponent  {
-  successfullyRegistrated 
+  isSuccessfullyRegistrated 
   isRegisterClicked = false;
+  statusMessage;
 
   constructor(private signUpService: SignUpService, private dialogRef:MatDialogRef<SignUpComponent>) { }
 
@@ -24,10 +25,12 @@ export class SignUpComponent  {
     
     this.signUpService.registerAccount(formValues)
       .subscribe((response)=>{
-        this.successfullyRegistrated = true;
+        this.isSuccessfullyRegistrated = 'success';
+        this.statusMessage = "נרשמתה בהצלחה, מייל ישלך אליך ברגע שהמשתמש יאומת"
       },
       error =>{
-        this.successfullyRegistrated = false
+        this.isSuccessfullyRegistrated = 'fail'
+        this.statusMessage = 'משהו השתבש, נסה שוב או פנה למפתח האתר'
       })
 
     console.log(formValues);
