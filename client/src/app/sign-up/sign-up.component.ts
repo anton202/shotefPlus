@@ -11,7 +11,7 @@ import { MatDialogRef } from '@angular/material';
 })
 export class SignUpComponent  {
   isSuccessfullyRegistrated 
-  isRegisterClicked = false;
+  displaySpinner = false;
   statusMessage;
 
   constructor(private signUpService: SignUpService, private dialogRef:MatDialogRef<SignUpComponent>) { }
@@ -21,17 +21,21 @@ export class SignUpComponent  {
   }
 
   onSignUp(formValues){
-    this.isRegisterClicked = true;
+    this.displaySpinner = true;
     
-    this.signUpService.registerAccount(formValues)
-      .subscribe((response)=>{
-        this.isSuccessfullyRegistrated = 'success';
-        this.statusMessage = "נרשמתה בהצלחה, מייל ישלך אליך ברגע שהמשתמש יאומת"
-      },
-      error =>{
-        this.isSuccessfullyRegistrated = 'fail'
-        this.statusMessage = 'משהו השתבש, נסה שוב או פנה למפתח האתר'
-      })
+      this.signUpService.registerAccount(formValues)
+        .subscribe((response)=>{
+          this.displaySpinner = false;
+          this.isSuccessfullyRegistrated = 'success';
+          this.statusMessage = "נרשמתה בהצלחה, מייל ישלך אליך ברגע שהמשתמש יאומת"
+        },
+        error =>{
+          this.displaySpinner = false;
+          this.isSuccessfullyRegistrated = 'fail'
+          this.statusMessage = 'משהו השתבש, נסה שוב או פנה למפתח האתר'
+        })
+
+    
 
     console.log(formValues);
   }

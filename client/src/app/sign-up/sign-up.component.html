@@ -27,19 +27,9 @@
     <button type="submit" [disabled]="!form.valid" mat-flat-button color="primary">הרשם</button>
   </form>
 
+  <mat-spinner *ngIf="displaySpinner"></mat-spinner>
+
   <app-status-message *ngIf="isSuccessfullyRegistrated" [messageType]="isSuccessfullyRegistrated"
   [message]="statusMessage"></app-status-message>
-
-  <!-- <div *ngIf="isRegisterClicked && successfullyRegistrated" class="successfulRegistretion">
-    <p style="color:green;">
-      הרישום עבר בהצלחה, נשלח לך מייל ברגע שהמשתמש יאומת
-    </p>
-  </div>
-
-  <div *ngIf="isRegisterClicked && !successfullyRegistrated">
-    <p class="error">
-      משהו השתבש, נסה עוד פעם או דווח למפתח האתר.
-    </p>
-  </div> -->
 
 </div>
