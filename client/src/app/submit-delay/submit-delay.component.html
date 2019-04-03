@@ -27,14 +27,18 @@
         <input matInput type="number" required formControlName="days_of_delay"
           placeholder="ימיי איחור אחרי תקופת שוטף פלוס">
       </mat-form-field>
-
-      <!-- <mat-form-field>
-        <input matInput type="file">
-      </mat-form-field> -->
-
+      
       <mat-form-field>
         <textarea matInput formControlName="comment" placeholder="הוסף הערה" cdkTextareaAutosize></textarea>
       </mat-form-field>
+      
+      <mat-form-field>
+        <mat-spinner class="fileUpload" diameter="30" *ngIf="readingFiles"></mat-spinner>
+          <ngx-mat-file-input multiple (change)="onChange()"
+           formControlName="proofFile" placeholder="הוסף הוכחה (תמונה בפורמט: jpg  או png)"
+           [accept]="'.png,.jpg'" ></ngx-mat-file-input>
+          <mat-hint>כדי להעלות מספר קבצים, העבירו את הקבצים שברצונכם להעלות לאותה תיקיה. כעת לחצו  על השורה הוסף הוכחה, בחלון שיפתח נווטו לתיקייה שבה נמצאים הקבצים שברצונכם להעלות. החזיקו את מקש ה- SHIFT במקלדת ובחרו עד 4 קבצים.</mat-hint>
+        </mat-form-field>
 
       <button mat-raised-button type="submit" [disabled]="!submitDelayForm.valid" color="warn">דווח על איחור</button>
     </form>

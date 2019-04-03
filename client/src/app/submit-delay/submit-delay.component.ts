@@ -6,6 +6,8 @@ import { MatDialog } from '@angular/material';
 import { SearchBusinessService } from '../search-business/search-business.service';
 import { AppService } from '../app.service';
 import { SignInComponent } from '../sign-in/sign-in.component';
+import { SharedService } from '../shared/shared.service';
+
 
 @Component({
   selector: 'app-submit-delay',
@@ -16,6 +18,7 @@ export class SubmitDelayComponent implements OnInit {
   companyNameSuggestion = []
   submitDelayForm: FormGroup;
   isLoading = false;
+  readingFiles = false;
   submitionStatus;
   statusMessage
 
@@ -23,7 +26,8 @@ export class SubmitDelayComponent implements OnInit {
     private submitDelayService: SubmitDelayService,
     private searchBusinessService: SearchBusinessService,
     private dialog: MatDialog,
-    private appService: AppService
+    private appService: AppService,
+    private sharedService: SharedService
   ) { }
 
   ngOnInit() {
@@ -34,8 +38,18 @@ export class SubmitDelayComponent implements OnInit {
       'start_date_of_shotef_plus': new FormControl(null),
       'date_of_reciving_the_money': new FormControl(null),
       'days_of_delay': new FormControl(null),
-      'comment': new FormControl(null)
+      'comment': new FormControl(null),
+      'proofFile': new FormControl(null,this.sharedService.maxInputFiles)
     })
+  }
+
+  onChange() {
+    if(this.submitDelayForm.value.proofFile){
+    const files = this.submitDelayForm.value.proofFile.files;
+    this.readingFiles = true;
+    this.sharedService.readFile(files)
+      .subscribe(files => { this.submitDelayForm.value.proofFile = files; this.readingFiles = false }) // this line mutates submitDelayForm object (not good...)
+    }
   }
 
   submitDelay() {
@@ -48,7 +62,7 @@ export class SubmitDelayComponent implements OnInit {
     this.submitDelayService.submitDelayToApi(this.submitDelayForm.value)
       .subscribe(() => {
         this.isLoading = false;
-        
+
         this.submitionStatus = 'success';
         this.statusMessage = 'הדוח דווח בהצלחה'
         setTimeout(() => this.submitionStatus = null, 4000)

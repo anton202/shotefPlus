@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { MatDialog } from '@angular/material';
-import { ConfirmActionComponent } from '../reusable-components/confirm-action/confirm-action.component';
+import { ConfirmActionComponent } from '../shared/confirm-action/confirm-action.component';
 
 @Injectable({
     providedIn: 'root'
