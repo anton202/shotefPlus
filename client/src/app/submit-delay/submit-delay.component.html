@@ -37,6 +37,9 @@
           <ngx-mat-file-input multiple (change)="onChange()"
            formControlName="proofFile" placeholder="הוסף הוכחה (תמונה בפורמט: jpg  או png)"
            [accept]="'.png,.jpg'" ></ngx-mat-file-input>
+           <mat-error *ngIf="submitDelayForm.get('proofFile').hasError('maxInputFiles')">
+              ניתן להעלות עד 4 קבצים.
+            </mat-error>
           <mat-hint>כדי להעלות מספר קבצים, העבירו את הקבצים שברצונכם להעלות לאותה תיקיה. כעת לחצו  על השורה הוסף הוכחה, בחלון שיפתח נווטו לתיקייה שבה נמצאים הקבצים שברצונכם להעלות. החזיקו את מקש ה- SHIFT במקלדת ובחרו עד 4 קבצים.</mat-hint>
         </mat-form-field>
 
