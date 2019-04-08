@@ -43,7 +43,7 @@
           <mat-hint>כדי להעלות מספר קבצים, העבירו את הקבצים שברצונכם להעלות לאותה תיקיה. כעת לחצו  על השורה הוסף הוכחה, בחלון שיפתח נווטו לתיקייה שבה נמצאים הקבצים שברצונכם להעלות. החזיקו את מקש ה- SHIFT במקלדת ובחרו עד 4 קבצים.</mat-hint>
         </mat-form-field>
 
-      <button mat-raised-button type="submit" [disabled]="!submitDelayForm.valid" color="warn">דווח על איחור</button>
+      <button mat-raised-button type="submit" [disabled]="!submitDelayForm.valid || readingFiles" color="warn">דווח על איחור</button>
     </form>
 
     <mat-spinner *ngIf="isLoading"></mat-spinner>

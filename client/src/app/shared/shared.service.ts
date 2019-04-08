@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { FormControl } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharedService {
+  finishedReadingFiles = new Subject();
 
   readFile(files) {
     return new Observable((observer) => {
@@ -17,6 +18,7 @@ export class SharedService {
           fileReader.readAsDataURL(files[encodedFiles.length])
         } else {
           observer.next(encodedFiles);
+          this.finishedReadingFiles.next(true);
         }
       }
       fileReader.readAsDataURL(files[encodedFiles.length])
