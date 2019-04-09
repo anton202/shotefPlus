@@ -39,7 +39,7 @@ export class SubmitDelayComponent implements OnInit {
       'date_of_reciving_the_money': new FormControl(null),
       'days_of_delay': new FormControl(null),
       'comment': new FormControl(null),
-      'proofFile': new FormControl(null,this.sharedService.maxInputFiles)
+      'proofFile': new FormControl(null,[this.sharedService.maxInputFiles])
     })
   }
 
@@ -57,7 +57,7 @@ export class SubmitDelayComponent implements OnInit {
     if (!this.appService.isAuthenticated) {
       return this.dialog.open(SignInComponent)
     }
-    console.log(this.submitDelayForm.value);
+   
     this.isLoading = true
     this.submitDelayService.submitDelayToApi(this.submitDelayForm.value)
       .subscribe(() => {
@@ -103,6 +103,25 @@ export class SubmitDelayComponent implements OnInit {
         return { 'companyNameDoesNotExist': true }
       }
     }
+  }
+  
+
+  twoProofFiles(control : FormControl){
+    console.log(this.submitDelayForm)
+    if(this.submitDelayForm.value.days_of_delay === 0){
+      if(!control.value){
+        return {'add2files': true}
+      } else if(control.value.files.length < 2){
+        return {'add2files': true}
+      } else if( control.value.files.length >= 2){
+        return null
+      }
+    }
+    // if(this.submitDelayForm.value.days_of_delay === 0 && control.value.files.length < 2){
+    //   return {'add2files': true}
+    // } else if (this.submitDelayForm.value.days_of_delay === 0 && control.value.files.length >= 2)  {
+    //   return null
+    // }
   }
 
 }
