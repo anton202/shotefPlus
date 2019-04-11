@@ -7,7 +7,7 @@ import { SearchBusinessService } from '../search-business/search-business.servic
 import { AppService } from '../app.service';
 import { SignInComponent } from '../sign-in/sign-in.component';
 import { SharedService } from '../shared/shared.service';
-
+import { FileValidator } from '../../../node_modules/ngx-material-file-input'
 
 @Component({
   selector: 'app-submit-delay',
@@ -21,6 +21,7 @@ export class SubmitDelayComponent implements OnInit {
   readingFiles = false;
   submitionStatus;
   statusMessage
+  totalMaxFilesSize = 10000000;
 
   constructor(
     private submitDelayService: SubmitDelayService,
@@ -39,7 +40,7 @@ export class SubmitDelayComponent implements OnInit {
       'date_of_reciving_the_money': new FormControl(null),
       'days_of_delay': new FormControl(null),
       'comment': new FormControl(null),
-      'proofFile': new FormControl(null,[this.sharedService.maxInputFiles])
+      'proofFile': new FormControl(null,[this.sharedService.maxInputFiles,FileValidator.maxContentSize(this.totalMaxFilesSize)])
     })
   }
 
@@ -105,24 +106,5 @@ export class SubmitDelayComponent implements OnInit {
     }
   }
   
-
-  twoProofFiles(control : FormControl){
-    console.log(this.submitDelayForm)
-    if(this.submitDelayForm.value.days_of_delay === 0){
-      if(!control.value){
-        return {'add2files': true}
-      } else if(control.value.files.length < 2){
-        return {'add2files': true}
-      } else if( control.value.files.length >= 2){
-        return null
-      }
-    }
-    // if(this.submitDelayForm.value.days_of_delay === 0 && control.value.files.length < 2){
-    //   return {'add2files': true}
-    // } else if (this.submitDelayForm.value.days_of_delay === 0 && control.value.files.length >= 2)  {
-    //   return null
-    // }
-  }
-
 }
 

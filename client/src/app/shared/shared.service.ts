@@ -28,6 +28,7 @@ export class SharedService {
   // max 4 images validator
   maxInputFiles(control: FormControl) {
     if (control.value) {
+      console.log(control.value)
       const filesAmount = control.value.files.length;
       return filesAmount <= 4 ? null : { maxInputFiles: { valid: false } }
     }
