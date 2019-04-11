@@ -15,7 +15,8 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { SignInComponent } from "./sign-in/sign-in.component";
 import { UserAreaComponent } from "./user-area/user-area.component";
 import { ConfirmActionComponent } from './shared/confirm-action/confirm-action.component';
-import { ShortenCommentPipe } from './search-results/shortenComment.pipe'
+import { ShortenCommentPipe } from './search-results/shortenComment.pipe';
+import { EvidenceComponent } from './evidence/evidence.component';
 
 
 @NgModule({
@@ -29,7 +30,9 @@ import { ShortenCommentPipe } from './search-results/shortenComment.pipe'
     SignInComponent,
     UserAreaComponent,
     ConfirmActionComponent,
-    ShortenCommentPipe
+    ShortenCommentPipe,
+    EvidenceComponent,
+    
   ],
   imports: [
     BrowserModule,

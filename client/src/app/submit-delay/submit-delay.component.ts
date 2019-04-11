@@ -40,16 +40,16 @@ export class SubmitDelayComponent implements OnInit {
       'date_of_reciving_the_money': new FormControl(null),
       'days_of_delay': new FormControl(null),
       'comment': new FormControl(null),
-      'proofFile': new FormControl(null,[this.sharedService.maxInputFiles,FileValidator.maxContentSize(this.totalMaxFilesSize)])
+      'evidence': new FormControl(null,[this.sharedService.maxInputFiles,FileValidator.maxContentSize(this.totalMaxFilesSize)])
     })
   }
 
   onChange() {
-    if(this.submitDelayForm.value.proofFile){
-    const files = this.submitDelayForm.value.proofFile.files;
+    if(this.submitDelayForm.value.evidence){
+    const files = this.submitDelayForm.value.evidence.files;
     this.readingFiles = true;
     this.sharedService.readFile(files)
-      .subscribe(files => { this.submitDelayForm.value.proofFile = files; this.readingFiles = false }) // this line mutates submitDelayForm object (not good...)
+      .subscribe(files => { this.submitDelayForm.value.evidence = files; this.readingFiles = false }) // this line mutates submitDelayForm object (not good...)
     }
   }
 

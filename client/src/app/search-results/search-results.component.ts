@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {MatPaginator, MatTableDataSource} from '@angular/material';
+import {MatPaginator, MatTableDataSource, MatDialog} from '@angular/material';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+
 import { SearchResultsService } from './search-results.service';
+import { EvidenceComponent } from '../evidence/evidence.component';
 
 @Component({
   selector: 'app-search-results',
@@ -78,7 +80,7 @@ export class SearchResultsComponent implements OnInit {
   }
 ]
   headerData = [{name:'בתי זיקוק בעמ',number:51000043,shotefPlusAvrg:90,avrgDaysOfDelay:100}];
-  columnsToDisplay = ['שם מפרסם הדוח','שוטף פלוס','יימי איחור אחרי תקופת שוטף פלוס','הערה'];
+  columnsToDisplay = ['שם מפרסם הדוח','שוטף פלוס','יימי איחור אחרי תקופת שוטף פלוס','הערה','הוכחות'];
   headerColumns = ['שם חברה','מספר חברה','ממוצע שוטף פלוס','ממוצע ימיי איחור'];
   dataSource =  new MatTableDataSource(this.dummyData);
   expandedElement:any
@@ -88,7 +90,7 @@ export class SearchResultsComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator
 
-  constructor(public searchResultsService: SearchResultsService) { }
+  constructor(private searchResultsService: SearchResultsService, private dialog: MatDialog) { }
 
   ngOnInit() {
    this.dataSource.paginator = this.paginator;
@@ -104,6 +106,10 @@ export class SearchResultsComponent implements OnInit {
           this.searchStatus = 'fail'
           this.statusMessage = 'משהו התשבש, נסה שוב או פנה למפתח האתר'
         } )
+  }
+
+  openEvidence(){
+    this.dialog.open(EvidenceComponent)
   }
 
 }
