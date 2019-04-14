@@ -45,6 +45,6 @@ import { EvidenceComponent } from './evidence/evidence.component';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [SignUpComponent, SignInComponent, UserAreaComponent, ConfirmActionComponent]
+  entryComponents: [SignUpComponent, SignInComponent, UserAreaComponent, ConfirmActionComponent, EvidenceComponent]
 })
 export class AppModule { }

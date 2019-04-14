@@ -1,0 +1,24 @@
+main{
+    max-width: 1000px;
+    max-height: 750px;
+   font-size: 70px;
+}
+
+img{
+    width: 100%;
+    height: 100%;
+}
+
+i{
+    cursor: pointer;
+    font-size: 70px;
+}
+
+.changeImg {
+    background-color: lightgray;
+    position: fixed;
+    bottom: 50px;
+    right: 50%;
+    display: flex;
+    align-content: center;
+}
