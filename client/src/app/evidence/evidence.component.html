@@ -1,15 +1,19 @@
 <main>
   <div>
-      <img src="../../assets/tall.jpg" alt="">
+      <img [src]="data.evidence[currentImg]" alt="">
   </div>
   
   <div class="changeImg">
-    <i class="material-icons">
+    <button mat-fab color="primary" style="margin-left:30px" (click)="changeImg('forward')">
+    <i class="material-icons" >
       arrow_forward_ios
       </i>
-      1/4
-      <i class="material-icons">
+    </button>
+     <span>{{data.evidence.length}} / {{currentImg + 1}}</span> 
+     <button mat-fab color="primary" style="margin-right:30px" (click)="changeImg('backward')">
+      <i class="material-icons"  >
         arrow_back_ios
-        </i>      
+        </i>
+      </button>      
   </div>
 </main>

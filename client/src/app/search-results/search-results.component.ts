@@ -22,7 +22,8 @@ export class SearchResultsComponent implements OnInit {
     publisherName:'שלג הנדסה',
     shotefPlus: 60,
     daysOfPAymentDelay: 30,
-    comment:'החברה תמיד מאחרת בתשלומים שלה ממולץ לעלות להם את המחיר על העבודה עקב האיחרוים בתשלומים'
+    comment:'החברה תמיד מאחרת בתשלומים שלה ממולץ לעלות להם את המחיר על העבודה עקב האיחרוים בתשלומים',
+    evidence:['../../assets/test.png','../../assets/tall.jpg ']
   },{
     publisherName:'שלג הנדסה',
     shotefPlus: 40,
@@ -108,8 +109,8 @@ export class SearchResultsComponent implements OnInit {
         } )
   }
 
-  openEvidence(){
-    this.dialog.open(EvidenceComponent)
+  openEvidence(evidence){
+    this.dialog.open(EvidenceComponent,{data:{evidence:evidence}})
   }
 
 }
