@@ -1,0 +1,13 @@
+form{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5%;
+}
+
+.companyNameSuggestion{
+    cursor: pointer;
+}
+
+.fileUpload{
+    margin-right: 95%;
+}

@@ -1,54 +1,39 @@
-import { Component, OnInit } from '@angular/core';
-import { SubmitDelayService } from './submit-delay.service'
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
-import { SearchBusinessService } from '../search-business/search-business.service';
+import { SubmitDelayService } from './submit-delay.service'
 import { AppService } from '../app.service';
 import { SignInComponent } from '../sign-in/sign-in.component';
-import { SharedService } from '../shared/shared.service';
-import { FileValidator } from '../../../node_modules/ngx-material-file-input'
+import { ReportService } from '../report/report.service';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-submit-delay',
   templateUrl: './submit-delay.component.html',
   styleUrls: ['./submit-delay.component.css']
 })
-export class SubmitDelayComponent implements OnInit {
-  companyNameSuggestion = []
-  submitDelayForm: FormGroup;
+export class SubmitDelayComponent implements OnInit, AfterViewInit {
   isLoading = false;
-  readingFiles = false;
   submitionStatus;
   statusMessage
-  totalMaxFilesSize = 10000000;
+  report:FormGroup
+
 
   constructor(
     private submitDelayService: SubmitDelayService,
-    private searchBusinessService: SearchBusinessService,
     private dialog: MatDialog,
     private appService: AppService,
-    private sharedService: SharedService
-  ) { }
+    private reportService: ReportService
+
+  ){}
 
   ngOnInit() {
-    //initialize reactive form in ngOnInit for maitaining readabilety 
-    this.submitDelayForm = new FormGroup({
-      'company_name': new FormControl(null, [this.componyNameDoesNotExist.bind(this),Validators.required]),
-      'shotef_plus': new FormControl(null,Validators.required),
-      'days_of_delay': new FormControl(null, Validators.required),
-      'comment': new FormControl(null),
-      'evidence': new FormControl(null,[this.sharedService.maxInputFiles,FileValidator.maxContentSize(this.totalMaxFilesSize)])
-    })
+    console.log(this.report)
   }
 
-  onChange() {
-    if(this.submitDelayForm.value.evidence){
-    const files = this.submitDelayForm.value.evidence.files;
-    this.readingFiles = true;
-    this.sharedService.readFile(files)
-      .subscribe(files => { this.submitDelayForm.value.evidence = files; this.readingFiles = false }) // this line mutates submitDelayForm object (not good...)
-    }
+  ngAfterViewInit(){
+    this.report = this.reportService.formValue;
+    console.log(this.report)
   }
 
   submitDelay() {
@@ -56,9 +41,9 @@ export class SubmitDelayComponent implements OnInit {
     if (!this.appService.isAuthenticated) {
       return this.dialog.open(SignInComponent)
     }
-   
+
     this.isLoading = true
-    this.submitDelayService.submitDelayToApi(this.submitDelayForm.value)
+    this.submitDelayService.submitDelayToApi(this.report.value)
       .subscribe(() => {
         this.isLoading = false;
 
@@ -76,33 +61,8 @@ export class SubmitDelayComponent implements OnInit {
 
   }
 
-  searchForCompanyName() {
-    this.searchBusinessService.requestCompanyNameFromApi(this.submitDelayForm.get('company_name').value)
-      .subscribe(companyRecord => {
-        this.companyNameSuggestion = companyRecord.result.records;
-      },
-        error => {
-          console.log(error)
-        })
-  }
 
-  //form control company_name validator
-  componyNameDoesNotExist(control: FormControl) {
-    if (this.companyNameSuggestion.length === 0) {
-      return { 'companyNameDoesNotExist': true }
-    } else {
-      let isCompanyNameExist = this.companyNameSuggestion.map(companyRecord => {
-        if (companyRecord['שם חברה'] === control.value) {
-          return true;
-        }
-      })
-      if (isCompanyNameExist.indexOf(true) !== -1) {
-        return null
-      } else {
-        return { 'companyNameDoesNotExist': true }
-      }
-    }
-  }
-  
+
+
 }
 

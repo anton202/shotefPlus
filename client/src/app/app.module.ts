@@ -17,6 +17,7 @@ import { UserAreaComponent } from "./user-area/user-area.component";
 import { ConfirmActionComponent } from './shared/confirm-action/confirm-action.component';
 import { ShortenCommentPipe } from './search-results/shortenComment.pipe';
 import { EvidenceComponent } from './evidence/evidence.component';
+import { ReportComponent } from './report/report.component';
 
 
 @NgModule({
@@ -32,7 +33,7 @@ import { EvidenceComponent } from './evidence/evidence.component';
     ConfirmActionComponent,
     ShortenCommentPipe,
     EvidenceComponent,
-    
+    ReportComponent,
   ],
   imports: [
     BrowserModule,

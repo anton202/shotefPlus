@@ -5,51 +5,12 @@
 
   <main>
     <p>*ניתן לדווח על תשלום שכן עמד בזמנים. לשם כך הזינו 0 בשורה: "ימיי איחור אחרי תקופת שוטף פלוס" וצרפו לפחות שני קבצי הוכחה.</p>
-    <form (ngSubmit)="submitDelay()" [formGroup]="submitDelayForm">
-      <mat-form-field>
-        <input (keypress)="searchForCompanyName()" matInput type="search" formControlName="company_name"
-          [matAutocomplete]="auto" placeholder="שם חברה/מספר חברה המאחרת בתשלום" >
-        <mat-error *ngIf="submitDelayForm.get('company_name').hasError('companyNameDoesNotExist')">החברה לא נמצאת במאגר
-          רשם החברות</mat-error>
-      </mat-form-field>
+    <app-report></app-report>
 
-      <mat-autocomplete #auto="matAutocomplete">
-        <mat-option *ngFor="let name of companyNameSuggestion" [value]="name['שם חברה']">{{name["שם חברה"]}}
-        </mat-option>
-      </mat-autocomplete>
-
-      <mat-form-field>
-        <input matInput type="number" formControlName="shotef_plus" 
-          placeholder="שוטף פלוס שסוכם בעסקה (30,40,60...)">
-      </mat-form-field>
-
-      <mat-form-field>
-        <input matInput type="number"  formControlName="days_of_delay"
-          placeholder="ימיי איחור אחרי תקופת שוטף פלוס">
-          <mat-hint *ngIf="submitDelayForm.get('days_of_delay').value === 0">עליך לצרף לפחות שתי הוכחות כדי לדווח דוח חיובי</mat-hint>
-      </mat-form-field>
-      
-      <mat-form-field>
-        <textarea matInput formControlName="comment" placeholder="הוסף הערה" cdkTextareaAutosize></textarea>
-      </mat-form-field>
-      
-      <mat-form-field>
-        <mat-spinner class="fileUpload" diameter="30" *ngIf="readingFiles"></mat-spinner>
-          <ngx-mat-file-input multiple (change)="onChange()"
-           formControlName="evidence" placeholder="הוסף הוכחה (תמונה בפורמט: jpg  או png)"
-           [accept]="'.png,.jpg'" ></ngx-mat-file-input>
-           <mat-error *ngIf="submitDelayForm.get('evidence').hasError('maxInputFiles')">
-              ניתן להעלות עד 4 קבצים.
-            </mat-error>
-            <mat-error *ngIf="submitDelayForm.get('evidence').hasError('maxContentSize')">
-              סה"כ ניתן להעלות עד 10 MB </mat-error>
-          <mat-hint>כדי להעלות מספר קבצים, העבירו את הקבצים שברצונכם להעלות לאותה תיקיה. כעת לחצו  על השורה הוסף הוכחה, בחלון שיפתח נווטו לתיקייה שבה נמצאים הקבצים שברצונכם להעלות. החזיקו את מקש ה- SHIFT במקלדת ובחרו עד 4 קבצים.</mat-hint>
-        </mat-form-field>
-
-      <button mat-raised-button type="submit" [disabled]="(!submitDelayForm.valid || readingFiles) || 
-      (submitDelayForm.get('days_of_delay').value === 0 && (submitDelayForm.get('evidence').value === null ||
-       submitDelayForm.get('evidence').value.files.length < 2 )) " color="warn">דווח על איחור</button>
-    </form>
+      <!-- <button mat-raised-button type="submit" [disabled]="(!report.valid || readingFiles) || 
+      (report.get('days_of_delay').value === 0 && (report.get('evidence').value === null ||
+       report.get('evidence').value.files.length < 2 )) " color="warn">דווח על איחור</button> -->
+   
 
     <mat-spinner *ngIf="isLoading"></mat-spinner>
     <app-status-message *ngIf="submitionStatus" [messageType]="submitionStatus" [message]="statusMessage"></app-status-message>
