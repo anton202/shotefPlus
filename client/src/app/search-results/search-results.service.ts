@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { SearchBusinessService } from '../search-business/search-business.service';
 import { environment } from '../../environments/environment';
 import { flatMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -12,12 +13,12 @@ export class SearchResultsService {
     showSppiner = false;
     constructor(private http: HttpClient, private searchBusinessService: SearchBusinessService) { }
 
-    searchCompanyRecords(companyName) {
+    public searchCompanyRecords(companyName) {
         this.showSppiner = true;
         return this.http.get(`${this.apiUrl}/${companyName}`)
     }
 
-    getCompanyRecords() {
+    public getCompanyRecords(): Observable<{}> {
         return this.searchBusinessService.companyName
             .pipe(flatMap(companyName => this.searchCompanyRecords(companyName)))
     }

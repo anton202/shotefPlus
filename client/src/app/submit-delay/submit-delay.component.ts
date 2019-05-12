@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SubmitDelayService } from './submit-delay.service'
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 
 import { SearchBusinessService } from '../search-business/search-business.service';
@@ -34,11 +34,9 @@ export class SubmitDelayComponent implements OnInit {
   ngOnInit() {
     //initialize reactive form in ngOnInit for maitaining readabilety 
     this.submitDelayForm = new FormGroup({
-      'company_name': new FormControl(null, this.componyNameDoesNotExist.bind(this)),
-      'shotef_plus': new FormControl(null),
-      'start_date_of_shotef_plus': new FormControl(null),
-      'date_of_reciving_the_money': new FormControl(null),
-      'days_of_delay': new FormControl(null),
+      'company_name': new FormControl(null, [this.componyNameDoesNotExist.bind(this),Validators.required]),
+      'shotef_plus': new FormControl(null,Validators.required),
+      'days_of_delay': new FormControl(null, Validators.required),
       'comment': new FormControl(null),
       'evidence': new FormControl(null,[this.sharedService.maxInputFiles,FileValidator.maxContentSize(this.totalMaxFilesSize)])
     })
