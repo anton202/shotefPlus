@@ -16,13 +16,13 @@
             </mat-panel-title>
           </mat-expansion-panel-header>
 
-          <mat-spinner style="margin:auto" *ngIf="userAreaService.proccesingSpinner"></mat-spinner> 
+          <mat-spinner style="margin:auto" *ngIf="isProcessing"></mat-spinner> 
 
-          <app-status-message *ngIf="userAreaService.isReportSetManipulated"
-           [messageType]="userAreaService.isReportSetManipulated" 
-           [message]="userAreaService.statusMessage" ></app-status-message>
+          <app-status-message *ngIf="statusMessage"
+           [messageType]="messageType" 
+           [message]="statusMessage" ></app-status-message>
 
-          <div class="form" *ngIf="!userAreaService.proccesingSpinner && !userAreaService.isReportSetManipulated  ">
+          <div class="form" *ngIf="!isProcessing && !statusMessage ">
               <form #f="ngForm">
                 <mat-form-field>
                   <input matInput type="number" [ngModel]="record.shotefPlus"  name="shotef_plus" placeholder="שוטף פלוס שסוכם בעסקה (30,40,60...)">
@@ -35,20 +35,20 @@
                 <mat-form-field>
                   <textarea matInput [ngModel]="record.comment"  name="comment" placeholder="הוסף הערה" cdkTextareaAutosize></textarea>
                 </mat-form-field>
-
+<!-- 
                 <mat-form-field>
                   
                     <ngx-mat-file-input multiple (change)="onChange(evidence.value)" name="evidence" #evidence
                       placeholder="הוסף הוכחה (תמונה בפורמט: jpg  או png)"
                      [accept]="'.png,.jpg'" ></ngx-mat-file-input>
                     <mat-hint>כדי להעלות מספר קבצים, העבירו את הקבצים שברצונכם להעלות לאותה תיקיה. כעת לחצו  על השורה הוסף הוכחה, בחלון שיפתח נווטו לתיקייה שבה נמצאים הקבצים שברצונכם להעלות. החזיקו את מקש ה- SHIFT במקלדת ובחרו עד 4 קבצים.</mat-hint>
-                  </mat-form-field>
+                  </mat-form-field> -->
 
               </form>
               <div class="formActionButtons">
                 <button mat-raised-button class="saveCangesBtn" color="primary" 
-                (click)="onButtonClick(record._id,'לשמור שינויים?','saveChanges', f.value)">שמור שינויים</button>
-                <button mat-raised-button color="warn" (click)="onButtonClick(record._id,'למחוק דוח?','deleteReport',index)">מחק דיווח</button>
+                (click)="saveChanges(f.value,record._id)">שמור שינויים</button>
+                <button mat-raised-button color="warn" (click)="deleteReport(record._id)">מחק דיווח</button>
               </div>
             </div>  
         </mat-expansion-panel>

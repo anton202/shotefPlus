@@ -25,33 +25,7 @@ export class UserAreaService {
        return dialogRef.afterClosed()
     }
 
-    changeReportSet(actionType,reportId,record,index){
-        this.proccesingSpinner = true;
-        setTimeout(()=>{
-            this[actionType](reportId,record)
-            .subscribe(
-                ()=> {
-                    this.proccesingSpinner = false
-                    this.isReportSetManipulated = 'success';
-                    this.statusMessage = this.successMessage;
-                    setTimeout(()=>{
-                        if(actionType = 'deleteReport'){
-                            this.records.splice(index,1)
-                        }
-                        this.isReportSetManipulated = null
-                    },2500)
-                },
-                error => {
-                    this.proccesingSpinner = false;
-                    this.isReportSetManipulated = 'fail';
-                    this.statusMessage = this.errorMessage;
-                    setTimeout(()=>this.isReportSetManipulated = null,3500)
-                }
-                )
-        },3000)
-        
-    }
-
+    
     getRecords(){
          this.http.get(this.apiUrl,{headers: this.headers})
             .subscribe(()=>console.log('success'),error => {this.isReportsFetched = 'fail';this.statusMessage = this.errorMessage})
