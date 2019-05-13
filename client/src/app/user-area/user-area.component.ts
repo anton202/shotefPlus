@@ -21,8 +21,25 @@ export class UserAreaComponent implements OnInit {
     this.records = this.userAreaService.records
   }
 
-  public saveChanges(report: Form, reportId: string): void {
-    console.log(report)
+  public confirmSaveChanges(report:Form, reportId:string):void{
+    this.userAreaService.confirmAction('לשמור שינויים?')
+    .subscribe(actinConfiremd =>{
+      if(actinConfiremd){
+        this.saveChanges(report,reportId)
+      }
+    })
+  }
+
+  public confirmDeleteReport(reportId:string):void{
+    this.userAreaService.confirmAction('למחוק דיווח?')
+    .subscribe(actinConfiremd =>{
+      if(actinConfiremd){
+        this.deleteReport(reportId)
+      }
+    })
+  }
+
+  private saveChanges(report: Form, reportId: string): void {
     this.isProcessing = true
     this.userAreaService.saveChanges(reportId, report)
       .subscribe(() => {
@@ -34,8 +51,9 @@ export class UserAreaComponent implements OnInit {
       )
   }
 
-  public deleteReport(reportId: string): void {
+  private deleteReport(reportId: string): void {
     console.log(reportId)
+    this.isProcessing = true;
     this.userAreaService.deleteReport(reportId)
       .subscribe(() => {
         this.handelResponse('הדיווח נמחק בהצלחה.', 'success')

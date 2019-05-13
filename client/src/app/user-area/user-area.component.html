@@ -47,8 +47,8 @@
               </form>
               <div class="formActionButtons">
                 <button mat-raised-button class="saveCangesBtn" color="primary" 
-                (click)="saveChanges(f.value,record._id)">שמור שינויים</button>
-                <button mat-raised-button color="warn" (click)="deleteReport(record._id)">מחק דיווח</button>
+                (click)="confirmSaveChanges(f.value,record._id)">שמור שינויים</button>
+                <button mat-raised-button color="warn" (click)="confirmDeleteReport(record._id)">מחק דיווח</button>
               </div>
             </div>  
         </mat-expansion-panel>
