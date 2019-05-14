@@ -11,12 +11,9 @@ export class UserAreaService {
     apiUrl = environment.apiUrl;
     token = localStorage.getItem('token')
     headers = new HttpHeaders().set('Authorization',this.token);
-    proccesingSpinner = false;
-    successMessage = 'הפעולה בוצע בהצלחה.';
     errorMessage = 'משהו השתבש, נסה שוב או פנה למפתח האתר.';
     statusMessage;
     isReportsFetched;
-    isReportSetManipulated;
     records = [{ name: 'בתי זיקוק לנפט בעמ', records: [{ shotefPlus: 30, delay: 60, comment: 'פעם אחת לא קיבלתי את התשלום מהחברה הזאת בזמן', createdAt: '20/3/2019', _id: '1543hnxsjo45' }] }];
     constructor(private http: HttpClient, private dailog: MatDialog) { }
 
@@ -25,7 +22,6 @@ export class UserAreaService {
        return dialogRef.afterClosed()
     }
 
-    
     getRecords(){
          this.http.get(this.apiUrl,{headers: this.headers})
             .subscribe(()=>console.log('success'),error => {this.isReportsFetched = 'fail';this.statusMessage = this.errorMessage})

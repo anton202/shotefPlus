@@ -35,14 +35,18 @@
                 <mat-form-field>
                   <textarea matInput [ngModel]="record.comment"  name="comment" placeholder="הוסף הערה" cdkTextareaAutosize></textarea>
                 </mat-form-field>
-<!-- 
-                <mat-form-field>
-                  
-                    <ngx-mat-file-input multiple (change)="onChange(evidence.value)" name="evidence" #evidence
-                      placeholder="הוסף הוכחה (תמונה בפורמט: jpg  או png)"
-                     [accept]="'.png,.jpg'" ></ngx-mat-file-input>
-                    <mat-hint>כדי להעלות מספר קבצים, העבירו את הקבצים שברצונכם להעלות לאותה תיקיה. כעת לחצו  על השורה הוסף הוכחה, בחלון שיפתח נווטו לתיקייה שבה נמצאים הקבצים שברצונכם להעלות. החזיקו את מקש ה- SHIFT במקלדת ובחרו עד 4 קבצים.</mat-hint>
-                  </mat-form-field> -->
+
+                <mat-form-field [formGroup]="fileInput">
+                    <mat-spinner class="fileUpload" diameter="30" *ngIf="readingFiles"></mat-spinner>
+                  <ngx-mat-file-input formControlName="evidence" placeholder="הוסף הוכחה (תמונה בפורמט: jpg  או png)" 
+                  (change)="readEvidence()" multiple ></ngx-mat-file-input>
+                  <mat-error *ngIf="fileInput.get('evidence').hasError('maxInputFiles')">
+                      ניתן להעלות עד 4 קבצים.
+                    </mat-error>
+                    <mat-error *ngIf="fileInput.get('evidence').hasError('maxContentSize')">
+                      סה"כ ניתן להעלות עד 10 MB </mat-error>
+                  <mat-hint>כדי להעלות מספר קבצים, העבירו את הקבצים שברצונכם להעלות לאותה תיקיה. כעת לחצו  על השורה הוסף הוכחה, בחלון שיפתח נווטו לתיקייה שבה נמצאים הקבצים שברצונכם להעלות. החזיקו את מקש ה- SHIFT במקלדת ובחרו עד 4 קבצים.</mat-hint>
+                </mat-form-field>
 
               </form>
               <div class="formActionButtons">

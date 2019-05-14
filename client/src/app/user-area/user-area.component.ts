@@ -1,6 +1,13 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Form, FormGroup, FormControl } from '@angular/forms';
+
 import { UserAreaService } from './user-area.service';
-import { Form } from '@angular/forms';
+import { SharedService } from '../shared/shared.service';
+import { editReport } from '../shared/models/edit-report'
+import { FileValidator } from '../../../node_modules/ngx-material-file-input'
+
+import { data } from './data';
+
 
 @Component({
   selector: 'app-user-area',
@@ -10,18 +17,23 @@ import { Form } from '@angular/forms';
 })
 export class UserAreaComponent implements OnInit {
   statusMessage: string;
-  records: Array<{}>;
+  records: Array<{}> = data;
   isProcessing: boolean = false;
   messageType: string;
+  fileInput: FormGroup;
+  readingFiles: boolean = false;
+  totalMaxFilesSize: number = 10000000;
 
-  constructor(private userAreaService: UserAreaService) { }
+  constructor(private userAreaService: UserAreaService, private sharedService: SharedService) { }
 
   ngOnInit() {
     this.userAreaService.getRecords();
-    this.records = this.userAreaService.records
+    this.fileInput = new FormGroup({
+      'evidence': new FormControl(null,[this.sharedService.maxInputFiles,FileValidator.maxContentSize(this.totalMaxFilesSize)])
+    })
   }
 
-  public confirmSaveChanges(report:Form, reportId:string):void{
+  public confirmSaveChanges(report:editReport, reportId:string):void{
     this.userAreaService.confirmAction('לשמור שינויים?')
     .subscribe(actinConfiremd =>{
       if(actinConfiremd){
@@ -39,20 +51,22 @@ export class UserAreaComponent implements OnInit {
     })
   }
 
-  private saveChanges(report: Form, reportId: string): void {
+  private saveChanges(report: editReport, reportId: string): void {
     this.isProcessing = true
+    report.evidence = this.fileInput.value.evidence
+    console.log(report)
     this.userAreaService.saveChanges(reportId, report)
       .subscribe(() => {
         this.handelResponse('השינויים נשמרו בהצלחה.', 'success')
       },
         error => {
           this.handelResponse('משהו השתבש..., נסה שוב או פנה למפתח האתר.', 'fail')
+          this.fileInput.value.evidence = null
         }
       )
   }
 
   private deleteReport(reportId: string): void {
-    console.log(reportId)
     this.isProcessing = true;
     this.userAreaService.deleteReport(reportId)
       .subscribe(() => {
@@ -62,6 +76,18 @@ export class UserAreaComponent implements OnInit {
           this.handelResponse('משהו השתבש...,נסה שוב או פנה לפתח האתר.', 'fail')
         }
       )
+  }
+
+ public readEvidence(){
+    if(this.fileInput.value.evidence){
+      this.readingFiles = true;
+      const files = this.fileInput.value.evidence.files;
+      this.sharedService.readFile(files)
+        .subscribe(files => {
+          this.readingFiles = false;
+          this.fileInput.value.evidence = files;
+        })
+    }
   }
 
   private handelResponse(message: string, messageType): void {

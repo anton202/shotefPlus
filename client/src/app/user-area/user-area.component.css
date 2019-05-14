@@ -1,6 +1,6 @@
 .userAreaContainer {
-  width: 500px;
-  height: 600px;
+  width: 600px;
+  height: 700px;
 }
 
 form {
@@ -9,6 +9,7 @@ form {
 }
 
 .formActionButtons {
+  margin-top: 20%;
   margin-right: 50%;
 }
 
@@ -28,6 +29,9 @@ form {
   margin-left: 2%;
 }
 
+.fileUpload{
+  margin-right: 95%;
+}
 
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {}
 
