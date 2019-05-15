@@ -14,7 +14,6 @@ export class UserAreaService {
     errorMessage = 'משהו השתבש, נסה שוב או פנה למפתח האתר.';
     statusMessage;
     isReportsFetched;
-    records = [{ name: 'בתי זיקוק לנפט בעמ', records: [{ shotefPlus: 30, delay: 60, comment: 'פעם אחת לא קיבלתי את התשלום מהחברה הזאת בזמן', createdAt: '20/3/2019', _id: '1543hnxsjo45' }] }];
     constructor(private http: HttpClient, private dailog: MatDialog) { }
 
     confirmAction(text){

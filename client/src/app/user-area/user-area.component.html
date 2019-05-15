@@ -1,7 +1,7 @@
 <div class="userAreaContainer">
   <h1>הדיווחים שלי</h1>
   <div>
-    <app-status-message *ngIf="userAreaService.isReportsFetched" [messageType]="userAreaService.isReportsFetched" [message]="userAreaService.statusMessage" ></app-status-message>
+    <app-status-message *ngIf="userAreaService.isReportsFetched" [messageType]="userAreaService.isReportsFetched" [message]="userAreaService.messageStatus" ></app-status-message>
     <mat-accordion>
       <mat-expansion-panel *ngFor="let company of records">
         <mat-expansion-panel-header>
@@ -18,11 +18,11 @@
 
           <mat-spinner style="margin:auto" *ngIf="isProcessing"></mat-spinner> 
 
-          <app-status-message *ngIf="statusMessage"
+          <app-status-message *ngIf="messageStatus"
            [messageType]="messageType" 
-           [message]="statusMessage" ></app-status-message>
+           [message]="messageStatus" ></app-status-message>
 
-          <div class="form" *ngIf="!isProcessing && !statusMessage ">
+          <div class="form" *ngIf="!isProcessing && !messageStatus ">
               <form #f="ngForm">
                 <mat-form-field>
                   <input matInput type="number" [ngModel]="record.shotefPlus"  name="shotef_plus" placeholder="שוטף פלוס שסוכם בעסקה (30,40,60...)">

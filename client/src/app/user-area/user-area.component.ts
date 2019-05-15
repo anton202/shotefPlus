@@ -16,7 +16,7 @@ import { data } from './data';
   encapsulation: ViewEncapsulation.None
 })
 export class UserAreaComponent implements OnInit {
-  statusMessage: string;
+  messageStatus: string;
   records: Array<{}> = data;
   isProcessing: boolean = false;
   messageType: string;
@@ -29,41 +29,45 @@ export class UserAreaComponent implements OnInit {
   ngOnInit() {
     this.userAreaService.getRecords();
     this.fileInput = new FormGroup({
-      'evidence': new FormControl(null,[this.sharedService.maxInputFiles,FileValidator.maxContentSize(this.totalMaxFilesSize)])
+      'evidence': new FormControl(null, [this.sharedService.maxInputFiles, FileValidator.maxContentSize(this.totalMaxFilesSize)])
     })
   }
 
-  public confirmSaveChanges(report:editReport, reportId:string):void{
+  public confirmSaveChanges(report: editReport, reportId: string): void {
     this.userAreaService.confirmAction('לשמור שינויים?')
-    .subscribe(actinConfiremd =>{
-      if(actinConfiremd){
-        this.saveChanges(report,reportId)
-      }
-    })
+      .subscribe(actinConfiremd => {
+        if (actinConfiremd) {
+          this.saveChanges(report, reportId)
+        }
+      })
   }
 
-  public confirmDeleteReport(reportId:string):void{
+  public confirmDeleteReport(reportId: string): void {
     this.userAreaService.confirmAction('למחוק דיווח?')
-    .subscribe(actinConfiremd =>{
-      if(actinConfiremd){
-        this.deleteReport(reportId)
-      }
-    })
+      .subscribe(actinConfiremd => {
+        if (actinConfiremd) {
+          this.deleteReport(reportId)
+        }
+      })
   }
 
   private saveChanges(report: editReport, reportId: string): void {
     this.isProcessing = true
     report.evidence = this.fileInput.value.evidence
     console.log(report)
-    this.userAreaService.saveChanges(reportId, report)
-      .subscribe(() => {
-        this.handelResponse('השינויים נשמרו בהצלחה.', 'success')
-      },
-        error => {
-          this.handelResponse('משהו השתבש..., נסה שוב או פנה למפתח האתר.', 'fail')
-          this.fileInput.value.evidence = null
-        }
-      )
+    setTimeout(()=>{
+
+      this.userAreaService.saveChanges(reportId, report)
+        .subscribe(() => {
+          this.handelResponse('השינויים נשמרו בהצלחה.', 'success')
+        },
+          error => {
+            this.handelResponse('משהו השתבש..., נסה שוב או פנה למפתח האתר.', 'fail')
+            
+          }
+        )
+
+    },3000)
   }
 
   private deleteReport(reportId: string): void {
@@ -78,8 +82,8 @@ export class UserAreaComponent implements OnInit {
       )
   }
 
- public readEvidence(){
-    if(this.fileInput.value.evidence){
+  public readEvidence(): void {
+    if (this.fileInput.value.evidence) {
       this.readingFiles = true;
       const files = this.fileInput.value.evidence.files;
       this.sharedService.readFile(files)
@@ -92,11 +96,12 @@ export class UserAreaComponent implements OnInit {
 
   private handelResponse(message: string, messageType): void {
     this.isProcessing = false;
-    this.statusMessage = message;
+    this.messageStatus = message;
     this.messageType = messageType;
+    this.fileInput.reset()
     setTimeout(() => {
       this.messageType = '';
-      this.statusMessage = '';
+      this.messageStatus = '';
     }, 3000)
   }
 
