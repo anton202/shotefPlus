@@ -33,6 +33,11 @@ form {
   margin-right: 95%;
 }
 
+.savingChanges > p, .waitForChangesToFinish{
+  text-align: center;
+}
+
+
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {}
 
 @media (min-width: 320px) and (max-width: 480px) {

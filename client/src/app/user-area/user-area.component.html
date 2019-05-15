@@ -16,11 +16,19 @@
             </mat-panel-title>
           </mat-expansion-panel-header>
 
-          <mat-spinner style="margin:auto" *ngIf="isProcessing && i === reportDomIdx"></mat-spinner> 
-
+          <div class="savingChanges" *ngIf="isProcessing && i === reportDomIdx">
+              <mat-spinner style="margin:auto" ></mat-spinner> 
+              <p>שומר שינויים...</p>
+          </div>
+          
+          
           <app-status-message *ngIf="messageStatus && i === reportDomIdx  "
            [messageType]="messageType" 
            [message]="messageStatus" ></app-status-message>
+
+          <div class="waitForChangesToFinish" *ngIf="isProcessing && i !== reportDomIdx">
+            <p>אנא המתן עד שהשינויים ישמרו...</p>
+          </div>
 
           <div class="form" *ngIf="!isProcessing && !messageStatus">
               <form #f="ngForm">
