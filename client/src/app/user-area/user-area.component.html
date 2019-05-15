@@ -9,20 +9,20 @@
             {{company.name}}
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <mat-expansion-panel class="test" *ngFor="let record of company.records; let index = i">
+        <mat-expansion-panel class="test" *ngFor="let record of company.records; let i = index">
           <mat-expansion-panel-header>
             <mat-panel-title>
               {{record.createdAt}}
             </mat-panel-title>
           </mat-expansion-panel-header>
 
-          <mat-spinner style="margin:auto" *ngIf="isProcessing"></mat-spinner> 
+          <mat-spinner style="margin:auto" *ngIf="isProcessing && i === reportDomIdx"></mat-spinner> 
 
-          <app-status-message *ngIf="messageStatus"
+          <app-status-message *ngIf="messageStatus && i === reportDomIdx  "
            [messageType]="messageType" 
            [message]="messageStatus" ></app-status-message>
 
-          <div class="form" *ngIf="!isProcessing && !messageStatus ">
+          <div class="form" *ngIf="!isProcessing && !messageStatus">
               <form #f="ngForm">
                 <mat-form-field>
                   <input matInput type="number" [ngModel]="record.shotefPlus"  name="shotef_plus" placeholder="שוטף פלוס שסוכם בעסקה (30,40,60...)">
@@ -51,7 +51,7 @@
               </form>
               <div class="formActionButtons">
                 <button mat-raised-button class="saveCangesBtn" color="primary" 
-                (click)="confirmSaveChanges(f.value,record._id)">שמור שינויים</button>
+                (click)="confirmSaveChanges(f.value,record._id,i)">שמור שינויים</button>
                 <button mat-raised-button color="warn" (click)="confirmDeleteReport(record._id)">מחק דיווח</button>
               </div>
             </div>  

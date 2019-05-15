@@ -23,6 +23,7 @@ export class UserAreaComponent implements OnInit {
   fileInput: FormGroup;
   readingFiles: boolean = false;
   totalMaxFilesSize: number = 10000000;
+  reportDomIdx: number;
 
   constructor(private userAreaService: UserAreaService, private sharedService: SharedService) { }
 
@@ -33,11 +34,11 @@ export class UserAreaComponent implements OnInit {
     })
   }
 
-  public confirmSaveChanges(report: editReport, reportId: string): void {
+  public confirmSaveChanges(report: editReport, reportId: string,idx): void {
     this.userAreaService.confirmAction('לשמור שינויים?')
       .subscribe(actinConfiremd => {
         if (actinConfiremd) {
-          this.saveChanges(report, reportId)
+          this.saveChanges(report, reportId,idx)
         }
       })
   }
@@ -51,10 +52,11 @@ export class UserAreaComponent implements OnInit {
       })
   }
 
-  private saveChanges(report: editReport, reportId: string): void {
+  private saveChanges(report: editReport, reportId: string,idx): void {
+    this.reportDomIdx = idx
     this.isProcessing = true
     report.evidence = this.fileInput.value.evidence
-    console.log(report)
+    console.log(idx, this.reportDomIdx)
     setTimeout(()=>{
 
       this.userAreaService.saveChanges(reportId, report)
@@ -67,7 +69,7 @@ export class UserAreaComponent implements OnInit {
           }
         )
 
-    },3000)
+    },6000)
   }
 
   private deleteReport(reportId: string): void {
