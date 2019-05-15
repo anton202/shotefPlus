@@ -1,13 +1,14 @@
 export const data = [
     {
         name: 'בתי זיקוק לנפט בעמ',
-        records: [
+        reports: [
             {
                 shotefPlus: 30,
                 delay: 60,
                 comment: 'פעם אחת לא קיבלתי את התשלום מהחברה הזאת בזמן',
                 createdAt: '20/3/2019',
-                _id: '1543hnxsjo45'
+                _id: '1543hnxsjo45',
+                evidence:['','','','']
             },{
                 shotefPlus: 60,
                 delay: 30,
@@ -31,7 +32,7 @@ export const data = [
     },
     {
         name: 'שלג הנדסה',
-        records: [
+        reports: [
             {
                 shotefPlus: 30,
                 delay: 60,
@@ -43,7 +44,7 @@ export const data = [
     },
     {
         name: ' יוזף ובניו תעשיות מלט',
-        records: [
+        reports: [
             {
                 shotefPlus: 30,
                 delay: 60,
@@ -55,7 +56,7 @@ export const data = [
     },
     {
         name: 'קרמיקה שולט ובנותיו',
-        records: [
+        reports: [
             {
                 shotefPlus: 60,
                 delay: 40,
@@ -67,7 +68,7 @@ export const data = [
     },
     {
         name: 'בתי זיקוק לנפט בעמ',
-        records: [
+        reports: [
             {
                 shotefPlus: 30,
                 delay: 60,

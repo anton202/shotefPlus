@@ -17,7 +17,7 @@ import { data } from './data';
 })
 export class UserAreaComponent implements OnInit {
   messageStatus: string;
-  records: Array<{}> = data;
+  reports: Array<{}> = data;
   isProcessing: boolean = false;
   messageType: string;
   fileInput: FormGroup;

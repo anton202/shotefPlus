@@ -3,16 +3,16 @@
   <div>
     <app-status-message *ngIf="userAreaService.isReportsFetched" [messageType]="userAreaService.isReportsFetched" [message]="userAreaService.messageStatus" ></app-status-message>
     <mat-accordion>
-      <mat-expansion-panel *ngFor="let company of records">
+      <mat-expansion-panel *ngFor="let company of reports">
         <mat-expansion-panel-header>
           <mat-panel-title>
             {{company.name}}
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <mat-expansion-panel class="test" *ngFor="let record of company.records; let i = index">
+        <mat-expansion-panel class="test" *ngFor="let report of company.reports; let i = index">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              {{record.createdAt}}
+              {{report.createdAt}}
             </mat-panel-title>
           </mat-expansion-panel-header>
 
@@ -21,8 +21,7 @@
               <p>שומר שינויים...</p>
           </div>
           
-          
-          <app-status-message *ngIf="messageStatus && i === reportDomIdx  "
+          <app-status-message *ngIf="messageStatus && i === reportDomIdx"
            [messageType]="messageType" 
            [message]="messageStatus" ></app-status-message>
 
@@ -33,15 +32,15 @@
           <div class="form" *ngIf="!isProcessing && !messageStatus">
               <form #f="ngForm">
                 <mat-form-field>
-                  <input matInput type="number" [ngModel]="record.shotefPlus"  name="shotef_plus" placeholder="שוטף פלוס שסוכם בעסקה (30,40,60...)">
+                  <input matInput type="number" [ngModel]="report.shotefPlus"  name="shotef_plus" placeholder="שוטף פלוס שסוכם בעסקה (30,40,60...)">
                 </mat-form-field>
 
                 <mat-form-field>
-                  <input matInput type="number" [ngModel]="record.delay"  name="days_of_delay" placeholder="ימיי איחור אחרי תקופת שוטף פלוס">
+                  <input matInput type="number" [ngModel]="report.delay"  name="days_of_delay" placeholder="ימיי איחור אחרי תקופת שוטף פלוס">
                 </mat-form-field>
 
                 <mat-form-field>
-                  <textarea matInput [ngModel]="record.comment"  name="comment" placeholder="הוסף הערה" cdkTextareaAutosize></textarea>
+                  <textarea matInput [ngModel]="report.comment"  name="comment" placeholder="הוסף הערה" cdkTextareaAutosize></textarea>
                 </mat-form-field>
 
                 <mat-form-field [formGroup]="fileInput">
@@ -55,12 +54,20 @@
                       סה"כ ניתן להעלות עד 10 MB </mat-error>
                   <mat-hint>כדי להעלות מספר קבצים, העבירו את הקבצים שברצונכם להעלות לאותה תיקיה. כעת לחצו  על השורה הוסף הוכחה, בחלון שיפתח נווטו לתיקייה שבה נמצאים הקבצים שברצונכם להעלות. החזיקו את מקש ה- SHIFT במקלדת ובחרו עד 4 קבצים.</mat-hint>
                 </mat-form-field>
-
               </form>
+
+              <p style="text-decoration:underline">הוכחות מוצרפות</p>
+              <div class="evidence" *ngFor="let evidence of report.evidence; let i = index">
+                <span>הוכחה {{ i + 1}}</span>
+                <i class="material-icons deleteIcon">
+                    delete
+                    </i>
+              </div>
+
               <div class="formActionButtons">
                 <button mat-raised-button class="saveCangesBtn" color="primary" 
-                (click)="confirmSaveChanges(f.value,record._id,i)">שמור שינויים</button>
-                <button mat-raised-button color="warn" (click)="confirmDeleteReport(record._id)">מחק דיווח</button>
+                (click)="confirmSaveChanges(f.value,report._id,i)">שמור שינויים</button>
+                <button mat-raised-button color="warn" (click)="confirmDeleteReport(report._id)">מחק דיווח</button>
               </div>
             </div>  
         </mat-expansion-panel>

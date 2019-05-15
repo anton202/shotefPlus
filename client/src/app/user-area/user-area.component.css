@@ -6,11 +6,12 @@
 form {
   display: flex;
   flex-direction: column;
+  margin-bottom: 50px;
 }
 
 .formActionButtons {
-  margin-top: 20%;
-  margin-right: 50%;
+  margin-top: 5%;
+  margin-right: 60%;
 }
 
 .successMessage {
@@ -37,6 +38,19 @@ form {
   text-align: center;
 }
 
+.deleteIcon{
+  margin-right: 30px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.evidence{
+  margin-top: 10px;;
+}
+
+.evidence > span{
+  vertical-align: middle;
+}
 
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {}
 
