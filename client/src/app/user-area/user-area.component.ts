@@ -34,54 +34,80 @@ export class UserAreaComponent implements OnInit {
     })
   }
 
-  public confirmSaveChanges(report: editReport, reportId: string,idx): void {
+  public confirmSaveChanges(report: editReport, reportId: string, idx: number): void {
     this.userAreaService.confirmAction('לשמור שינויים?')
       .subscribe(actinConfiremd => {
         if (actinConfiremd) {
-          this.saveChanges(report, reportId,idx)
+          this.saveChanges(report, reportId, idx)
         }
       })
   }
 
-  public confirmDeleteReport(reportId: string): void {
+  public confirmDeleteReport(reportId: string, idx: number): void {
     this.userAreaService.confirmAction('למחוק דיווח?')
       .subscribe(actinConfiremd => {
         if (actinConfiremd) {
-          this.deleteReport(reportId)
+          this.deleteReport(reportId, idx)
         }
       })
   }
 
-  private saveChanges(report: editReport, reportId: string,idx): void {
+  public confirmDeleteEvidence(reportId: string, evidenceUrl: string, idx: number): void {
+    this.userAreaService.confirmAction('למחוק הוכחה?')
+      .subscribe(actionConfirmed => {
+        if (actionConfirmed) {
+          this.deleteEvidence(reportId, evidenceUrl, idx)
+        }
+      })
+  }
+
+  private saveChanges(report: editReport, reportId: string, idx: number): void {
     this.reportDomIdx = idx
     this.isProcessing = true
     report.evidence = this.fileInput.value.evidence
     console.log(idx, this.reportDomIdx)
-    setTimeout(()=>{
+    setTimeout(() => {
 
       this.userAreaService.saveChanges(reportId, report)
         .subscribe(() => {
-          this.handelResponse('השינויים נשמרו בהצלחה.', 'success')
+          this.handelResponse('השינויים נשמרו בהצלחה.', 'success');
         },
           error => {
-            this.handelResponse('משהו השתבש..., נסה שוב או פנה למפתח האתר.', 'fail')
-            
+            this.handelResponse('משהו השתבש..., נסה שוב או פנה למפתח האתר.', 'fail');
+
           }
         )
 
-    },6000)
+    }, 6000)
   }
 
-  private deleteReport(reportId: string): void {
+  private deleteReport(reportId: string, idx: number): void {
     this.isProcessing = true;
+    this.reportDomIdx = idx
     this.userAreaService.deleteReport(reportId)
       .subscribe(() => {
-        this.handelResponse('הדיווח נמחק בהצלחה.', 'success')
+        this.handelResponse('הדיווח נמחק בהצלחה.', 'success');
       },
         error => {
-          this.handelResponse('משהו השתבש...,נסה שוב או פנה לפתח האתר.', 'fail')
+          this.handelResponse('משהו השתבש...,נסה שוב או פנה לפתח האתר.', 'fail');
         }
       )
+  }
+
+  private deleteEvidence(reportId: string, evidenceUrl: string, idx: number): void {
+    this.isProcessing = true
+    this.reportDomIdx = idx
+    setTimeout(()=>{
+
+      this.userAreaService.deleteEvidence(reportId, evidenceUrl)
+            .subscribe(() => {
+              this.handelResponse('ההוכחה נמחקה בהצלחה', 'success');
+            },
+              error => {
+                this.handelResponse('משהו השתבש...,נסה שוב או פנה לפתח האתר.', 'fail');
+              })
+
+    },4000)
   }
 
   public readEvidence(): void {
@@ -96,7 +122,7 @@ export class UserAreaComponent implements OnInit {
     }
   }
 
-  private handelResponse(message: string, messageType): void {
+  private handelResponse(message: string, messageType: string): void {
     this.isProcessing = false;
     this.messageStatus = message;
     this.messageType = messageType;
