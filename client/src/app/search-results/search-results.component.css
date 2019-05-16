@@ -40,6 +40,10 @@ table {
     border-bottom-width: 0;
   }
 
+  .example-element-description{
+    width: 60%;
+  }
+
   mat-spinner{
     margin: auto;
     margin-top: 5%;

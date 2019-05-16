@@ -19,7 +19,7 @@ import { data } from './data';
 })
 export class SearchResultsComponent implements OnInit {
   headerData = [{ name: 'בתי זיקוק בעמ', number: 51000043, shotefPlusAvrg: 90, avrgDaysOfDelay: 100 }];
-  columnsToDisplay = ['שם מפרסם הדוח', 'שוטף פלוס', 'יימי איחור אחרי תקופת שוטף פלוס', 'הערה', 'הוכחות'];
+  columnsToDisplay = ['שוטף פלוס', 'יימי איחור אחרי תקופת שוטף פלוס', 'הערה', 'הוכחות'];
   headerColumns = ['שם חברה', 'מספר חברה', 'ממוצע שוטף פלוס', 'ממוצע ימיי איחור'];
   dataSource = new MatTableDataSource(data);
   expandedElement: any

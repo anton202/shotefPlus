@@ -143,7 +143,6 @@ export class UserAreaComponent implements OnInit {
     }, 3000)
   }
 
-
   public openEvidence(evidence: string): void {
     this.dialog.open(EvidenceComponent, { data: { evidence: [evidence] } })
   }
