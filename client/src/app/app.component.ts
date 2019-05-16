@@ -5,7 +5,7 @@ import { SignUpComponent } from './sign-up/sign-up.component'
 import { SignInComponent } from './sign-in/sign-in.component';
 import { AppService } from './app.service';
 import { UserAreaComponent } from './user-area/user-area.component';
-
+import { ConfirmActionComponent } from './shared/confirm-action/confirm-action.component';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -31,6 +31,20 @@ export class AppComponent implements OnInit {
     } else {
       this.dailog.open(SignInComponent)
     }
+  }
+
+  private logOut(){
+    console.log('logOut')
+  }
+
+  public confirmLogOut(){
+    const dialogRef = this.dailog.open(ConfirmActionComponent,{data:{text:'להתנתק מהמערכת?'}})
+    dialogRef.afterClosed().subscribe(actionConfirmed =>{
+      if(actionConfirmed){
+        this.logOut()
+      }
+    })
+      
   }
 
 }
