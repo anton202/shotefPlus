@@ -32,11 +32,11 @@
           <div class="form" *ngIf="!isProcessing && !messageStatus">
               <form #f="ngForm">
                 <mat-form-field>
-                  <input matInput type="number" [ngModel]="report.shotefPlus"  name="shotef_plus" placeholder="שוטף פלוס שסוכם בעסקה (30,40,60...)">
+                  <input matInput type="number" [ngModel]="report.shotefPlus"  name="shotef_plus" placeholder="שוטף פלוס שסוכם בעסקה (30,40,60...)" required>
                 </mat-form-field>
 
                 <mat-form-field>
-                  <input matInput type="number" [ngModel]="report.delay"  name="days_of_delay" placeholder="ימיי איחור אחרי תקופת שוטף פלוס">
+                  <input matInput type="number" [ngModel]="report.delay"  name="days_of_delay" placeholder="ימיי איחור אחרי תקופת שוטף פלוס" required>
                 </mat-form-field>
 
                 <mat-form-field>
@@ -68,9 +68,9 @@
               </div>
 
               <div class="formActionButtons">
-                <button mat-raised-button class="saveCangesBtn" color="primary" 
+                <button mat-raised-button class="saveCangesBtn" color="primary" [disabled]="f.invalid"
                 (click)="confirmSaveChanges(f.value,report._id,i)">שמור שינויים</button>
-                <button mat-raised-button color="warn" (click)="confirmDeleteReport(report._id,i)">מחק דיווח</button>
+                <button mat-raised-button color="warn" [disabled]="f.invalid" (click)="confirmDeleteReport(report._id,i)">מחק דיווח</button>
               </div>
             </div>  
         </mat-expansion-panel>
