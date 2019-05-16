@@ -8,7 +8,7 @@ export const data = [
                 comment: 'פעם אחת לא קיבלתי את התשלום מהחברה הזאת בזמן',
                 createdAt: '20/3/2019',
                 _id: '1543hnxsjo45',
-                evidence:['','','','']
+                evidence:['../../assets/tall.jpg','../../assets/test.png']
             },{
                 shotefPlus: 60,
                 delay: 30,

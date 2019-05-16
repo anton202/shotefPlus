@@ -30,26 +30,29 @@ form {
   margin-left: 2%;
 }
 
-.fileUpload{
+.fileUpload {
   margin-right: 95%;
 }
 
-.savingChanges > p, .waitForChangesToFinish{
+.savingChanges>p,
+.waitForChangesToFinish {
   text-align: center;
 }
 
-.deleteIcon{
+.deleteIcon {
   margin-right: 30px;
   vertical-align: middle;
   cursor: pointer;
 }
 
-.evidence{
-  margin-top: 10px;;
+.evidence {
+  margin-top: 10px;
+  ;
 }
 
-.evidence > span{
+.evidence>span {
   vertical-align: middle;
+  cursor: pointer;
 }
 
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {}

@@ -59,7 +59,7 @@
               <div *ngIf="report.evidence">
                 <p style="text-decoration:underline">הוכחות מוצרפות</p>
                 <div class="evidence" *ngFor="let evidence of report.evidence; let x = index">
-                  <span>הוכחה {{ x + 1}}</span>
+                  <span (click)="openEvidence(evidence)">הוכחה {{ x + 1}}</span>
                   <i class="material-icons deleteIcon" (click)="confirmDeleteEvidence(report._id,report.evidence,i)">
                       delete
                       </i>

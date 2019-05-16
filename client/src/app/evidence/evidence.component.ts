@@ -12,9 +12,7 @@ export class EvidenceComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
 
-  ngOnInit() {
-    console.log(this.data.evidence)
-  }
+  ngOnInit() {}
 
  changeImg(direction){
    if(direction === 'forward' && this.currentImg + 1 < this.data.evidence.length){

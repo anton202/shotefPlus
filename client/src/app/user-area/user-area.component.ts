@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Form, FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
+
+import { MatDialog } from '@angular/material';
 
 import { UserAreaService } from './user-area.service';
 import { SharedService } from '../shared/shared.service';
@@ -7,6 +9,7 @@ import { editReport } from '../shared/models/edit-report'
 import { FileValidator } from '../../../node_modules/ngx-material-file-input'
 
 import { data } from './data';
+import { EvidenceComponent } from '../evidence/evidence.component';
 
 
 @Component({
@@ -25,7 +28,7 @@ export class UserAreaComponent implements OnInit {
   totalMaxFilesSize: number = 10000000;
   reportDomIdx: number;
 
-  constructor(private userAreaService: UserAreaService, private sharedService: SharedService) { }
+  constructor(private userAreaService: UserAreaService, private sharedService: SharedService, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.userAreaService.getRecords();
@@ -133,5 +136,9 @@ export class UserAreaComponent implements OnInit {
     }, 3000)
   }
 
+
+  public openEvidence(evidence: string): void {
+    this.dialog.open(EvidenceComponent, { data: { evidence: [evidence] } })
+  }
 
 }
