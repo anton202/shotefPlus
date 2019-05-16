@@ -12,16 +12,25 @@ export class SharedService {
     return new Observable((observer) => {
       const encodedFiles = [];
       const fileReader = new FileReader();
-      fileReader.onload = () => {
-        encodedFiles.push(fileReader.result);
-        if (encodedFiles.length !== files.length) {
-          fileReader.readAsDataURL(files[encodedFiles.length])
-        } else {
-          observer.next(encodedFiles);
-          this.finishedReadingFiles.next(true);
+      
+      fileReader.onerror = (error)=> {
+        observer.error(error)
+      fileReader.abort()
+    }
+      setTimeout(()=>{
+
+        fileReader.onload = () => {
+          encodedFiles.push(fileReader.result);
+          if (encodedFiles.length !== files.length) {
+            fileReader.readAsDataURL(files[encodedFiles.length])
+          } else {
+            observer.next(encodedFiles);
+            this.finishedReadingFiles.next(true);
+          }
         }
-      }
-      fileReader.readAsDataURL(files[encodedFiles.length])
+        fileReader.readAsDataURL(files[encodedFiles.length])
+
+      },6000)
     })
   }
 

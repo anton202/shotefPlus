@@ -52,8 +52,9 @@
                     </mat-error>
                     <mat-error *ngIf="fileInput.get('evidence').hasError('maxContentSize')">
                       סה"כ ניתן להעלות עד 10 MB </mat-error>
-                  <mat-hint>כדי להעלות מספר קבצים, העבירו את הקבצים שברצונכם להעלות לאותה תיקיה. כעת לחצו  על השורה הוסף הוכחה, בחלון שיפתח נווטו לתיקייה שבה נמצאים הקבצים שברצונכם להעלות. החזיקו את מקש ה- SHIFT במקלדת ובחרו עד 4 קבצים.</mat-hint>
-                </mat-form-field>
+                      <mat-hint>כדי להעלות מספר קבצים, העבירו את הקבצים שברצונכם להעלות לאותה תיקיה. כעת לחצו  על השורה הוסף הוכחה, בחלון שיפתח נווטו לתיקייה שבה נמצאים הקבצים שברצונכם להעלות. החזיקו את מקש ה- SHIFT במקלדת ובחרו עד 4 קבצים.</mat-hint>
+                    </mat-form-field>
+                    <p style="color:red;margin-top:30px" *ngIf="readingFilesErrorMessage">{{readingFilesErrorMessage}}</p>
               </form>
 
               <div *ngIf="report.evidence">

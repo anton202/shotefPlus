@@ -19,14 +19,15 @@ import { EvidenceComponent } from '../evidence/evidence.component';
   encapsulation: ViewEncapsulation.None
 })
 export class UserAreaComponent implements OnInit {
-  messageStatus: string;
-  reports: Array<{}> = data;
-  isProcessing: boolean = false;
+  public messageStatus: string;
+  public reports: Array<{}> = data;
+  public isProcessing: boolean = false;
   messageType: string;
-  fileInput: FormGroup;
+  public fileInput: FormGroup;
   readingFiles: boolean = false;
-  totalMaxFilesSize: number = 10000000;
-  reportDomIdx: number;
+  private totalMaxFilesSize: number = 10000000;
+  private reportDomIdx: number;
+  public readingFilesErrorMessage: string;
 
   constructor(private userAreaService: UserAreaService, private sharedService: SharedService, private dialog: MatDialog) { }
 
@@ -100,17 +101,17 @@ export class UserAreaComponent implements OnInit {
   private deleteEvidence(reportId: string, evidenceUrl: string, idx: number): void {
     this.isProcessing = true
     this.reportDomIdx = idx
-    setTimeout(()=>{
+    setTimeout(() => {
 
       this.userAreaService.deleteEvidence(reportId, evidenceUrl)
-            .subscribe(() => {
-              this.handelResponse('ההוכחה נמחקה בהצלחה', 'success');
-            },
-              error => {
-                this.handelResponse('משהו השתבש...,נסה שוב או פנה לפתח האתר.', 'fail');
-              })
+        .subscribe(() => {
+          this.handelResponse('ההוכחה נמחקה בהצלחה', 'success');
+        },
+          error => {
+            this.handelResponse('משהו השתבש...,נסה שוב או פנה לפתח האתר.', 'fail');
+          })
 
-    },4000)
+    }, 4000)
   }
 
   public readEvidence(): void {
@@ -121,7 +122,13 @@ export class UserAreaComponent implements OnInit {
         .subscribe(files => {
           this.readingFiles = false;
           this.fileInput.value.evidence = files;
-        })
+          this.readingFilesErrorMessage = '';
+        },
+          error => {
+            this.readingFiles = false;
+            this.readingFilesErrorMessage = 'משהו השתבש בעת קריאת הקובץ נסה שוב או נסה להעלות קובץ אחר'
+          }
+        )
     }
   }
 
