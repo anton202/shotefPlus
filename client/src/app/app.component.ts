@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
   openDialog() {
     if (this.appService.isAuthenticated) {
       // user area component
-      this.dailog.open(UserAreaComponent)
+      this.dailog.open(UserAreaComponent,{panelClass:'userArea'})
     } else {
       this.dailog.open(SignInComponent)
     }

@@ -3,6 +3,10 @@
   height: 700px;
 }
 
+h1{
+  text-align: center;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -58,12 +62,19 @@ form {
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {}
 
 @media (min-width: 320px) and (max-width: 480px) {
+ 
+
   .userAreaContainer {
-    width: auto;
-    height: auto;
+    width: 280px;
+    height: 550px;
     padding: 0;
+    overflow: auto;
   }
 
+  .main {
+    width: 95%;
+    margin: auto;
+  }
 
   div.mat-expansion-panel-body {
     padding: 0px 10px 5px;
@@ -73,8 +84,18 @@ form {
     margin-right: 0;
   }
 
+  .formActionButtons>button {
+    width: 100%;
+    height: 48px;
+    margin-top: 8px;
+  }
+
   .saveCangesBtn {
     margin-left: 1%;
+  }
+
+  form {
+    margin-bottom: 60px;
   }
 
 }

@@ -1,7 +1,7 @@
 <div class="userAreaContainer">
   <h1>הדיווחים שלי</h1>
-  <div>
-    <app-status-message *ngIf="userAreaService.isReportsFetched" [messageType]="userAreaService.isReportsFetched" [message]="userAreaService.messageStatus" ></app-status-message>
+  <div class="main">
+    <app-status-message *ngIf="userAreaService.isReportsFetched" [messageType]="userAreaService.isReportsFetched" [message]="userAreaService.statusMessage" ></app-status-message>
     <mat-accordion>
       <mat-expansion-panel *ngFor="let company of reports">
         <mat-expansion-panel-header>
