@@ -17,8 +17,6 @@ export class SharedService {
         observer.error(error)
       fileReader.abort()
     }
-      setTimeout(()=>{
-
         fileReader.onload = () => {
           encodedFiles.push(fileReader.result);
           if (encodedFiles.length !== files.length) {
@@ -28,9 +26,7 @@ export class SharedService {
             this.finishedReadingFiles.next(true);
           }
         }
-        fileReader.readAsDataURL(files[encodedFiles.length])
-
-      },6000)
+        fileReader.readAsDataURL(files[encodedFiles.length])     
     })
   }
 

@@ -26,6 +26,9 @@ form > button {
     margin-bottom: 5%;
 }
 
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {}
+
 @media (min-width: 320px) and (max-width: 480px) {
     h1{
         font-size: 24px;
@@ -37,12 +40,10 @@ form > button {
         width: 90%;
     }
 
-    
+    button {
+        height: 48px;
+    }
   }
   
   
-  @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-  
-   
-    
-  }
+ 

@@ -48,7 +48,10 @@ export class SearchResultsComponent implements OnInit {
   }
 
   openEvidence(evidence: Array<string>): void {
-    this.dialog.open(EvidenceComponent, { data: { evidence: evidence } })
+    this.dialog.open(EvidenceComponent, { 
+      data: { evidence: evidence },
+      panelClass:'evidence' 
+    })
   }
 
 // this function search the value typed in the input filed on the data object.

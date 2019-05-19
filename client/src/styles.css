@@ -4,3 +4,9 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: 'Roboto', sans-serif; }
+
+@media (min-width: 320px) and (max-width: 480px){
+    .evidence .mat-dialog-container {
+    padding: 0;
+}
+}

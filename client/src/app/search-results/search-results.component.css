@@ -58,6 +58,10 @@ table {
     margin-top: 3%;
   }
 
+  .mat-dialog-container {
+    padding:0px;
+}
+
   @media (min-width: 320px) and (max-width: 480px) {
    main{
      margin-top:10%;
@@ -70,6 +74,11 @@ table {
   .example-element-detail{
     padding: 0;
   }
+
+  .example-element-description{
+    width: 100%;
+  }
+
   }
   
   
