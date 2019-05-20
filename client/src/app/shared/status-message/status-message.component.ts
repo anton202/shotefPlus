@@ -3,14 +3,15 @@ import { Component, Input } from "@angular/core";
 @Component({
     selector: 'app-status-message',
     templateUrl: './status-message.component.html',
-    styleUrls:['./status-message.component.css']
+    styleUrls: ['./status-message.component.css']
 })
 export class StatusMessageComponent {
-@Input() messageType;
-@Input() message;
-    constructor(){}
+    @Input() messageType: string;
+    @Input() message: string;
 
-    setColor(){
-        return this.messageType === 'success'? 'green': 'red'
+    constructor() { }
+
+    setColor() {
+        return this.messageType === 'success' ? 'green' : 'red'
     }
 }
