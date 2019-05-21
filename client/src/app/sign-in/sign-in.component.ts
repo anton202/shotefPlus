@@ -9,8 +9,8 @@ import { SignUpComponent } from '../sign-up/sign-up.component';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
-  statusMessage;
-  isSuccessfullyLogedIn;
+  statusMessage:string;
+  isSuccessfullyLogedIn:string;
   displaySpinner = false;
 
   constructor(
@@ -19,23 +19,15 @@ export class SignInComponent implements OnInit {
     private dialog: MatDialog
   ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  closeDialog() {
-    this.dialogRef.close()
-  }
-
-  onSignIn(loginValues) {
+ public onSignIn(loginValues: {email:string,password:string}) {
     this.displaySpinner = true;
     this.signInService.login(loginValues)
       .subscribe((response) => {
         this.displaySpinner = false;
         this.isSuccessfullyLogedIn = 'success';
         this.statusMessage = 'התחברתה בהצלחה'
-        setTimeout(() => {
-          this.closeDialog()
-        }, 1500)
       },
         error => {
           this.displaySpinner = false;
@@ -45,7 +37,7 @@ export class SignInComponent implements OnInit {
       )
   }
 
-  openSignInDialog() {
+  public openSignInDialog() {
     this.dialogRef.close()
     this.dialog.open(SignUpComponent)
   }
