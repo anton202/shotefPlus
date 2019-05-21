@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { SignUpService } from './sign-up.service';
 import { MatDialogRef } from '@angular/material';
-
+import { registration } from './sign-up.model';
 
 @Component({
   selector: 'app-sign-up',
@@ -10,17 +10,17 @@ import { MatDialogRef } from '@angular/material';
   providers: [ SignUpService ]
 })
 export class SignUpComponent  {
-  isSuccessfullyRegistrated 
-  displaySpinner = false;
-  statusMessage;
+  isSuccessfullyRegistrated: string; 
+  displaySpinner: boolean = false;
+  statusMessage: string;
 
   constructor(private signUpService: SignUpService, private dialogRef:MatDialogRef<SignUpComponent>) { }
 
-  onClose(){
+  public onClose(): void{
     this.dialogRef.close()
   }
 
-  onSignUp(formValues){
+  public onSignUp(formValues: registration): void{
     this.displaySpinner = true;
     
       this.signUpService.registerAccount(formValues)
@@ -34,10 +34,6 @@ export class SignUpComponent  {
           this.isSuccessfullyRegistrated = 'fail'
           this.statusMessage = 'משהו השתבש, נסה שוב או פנה למפתח האתר'
         })
-
-    
-
-    console.log(formValues);
   }
 
 }

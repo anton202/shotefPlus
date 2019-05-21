@@ -16,12 +16,12 @@
     </mat-radio-group>
 
     <mat-form-field *ngIf="form.value.employmentType === 'selfEmployed'">
-      <input matInput name="idNumber" minlength="9" maxlength="9" placeholder="מספר עוסק פטור/מורשה" required ngModel>
+      <input matInput name="freeLancerId" minlength="9" maxlength="9" placeholder="מספר עוסק פטור/מורשה" required ngModel>
       <mat-hint>מספר תעודת זהות</mat-hint>
     </mat-form-field>
 
     <mat-form-field *ngIf="form.value.employmentType === 'company'">
-      <input matInput name="companyNumber" type="number" placeholder="מספר חברה" required ngModel>
+      <input matInput name="companyId" type="number" placeholder="מספר חברה" required ngModel>
     </mat-form-field>
 
     <button type="submit" [disabled]="!form.valid" mat-flat-button color="primary">הרשם</button>
