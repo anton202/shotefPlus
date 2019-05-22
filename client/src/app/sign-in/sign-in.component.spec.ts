@@ -35,7 +35,7 @@ describe('sign-in component test',()=>{
         TestBed.configureTestingModule({
             declarations:[SignInComponent, StatusMessageComponent],
             imports: [MaterialModule, FormsModule],
-            providers:[{provide:SignInService, useValue:signInServiceStub},{provide:MatDialogRef, useValue:{},MatDialog}]
+            providers:[{provide:SignInService, useValue:signInServiceStub},{provide:MatDialogRef, useValue:{}},MatDialog]
         })
 
         TestBed.overrideModule(BrowserDynamicTestingModule, {

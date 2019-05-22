@@ -7,7 +7,7 @@ import { registration } from './sign-up.model';
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.css'],
-  providers: [ SignUpService ]
+  
 })
 export class SignUpComponent  {
   isSuccessfullyRegistrated: string; 
