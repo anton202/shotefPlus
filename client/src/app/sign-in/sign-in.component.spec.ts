@@ -6,7 +6,7 @@ import { NoopAnimationsModule } from
  '@angular/platform-browser/animations';    
 import { BrowserDynamicTestingModule } from  
  '@angular/platform-browser-dynamic/testing';    
- import { FormsModule } from '@angular/forms';  
+ import { FormsModule, ReactiveFormsModule } from '@angular/forms';  
  import { MaterialModule } from '../material.module';
  import { MatDialogRef, MatDialog } from '@angular/material';
  import { SignInService } from './sign-in.service';
@@ -24,7 +24,7 @@ describe('sign-in component test',()=>{
         login(loginValues){
            return new Observable((observer)=>{
                observer.next(true)
-               if(loginValues.password === ''){
+               if(loginValues.password === false){
                    observer.error(false)
                }
            }) 
@@ -34,7 +34,7 @@ describe('sign-in component test',()=>{
     beforeEach(()=>{
         TestBed.configureTestingModule({
             declarations:[SignInComponent, StatusMessageComponent],
-            imports: [MaterialModule, FormsModule],
+            imports: [MaterialModule, FormsModule, ReactiveFormsModule],
             providers:[{provide:SignInService, useValue:signInServiceStub},{provide:MatDialogRef, useValue:{}},MatDialog]
         })
 
@@ -52,27 +52,36 @@ describe('sign-in component test',()=>{
 
     describe('signing in',()=>{
         it('should display successfully loged in',fakeAsync(()=>{
-            const loginValues = {
-                email:'a.kluge202@gmail.com',
-                password:'anton202'
-            }
+           component.signInForm.controls['email'].setValue('a.kluge@gmail.com');
+           component.signInForm.controls['password'].setValue('123455');
 
-            component.onSignIn(loginValues)
+            component.onSignIn()
             fixture.detectChanges()
             const statusMessageComponent = rootElement.query(By.css('app-status-message'))
             expect(statusMessageComponent.nativeElement.innerText).toContain('התחברתה בהצלחה')
         }))
 
         it('should dispaly error message if not successfully loged in',()=>{
-            const loginValues = {
-                email:'a.kluge202@gmail.com',
-                password:''
-            }
-
-            component.onSignIn(loginValues);
+            component.signInForm.controls['email'].setValue('a.kluge@gmail.com');
+            component.signInForm.controls['password'].setValue(false);
+            component.onSignIn();
             fixture.detectChanges();
             const statusMessageComponent = rootElement.query(By.css('app-status-message'))
             expect(statusMessageComponent.nativeElement.innerText).toContain('ההתחברות נכשלה, נסה שוב או פנה למפתח האתר')
+        })
+    })
+
+    describe('form validity',()=>{
+        it('from shoudl be invalid if empty',()=>{
+            expect(component.signInForm.valid).toBeFalsy()
+        })
+
+        it('email input should be invalid if empty',()=>{
+            expect(component.signInForm.controls['email'].valid).toBeFalsy()
+        })
+
+        it('passworn input should be invallid if empty',()=>{
+            expect(component.signInForm.controls['password'].valid).toBeFalsy()
         })
     })
 })
