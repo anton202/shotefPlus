@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { SignInService } from './sign-in.service';
 import { MatDialogRef, MatDialog } from '@angular/material';
 import { SignUpComponent } from '../sign-up/sign-up.component';
+import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-in',
@@ -12,6 +13,7 @@ export class SignInComponent implements OnInit {
   statusMessage: string;
   isSuccessfullyLogedIn: string;
   displaySpinner: boolean = false;
+  signInForm: FormGroup;
 
   constructor(
     private signInService: SignInService,
@@ -19,11 +21,17 @@ export class SignInComponent implements OnInit {
     private dialog: MatDialog
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.signInForm = new FormGroup({
+      'email': new FormControl(null, Validators.required),
+      'password': new FormControl(null, Validators.required)
+    })
+  }
 
-  public onSignIn(loginValues: { email: string, password: string }): void {
+  public onSignIn(): void {
     this.displaySpinner = true;
-    this.signInService.login(loginValues)
+    console.log(this.signInForm.value)
+    this.signInService.login(this.signInForm.value)
       .subscribe((response) => {
         this.displaySpinner = false;
         this.isSuccessfullyLogedIn = 'success';

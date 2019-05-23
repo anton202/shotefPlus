@@ -1,16 +1,16 @@
 <div class="container">
   <i (click)="onClose()" class="material-icons">clear</i>
 
-  <form (ngSubmit)="onSignIn(form.value)" #form="ngForm">
+  <form (ngSubmit)="onSignIn()"  [formGroup]="signInForm">
     <mat-form-field>
-      <input matInput name="email" type="email" placeholder="דואר אלקטרוני" email required ngModel>
+      <input matInput formControlName="email" type="email" placeholder="דואר אלקטרוני" >
     </mat-form-field>
 
     <mat-form-field>
-      <input class="password" matInput name="password" type="password" placeholder="סיסמא" minlength="6" required ngModel>
+      <input class="password" matInput formControlName="password" type="password" placeholder="סיסמא" >
     </mat-form-field>
 
-    <button type="submit" [disabled]="!form.valid" mat-flat-button color="primary">הכנס</button>
+    <button type="submit" [disabled]="!signInForm.valid"  mat-flat-button color="primary">הכנס</button>
     <button style="margin-top:10px" mat-button (click)="openSignInDialog()">צור משתמש</button>
   </form>
 
