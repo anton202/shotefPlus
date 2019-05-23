@@ -1,30 +1,30 @@
 <div class="container">
   <i (click)="onClose()" class="material-icons">clear</i>
-  <form (ngSubmit)="onSignUp(form.value)" #form="ngForm">
+  <form (ngSubmit)="onSignUp()" [formGroup]="signUpForm">
     <mat-form-field>
-      <input matInput name="email" type="email" placeholder="דואר אלקטרוני" email required ngModel>
+      <input matInput formControlName="email" type="email" placeholder="דואר אלקטרוני" >
     </mat-form-field>
 
     <mat-form-field>
-      <input class="password" matInput name="password" type="text" placeholder="סיסמא" minlength="6" required ngModel>
+      <input class="password" matInput formControlName="password" type="text" placeholder="סיסמא">
       <mat-hint>מינימום 6 תווים</mat-hint>
     </mat-form-field>
 
-    <mat-radio-group class="chooseEmploymentType" name="employmentType" required ngModel>
+    <mat-radio-group class="chooseEmploymentType" formControlName="employmentType">
       <mat-radio-button value="selfEmployed">עצמאי</mat-radio-button>
       <mat-radio-button class="employmentType" value="company">חברה בע"מ</mat-radio-button>
     </mat-radio-group>
 
-    <mat-form-field *ngIf="form.value.employmentType === 'selfEmployed'">
-      <input matInput name="freeLancerId" minlength="9" maxlength="9" placeholder="מספר עוסק פטור/מורשה" required ngModel>
+    <mat-form-field *ngIf="signUpForm.get('employmentType').value === 'selfEmployed'">
+      <input matInput formControlName="freeLancerId"  placeholder="מספר עוסק פטור/מורשה" >
       <mat-hint>מספר תעודת זהות</mat-hint>
     </mat-form-field>
 
-    <mat-form-field *ngIf="form.value.employmentType === 'company'">
-      <input matInput name="companyId" type="number" placeholder="מספר חברה" required ngModel>
+    <mat-form-field *ngIf="signUpForm.get('employmentType').value === 'company'">
+      <input matInput formControlName="companyId" type="number" placeholder="מספר חברה" >
     </mat-form-field>
 
-    <button type="submit" [disabled]="!form.valid" mat-flat-button color="primary">הרשם</button>
+    <button type="submit"  mat-flat-button color="primary">הרשם</button>
   </form>
 
   <mat-spinner *ngIf="displaySpinner"></mat-spinner>
