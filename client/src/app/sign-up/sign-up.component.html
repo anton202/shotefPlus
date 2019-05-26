@@ -11,11 +11,11 @@
     </mat-form-field>
 
     <mat-radio-group class="chooseEmploymentType" formControlName="employmentType">
-      <mat-radio-button value="selfEmployed">עצמאי</mat-radio-button>
+      <mat-radio-button value="freeLancer">עצמאי</mat-radio-button>
       <mat-radio-button class="employmentType" value="company">חברה בע"מ</mat-radio-button>
     </mat-radio-group>
 
-    <mat-form-field *ngIf="signUpForm.get('employmentType').value === 'selfEmployed'">
+    <mat-form-field *ngIf="signUpForm.get('employmentType').value === 'freeLancer'">
       <input matInput formControlName="freeLancerId"  placeholder="מספר עוסק פטור/מורשה" >
       <mat-hint>מספר תעודת זהות</mat-hint>
     </mat-form-field>

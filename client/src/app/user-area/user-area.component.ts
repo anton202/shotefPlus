@@ -70,8 +70,6 @@ export class UserAreaComponent implements OnInit {
     this.isProcessing = true
     report.evidence = this.fileInput.value.evidence
     console.log(idx, this.reportDomIdx)
-    setTimeout(() => {
-
       this.userAreaService.saveChanges(reportId, report)
         .subscribe(() => {
           this.handelResponse('השינויים נשמרו בהצלחה.', 'success');
@@ -81,8 +79,6 @@ export class UserAreaComponent implements OnInit {
 
           }
         )
-
-    }, 6000)
   }
 
   private deleteReport(reportId: string, idx: number): void {
@@ -101,8 +97,6 @@ export class UserAreaComponent implements OnInit {
   private deleteEvidence(reportId: string, evidenceUrl: string, idx: number): void {
     this.isProcessing = true
     this.reportDomIdx = idx
-    setTimeout(() => {
-
       this.userAreaService.deleteEvidence(reportId, evidenceUrl)
         .subscribe(() => {
           this.handelResponse('ההוכחה נמחקה בהצלחה', 'success');
@@ -110,8 +104,6 @@ export class UserAreaComponent implements OnInit {
           error => {
             this.handelResponse('משהו השתבש...,נסה שוב או פנה לפתח האתר.', 'fail');
           })
-
-    }, 4000)
   }
 
   public readEvidence(): void {

@@ -8,7 +8,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.css'],
-
 })
 export class SignUpComponent implements OnInit {
   isSuccessfullyRegistrated: string;
@@ -26,6 +25,7 @@ export class SignUpComponent implements OnInit {
       'freeLancerId': new FormControl(null, [Validators.required, Validators.minLength(9)]),
       'companyId': new FormControl(null, Validators.required)
     })
+    this.setEmploymentTypeValidator()
   }
 
   public onClose(): void {
@@ -43,6 +43,7 @@ export class SignUpComponent implements OnInit {
       },
         error => {
           this.handleRespone('fail','משהו השתבש, נסה שוב או פנה לתמיכה טכנית')
+          
         })
   }
 
@@ -50,6 +51,21 @@ export class SignUpComponent implements OnInit {
     this.displaySpinner = false;
     this.isSuccessfullyRegistrated = isSuccessfullyRegistrated
     this.statusMessage = registrationStatusMessage;
+  }
+
+  private setEmploymentTypeValidator(): void{
+    const employmentType = this.signUpForm.get('employmentType');
+    const frelancerId = this.signUpForm.get('freeLancerId');
+    const companyId = this.signUpForm.get('companyId');
+
+    employmentType.valueChanges.subscribe(value =>{
+      if(value === 'freeLancer'){
+        companyId.setValidators(null)
+      }
+      if(value === 'company'){
+        frelancerId.setValidators(null)
+      }
+    })
   }
 
 }
