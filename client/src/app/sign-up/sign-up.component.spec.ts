@@ -88,9 +88,15 @@ describe('sign-up component test',()=>{
 
         it('email control should be invalid if email is not in standart form',()=>{
             component.signUpForm.controls['email'].setValue('testgmail');
-            fixture.detectChanges()
-            console.log(component.signUpForm)
             expect( component.signUpForm.controls['email'].valid).toBeFalsy()
+        })
+
+        it('password validity',()=>{
+            component.signUpForm.controls['password'].setValue('123');
+            expect(component.signUpForm.controls['password'].valid).toBeFalsy()
+
+            component.signUpForm.controls['password'].setValue('123456');
+            expect(component.signUpForm.controls['password'].valid).toBeTruthy()
         })
     })
 })

@@ -23,8 +23,8 @@ export class SignUpComponent implements OnInit {
       'employmentType': new FormControl(null),
       'freeLancerId': new FormControl(null, [Validators.required, Validators.minLength(9)]),
       'companyId': new FormControl(null, Validators.required)
-    }, this.onlyOneEmploymentTypeValidator)
-    
+    }, this.onlyOneEmploymentTypeCanBeSubmitedValidator)
+
     this.onlyOneEmploymentTypeRequired()
   }
 
@@ -72,7 +72,7 @@ export class SignUpComponent implements OnInit {
     })
   }
 
-  private onlyOneEmploymentTypeValidator(form: FormGroup): {} | null {
+  private onlyOneEmploymentTypeCanBeSubmitedValidator(form: FormGroup): {} | null {
     const freeLancerId = form.controls.freeLancerId.value;
     const companyId = form.controls.companyId.value;
 

@@ -20,6 +20,7 @@
     <mat-form-field *ngIf="signUpForm.get('employmentType').value === 'freeLancer'">
       <input matInput formControlName="freeLancerId"  placeholder="מספר עוסק פטור/מורשה" >
       <mat-hint>מספר תעודת זהות</mat-hint>
+      <mat-error *ngIf="signUpForm.get('freeLancerId').hasError('minlength')">נא להזין מספר תעודת זהות תקין בעל 9 ספרות</mat-error>
     </mat-form-field>
 
     <mat-form-field *ngIf="signUpForm.get('employmentType').value === 'company'">
