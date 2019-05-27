@@ -79,6 +79,8 @@ describe('sign-up component test',()=>{
             const statusMessageComponent = rootElement.query(By.css('app-status-message'))
             expect(statusMessageComponent.nativeElement.innerText).toContain('משהו השתבש, נסה שוב או פנה לתמיכה טכנית')
         })
+
+        
     })
 
     describe('sign up form validity',()=>{
@@ -97,6 +99,21 @@ describe('sign-up component test',()=>{
 
             component.signUpForm.controls['password'].setValue('123456');
             expect(component.signUpForm.controls['password'].valid).toBeTruthy()
+        })
+
+        it('employmentType validity',()=>{
+            component.signUpForm.controls['freeLancerId'].setValue('123');
+            expect(component.signUpForm.controls['freeLancerId'].valid).toBeFalsy()
+
+            component.signUpForm.controls['freeLancerId'].setValue('321332426');
+            expect(component.signUpForm.controls['freeLancerId'].valid).toBeTruthy()
+        })
+
+        it('form should not be valid if two employment types submited',()=>{
+            component.signUpForm.controls['freeLancerId'].setValue('321332425')
+            component.signUpForm.controls['companyId'].setValue('321332425')
+
+            expect(component.signUpForm.errors.twoEmploymentTypesSubmited).toBeTruthy()
         })
     })
 })
