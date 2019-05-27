@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SignUpService } from './sign-up.service';
 import { MatDialogRef } from '@angular/material';
-import { registration } from './sign-up.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -19,13 +18,14 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit() {
     this.signUpForm = new FormGroup({
-      'email': new FormControl(null, [Validators.required, Validators.email]),
+      'email': new FormControl(null, [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]),
       'password': new FormControl(null, [Validators.required, Validators.minLength(6)]),
       'employmentType': new FormControl(null),
       'freeLancerId': new FormControl(null, [Validators.required, Validators.minLength(9)]),
       'companyId': new FormControl(null, Validators.required)
-    })
-    this.setEmploymentTypeValidator()
+    }, this.onlyOneEmploymentTypeValidator)
+    
+    this.onlyOneEmploymentTypeRequired()
   }
 
   public onClose(): void {
@@ -33,39 +33,56 @@ export class SignUpComponent implements OnInit {
   }
 
   public onSignUp(): void {
-    if (this.signUpForm.valid === false) {
+    if (!this.signUpForm.valid) {
       return
     }
     this.displaySpinner = true;
     this.signUpService.registerAccount(this.signUpForm.value)
       .subscribe(() => {
-        this.handleRespone('success','נרשמתה בהצלחהת מייל ישלך אליך ברגע שהמשתמש יאומת')
+        this.handleRespone('success', 'נרשמתה בהצלחה, מייל ישלך אליך ברגע שהמשתמש יאומת')
       },
         error => {
-          this.handleRespone('fail','משהו השתבש, נסה שוב או פנה לתמיכה טכנית')
-          
+          this.handleRespone('fail', 'משהו השתבש, נסה שוב או פנה לתמיכה טכנית')
+
         })
   }
 
-  private handleRespone(isSuccessfullyRegistrated: string,registrationStatusMessage:string): void{
+  private handleRespone(isSuccessfullyRegistrated: string, registrationStatusMessage: string): void {
     this.displaySpinner = false;
     this.isSuccessfullyRegistrated = isSuccessfullyRegistrated
     this.statusMessage = registrationStatusMessage;
   }
 
-  private setEmploymentTypeValidator(): void{
+  private onlyOneEmploymentTypeRequired(): void {
     const employmentType = this.signUpForm.get('employmentType');
-    const frelancerId = this.signUpForm.get('freeLancerId');
+    const freeLancer = this.signUpForm.get('freeLancerId');
     const companyId = this.signUpForm.get('companyId');
 
-    employmentType.valueChanges.subscribe(value =>{
-      if(value === 'freeLancer'){
+    employmentType.valueChanges.subscribe(value => {
+      if (value === 'freeLancer') {
         companyId.setValidators(null)
+        freeLancer.setValidators([Validators.required, Validators.minLength(9)])
       }
-      if(value === 'company'){
-        frelancerId.setValidators(null)
+      if (value === 'company') {
+        freeLancer.setValidators(null)
+        companyId.setValidators([Validators.required])
       }
+      companyId.updateValueAndValidity();
+      freeLancer.updateValueAndValidity()
     })
   }
 
+  private onlyOneEmploymentTypeValidator(form: FormGroup): {} | null {
+    const freeLancerId = form.controls.freeLancerId.value;
+    const companyId = form.controls.companyId.value;
+
+    if (companyId && freeLancerId) {
+      return { twoEmploymentTypesSubmited: true }
+    }
+    return null;
+  }
+
 }
+
+
+// only one vaue should be submited freeLance or compnay id

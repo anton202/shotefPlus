@@ -3,10 +3,12 @@
   <form (ngSubmit)="onSignUp()" [formGroup]="signUpForm">
     <mat-form-field>
       <input matInput formControlName="email" type="email" placeholder="דואר אלקטרוני" >
+      <mat-error *ngIf="signUpForm.get('email').hasError('pattern')">מייל לא תקין</mat-error>
     </mat-form-field>
 
     <mat-form-field>
       <input class="password" matInput formControlName="password" type="text" placeholder="סיסמא">
+      <mat-error *ngIf="signUpForm.get('password').hasError('minlength')">סיסמא קצרה מידי</mat-error>
       <mat-hint>מינימום 6 תווים</mat-hint>
     </mat-form-field>
 
@@ -23,7 +25,7 @@
     <mat-form-field *ngIf="signUpForm.get('employmentType').value === 'company'">
       <input matInput formControlName="companyId" type="number" placeholder="מספר חברה" >
     </mat-form-field>
-
+    <mat-error *ngIf="signUpForm.hasError('twoEmploymentTypesSubmited')">לא ניתן להרשם עם שני סוגי עיסוק</mat-error>
     <button type="submit"  mat-flat-button color="primary">הרשם</button>
   </form>
 
