@@ -10,10 +10,10 @@ import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
-  statusMessage: string;
-  isSuccessfullyLogedIn: string;
-  displaySpinner: boolean = false;
-  signInForm: FormGroup;
+ public statusMessage: string;
+ public isSuccessfullyLogedIn: string;
+ public displaySpinner: boolean = false;
+ public signInForm: FormGroup;
 
   constructor(
     private signInService: SignInService,

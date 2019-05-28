@@ -9,10 +9,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./sign-up.component.css'],
 })
 export class SignUpComponent implements OnInit {
-  isSuccessfullyRegistrated: string;
-  displaySpinner: boolean = false;
-  statusMessage: string;
-  signUpForm: FormGroup;
+  public isSuccessfullyRegistrated: string;
+  public displaySpinner: boolean = false;
+  public statusMessage: string;
+  public signUpForm: FormGroup;
 
   constructor(private signUpService: SignUpService, private dialogRef: MatDialogRef<SignUpComponent>) { }
 
@@ -83,6 +83,3 @@ export class SignUpComponent implements OnInit {
   }
 
 }
-
-
-// only one vaue should be submited freeLance or compnay id

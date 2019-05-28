@@ -5,6 +5,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { SearchResultsService } from './search-results.service';
 import { EvidenceComponent } from '../evidence/evidence.component';
 import { data } from './data';
+import { SearchBusinessService } from '../search-business/search-business.service';
 @Component({
   selector: 'app-search-results',
   templateUrl: './search-results.component.html',
@@ -23,28 +24,20 @@ export class SearchResultsComponent implements OnInit {
   headerColumns = ['שם חברה', 'מספר חברה', 'ממוצע שוטף פלוס', 'ממוצע ימיי איחור'];
   dataSource = new MatTableDataSource(data);
   expandedElement: any
-  companyRecords;
-  searchStatus;
-  statusMessage;
+  companyReports: Array<{}>;
+  public isLoading:boolean = false;
 
   @ViewChild(MatPaginator) paginator: MatPaginator
 
-  constructor(private searchResultsService: SearchResultsService, private dialog: MatDialog) { }
+  constructor(private searchBusinessService: SearchBusinessService, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
 
-    this.searchResultsService.getCompanyRecords()
-      .subscribe(companyRecords => {
-        this.searchResultsService.showSppiner = false;
-        this.companyRecords = companyRecords
-      },
-        error => {
-          console.log('error')
-          this.searchResultsService.showSppiner = false
-          this.searchStatus = 'fail'
-          this.statusMessage = 'משהו התשבש, נסה שוב או פנה למפתח האתר'
-        })
+    this.searchBusinessService.reports
+      .subscribe(reports =>{
+        this.companyReports = reports
+      })
   }
 
   openEvidence(evidence: Array<string>): void {

@@ -9,8 +9,9 @@ import { SearchBusinessService } from './search-business.service';
   styleUrls: ['./search-business.component.css']
 })
 export class SearchBusinessComponent implements OnInit {
-  companyNameSuggestion: Array<any> = []
-  searchCompanyNameForm: FormGroup;
+ public companyNameSuggestion: Array<any> = []
+ public searchCompanyNameForm: FormGroup;
+ public isSearchig: boolean = false;
 
   constructor(private searchBusinessService: SearchBusinessService) { }
 
@@ -22,8 +23,13 @@ export class SearchBusinessComponent implements OnInit {
   }
 
   public onSearchSubmit(): void {
+    this.isSearchig = true;
     const companyName = this.searchCompanyNameForm.get('company_name').value;
-    this.searchBusinessService.companyName.next(companyName);
+    this.searchBusinessService.getCompnayReports(companyName)
+        .subscribe(companyReports =>{
+          this.isSearchig = false;
+          this.searchBusinessService.reports.next(companyReports)
+        })
   }
 
   public searchForCompanyName(): void {
