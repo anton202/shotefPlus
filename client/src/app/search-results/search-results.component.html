@@ -1,5 +1,5 @@
 <main >
-<table mat-table [dataSource]="headerData">
+<table mat-table [dataSource]="headerData" class="headerTable">
     <ng-container matColumnDef="שם חברה">
         <th mat-header-cell *matHeaderCellDef> שם חברה </th>
         <td mat-cell *matCellDef="let companyInfo"> {{companyInfo.name}} </td>

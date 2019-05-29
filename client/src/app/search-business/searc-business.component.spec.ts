@@ -20,7 +20,6 @@ describe('search business component test',()=>{
     let rootElement: DebugElement;
 
     const searchBusinessServiceStub = {
-         companyName: new Subject(),
         requestCompanyNameFromApi(nameOrNumber){
             return new Observable((observer)=>{
                 if(nameOrNumber === undefined){
