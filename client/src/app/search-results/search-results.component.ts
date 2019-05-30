@@ -49,8 +49,6 @@ export class SearchResultsComponent implements OnInit {
   // this function search the value typed in the input filed on the data object.
   // so if the value exist on the data object, this data returns to the user.
   applyFilter(filterValue: string): void {
-    console.log(typeof filterValue.trim().toLowerCase())
-
     this.dataSource.filter = filterValue.trim().toLowerCase().toString();
   }
 }

@@ -37,7 +37,7 @@ export class AppComponent implements OnInit {
     console.log('logOut')
   }
 
-  public confirmLogOut(){
+  public confirmLogOut(): void{
     const dialogRef = this.dailog.open(ConfirmActionComponent,{data:{text:'להתנתק מהמערכת?'}})
     dialogRef.afterClosed().subscribe(actionConfirmed =>{
       if(actionConfirmed){

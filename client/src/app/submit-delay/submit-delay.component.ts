@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SubmitDelayService } from './submit-delay.service'
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 import { SearchBusinessService } from '../search-business/search-business.service';
 import { AppService } from '../app.service';
@@ -15,13 +15,13 @@ import { FileValidator } from '../../../node_modules/ngx-material-file-input'
   styleUrls: ['./submit-delay.component.css']
 })
 export class SubmitDelayComponent implements OnInit {
-  companyNameSuggestion = []
-  submitDelayForm: FormGroup;
-  isLoading = false;
-  readingFiles = false;
-  submitionStatus;
-  statusMessage
-  totalMaxFilesSize = 10000000;
+  public companyNameSuggestion: Array<string> = []
+  public submitDelayForm: FormGroup;
+  public isLoading: boolean = false;
+  public readingFiles: boolean = false;
+  public submitionStatus: string;
+  public statusMessage: string
+  private totalMaxFilesSize: number = 10000000;
 
   constructor(
     private submitDelayService: SubmitDelayService,
@@ -34,49 +34,44 @@ export class SubmitDelayComponent implements OnInit {
   ngOnInit() {
     //initialize reactive form in ngOnInit for maitaining readabilety 
     this.submitDelayForm = new FormGroup({
-      'company_name': new FormControl(null, [this.componyNameDoesNotExist.bind(this),Validators.required]),
-      'shotef_plus': new FormControl(null,Validators.required),
+      'company_name': new FormControl(null, [this.componyNameDoesNotExist.bind(this), Validators.required]),
+      'shotef_plus': new FormControl(null, Validators.required),
       'days_of_delay': new FormControl(null, Validators.required),
       'comment': new FormControl(null),
-      'evidence': new FormControl(null,[this.sharedService.maxInputFiles,FileValidator.maxContentSize(this.totalMaxFilesSize)])
+      'evidence': new FormControl(null, [this.sharedService.maxInputFiles, FileValidator.maxContentSize(this.totalMaxFilesSize)])
     })
   }
 
-  onChange() {
-    if(this.submitDelayForm.value.evidence){
-    const files = this.submitDelayForm.value.evidence.files;
-    this.readingFiles = true;
-    this.sharedService.readFile(files)
-      .subscribe(files => { this.submitDelayForm.value.evidence = files; this.readingFiles = false }) // this line mutates submitDelayForm object (not good...)
+  public onChange(): void {
+    if (this.submitDelayForm.value.evidence) {
+      const files = this.submitDelayForm.value.evidence.files;
+      this.readingFiles = true;
+      this.sharedService.readFile(files)
+        .subscribe(files => { this.submitDelayForm.value.evidence = files; this.readingFiles = false }) // this line mutates submitDelayForm object (not good...)
     }
   }
 
-  submitDelay() {
+  public submitDelay(): MatDialogRef<SignInComponent> {
     // check if user is loged in. if not prompt sign-in dialog
     if (!this.appService.isAuthenticated) {
       return this.dialog.open(SignInComponent)
     }
-   
+
     this.isLoading = true
     this.submitDelayService.submitDelayToApi(this.submitDelayForm.value)
       .subscribe(() => {
-        this.isLoading = false;
-
-        this.submitionStatus = 'success';
-        this.statusMessage = 'הדוח דווח בהצלחה'
-        setTimeout(() => this.submitionStatus = null, 4000)
+        this.handelRespone('success','הדוח דווח בהצלחה')
+        this.submitDelayForm.reset()
+        this.submitDelayForm.controls['company_name'].untouched;
       },
         () => {
-          this.isLoading = false
-          this.submitionStatus = 'fail';
-          this.statusMessage = 'משהו השתבש בעת הדיווח,נסה שוב או פנה למפתח האתר'
-          setTimeout(() => this.submitionStatus = null, 4000)
+          this.handelRespone('fail','משהו השתבש בעת הדיווח, נסה שוב או פנה לתמיכה טכנית')
         }
       )
 
   }
 
-  searchForCompanyName() {
+  public searchForCompanyName(): void {
     this.searchBusinessService.requestCompanyNameFromApi(this.submitDelayForm.get('company_name').value)
       .subscribe(companyRecord => {
         this.companyNameSuggestion = companyRecord.result.records;
@@ -86,8 +81,15 @@ export class SubmitDelayComponent implements OnInit {
         })
   }
 
+  private handelRespone(status: string, message: string): void{
+    this.isLoading = false;
+    this.submitionStatus = status;
+    this.statusMessage = message;
+    setTimeout(() => this.submitionStatus = null, 6000)
+  }
+
   //form control company_name validator
-  componyNameDoesNotExist(control: FormControl) {
+ private componyNameDoesNotExist(control: FormControl): boolean | {} {
     if (this.companyNameSuggestion.length === 0) {
       return { 'companyNameDoesNotExist': true }
     } else {
@@ -103,6 +105,6 @@ export class SubmitDelayComponent implements OnInit {
       }
     }
   }
-  
+
 }
 
