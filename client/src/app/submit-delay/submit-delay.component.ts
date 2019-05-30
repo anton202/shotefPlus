@@ -15,7 +15,7 @@ import { FileValidator } from '../../../node_modules/ngx-material-file-input'
   styleUrls: ['./submit-delay.component.css']
 })
 export class SubmitDelayComponent implements OnInit {
-  public companyNameSuggestion: Array<string> = []
+  public companyNameSuggestion: Array<{}> = []
   public submitDelayForm: FormGroup;
   public isLoading: boolean = false;
   public readingFiles: boolean = false;
