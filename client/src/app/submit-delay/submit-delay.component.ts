@@ -45,6 +45,7 @@ export class SubmitDelayComponent implements OnInit {
   public onChange(): void {
     if (this.submitDelayForm.value.evidence) {
       const files = this.submitDelayForm.value.evidence.files;
+      console.log(files)
       this.readingFiles = true;
       this.sharedService.readFile(files)
         .subscribe(files => { this.submitDelayForm.value.evidence = files; this.readingFiles = false }) // this line mutates submitDelayForm object (not good...)
@@ -62,13 +63,11 @@ export class SubmitDelayComponent implements OnInit {
       .subscribe(() => {
         this.handelRespone('success','הדוח דווח בהצלחה')
         this.submitDelayForm.reset()
-        this.submitDelayForm.controls['company_name'].untouched;
       },
         () => {
           this.handelRespone('fail','משהו השתבש בעת הדיווח, נסה שוב או פנה לתמיכה טכנית')
         }
       )
-
   }
 
   public searchForCompanyName(): void {

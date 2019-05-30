@@ -6,9 +6,9 @@ import { FormControl } from '@angular/forms';
   providedIn: 'root'
 })
 export class SharedService {
-  finishedReadingFiles = new Subject();
+  public finishedReadingFiles: Subject<boolean> = new Subject();
 
-  readFile(files) {
+  public readFile(files: Array<any>): Observable<any> {
     return new Observable((observer) => {
       const encodedFiles = [];
       const fileReader = new FileReader();
@@ -31,7 +31,7 @@ export class SharedService {
   }
 
   // max 4 images validator
-  maxInputFiles(control: FormControl) {
+ public maxInputFiles(control: FormControl) {
     if (control.value) {
       const filesAmount = control.value.files.length;
       return filesAmount <= 4 ? null : { maxInputFiles: { valid: false } }
