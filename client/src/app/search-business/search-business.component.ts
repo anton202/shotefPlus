@@ -9,9 +9,11 @@ import { SearchBusinessService } from './search-business.service';
   styleUrls: ['./search-business.component.css']
 })
 export class SearchBusinessComponent implements OnInit {
- public companyNameSuggestion: Array<any> = []
- public searchCompanyNameForm: FormGroup;
- public isSearchig: boolean = false;
+  public companyNameSuggestion: Array<any> = []
+  public searchCompanyNameForm: FormGroup;
+  public isSearchig: boolean = false;
+  public searchStatus: string;
+  public errorMessage: string;
 
   constructor(private searchBusinessService: SearchBusinessService) { }
 
@@ -26,9 +28,14 @@ export class SearchBusinessComponent implements OnInit {
     this.isSearchig = true;
     const companyName = this.searchCompanyNameForm.get('company_name').value;
     this.searchBusinessService.getCompnayReports(companyName)
-        .subscribe(companyReports =>{
+      .subscribe(companyReports => {
+        this.isSearchig = false;
+        this.searchBusinessService.reports.next(companyReports)
+      },
+        error => {
           this.isSearchig = false;
-          this.searchBusinessService.reports.next(companyReports)
+          this.searchStatus = 'fail'
+          this.errorMessage = 'משהו השתבש בחיפוש נסה שוב או פנה לתיכה טכנית'
         })
   }
 
@@ -56,7 +63,7 @@ export class SearchBusinessComponent implements OnInit {
       if (isCompanyNameExist.indexOf(true) !== -1) {
         return null
       } else {
-        
+
         return { 'companyNameDoesNotExist': true }
       }
     }
