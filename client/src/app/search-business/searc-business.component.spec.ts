@@ -65,7 +65,7 @@ describe('search business component test',()=>{
         expect(searchCompanyInput.valid).toBeTruthy()
     })
 
-    it('search company input should be invalid if company name exist in api',()=>{
+    it('search company input should be invalid if company name does not exist in api',()=>{
          let searchCompanyInput = component.searchCompanyNameForm.controls['company_name']
         component.companyNameSuggestion = [{'שם חברה':'בתי זיקוק לנפט'}]
         searchCompanyInput.setValue('שלג הנדסה בעמ');

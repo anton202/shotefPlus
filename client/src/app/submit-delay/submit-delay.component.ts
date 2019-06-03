@@ -6,7 +6,7 @@ import { MatDialog, MatDialogRef } from '@angular/material';
 import { SearchBusinessService } from '../search-business/search-business.service';
 import { AppService } from '../app.service';
 import { SignInComponent } from '../sign-in/sign-in.component';
-import { SharedService } from '../shared/shared.service';
+import { SharedService } from '../shared/services/shared.service';
 import { FileValidator } from '../../../node_modules/ngx-material-file-input'
 
 @Component({

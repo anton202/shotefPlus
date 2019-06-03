@@ -16,7 +16,7 @@ import { SearchBusinessService } from '../search-business/search-business.servic
 import { SubmitDelayService } from './submit-delay.service'
 import { AppService } from '../app.service';
 import { SignInComponent } from '../sign-in/sign-in.component';
-import { SharedService } from '../shared/shared.service';
+import { SharedService } from '../shared/services/shared.service';
 import { FileValidator } from '../../../node_modules/ngx-material-file-input'
 import { SubmitDelayComponent } from './submit-delay.component';
 import { StatusMessageComponent } from '../shared/status-message/status-message.component'

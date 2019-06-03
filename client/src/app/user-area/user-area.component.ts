@@ -1,15 +1,13 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-
 import { MatDialog } from '@angular/material';
-
 import { UserAreaService } from './user-area.service';
-import { SharedService } from '../shared/shared.service';
+import { SharedService } from '../shared/services/shared.service';
 import { editReport } from '../shared/models/edit-report'
 import { FileValidator } from '../../../node_modules/ngx-material-file-input'
-
 import { data } from './data';
 import { EvidenceComponent } from '../evidence/evidence.component';
+import { ConfirmActionComponent } from '../shared/confirm-action/confirm-action.component';
 
 
 @Component({
@@ -39,7 +37,7 @@ export class UserAreaComponent implements OnInit {
   }
 
   public confirmSaveChanges(report: editReport, reportId: string, idx: number): void {
-    this.userAreaService.confirmAction('לשמור שינויים?')
+    this.confirmAction('לשמור שינויים?')
       .subscribe(actinConfiremd => {
         if (actinConfiremd) {
           this.saveChanges(report, reportId, idx)
@@ -48,7 +46,7 @@ export class UserAreaComponent implements OnInit {
   }
 
   public confirmDeleteReport(reportId: string, idx: number): void {
-    this.userAreaService.confirmAction('למחוק דיווח?')
+    this.confirmAction('למחוק דיווח?')
       .subscribe(actinConfiremd => {
         if (actinConfiremd) {
           this.deleteReport(reportId, idx)
@@ -57,7 +55,7 @@ export class UserAreaComponent implements OnInit {
   }
 
   public confirmDeleteEvidence(reportId: string, evidenceUrl: string, idx: number): void {
-    this.userAreaService.confirmAction('למחוק הוכחה?')
+    this.confirmAction('למחוק הוכחה?')
       .subscribe(actionConfirmed => {
         if (actionConfirmed) {
           this.deleteEvidence(reportId, evidenceUrl, idx)
@@ -139,4 +137,8 @@ export class UserAreaComponent implements OnInit {
     this.dialog.open(EvidenceComponent, { data: [evidence], panelClass: 'evidence' })
   }
 
+  public confirmAction(text: string){
+    const dialogRef = this.dialog.open(ConfirmActionComponent,{data:{text}});
+    return dialogRef.afterClosed()
+ }
 }
