@@ -14,7 +14,7 @@ describe('submit delay service', () => {
         })
     })
 
-    describe('submit delay tp api', () => {
+    describe('submit delay t0 api', () => {
         let submitDelayService: SubmitDelayService;
         let httpTestingController: HttpTestingController;
 

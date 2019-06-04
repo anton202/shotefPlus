@@ -42,7 +42,6 @@ export class SearchBusinessComponent implements OnInit {
   public searchForCompanyName(): void {
     this.searchBusinessService.requestCompanyNameFromApi(this.searchCompanyNameForm.get('company_name').value)
       .subscribe(companyRecord => {
-        console.log(companyRecord)
         this.companyNameSuggestion = companyRecord.result.records;
       },
         error => {

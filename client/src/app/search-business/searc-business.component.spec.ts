@@ -12,6 +12,7 @@ import { MaterialModule } from '../material.module';
 
 import { SearchBusinessComponent } from './search-business.component';
 import { SearchBusinessService } from './search-business.service';
+import { StatusMessageComponent } from '../shared/status-message/status-message.component'
 import { Observable, Subject } from 'rxjs';
 
 describe('search business component test',()=>{
@@ -32,7 +33,7 @@ describe('search business component test',()=>{
 
     beforeEach(()=>{
         TestBed.configureTestingModule({
-            declarations:[SearchBusinessComponent],
+            declarations:[SearchBusinessComponent, StatusMessageComponent],
             imports:[MaterialModule,ReactiveFormsModule,FormsModule],
             providers: [{provide:SearchBusinessService, useValue:searchBusinessServiceStub}]
         })
