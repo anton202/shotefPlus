@@ -2,7 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { UserAreaService } from './user-area.service';
-import { SharedService } from '../shared/services/shared.service';
+import { ReadImgService } from '../shared/services/readImg.service';
+import { ValidatorsService } from '../shared/services/validators.service'
 import { editReport } from '../shared/models/edit-report'
 import { FileValidator } from '../../../node_modules/ngx-material-file-input'
 import { data } from './data';
@@ -27,12 +28,17 @@ export class UserAreaComponent implements OnInit {
   private reportDomIdx: number;
   public readingFilesErrorMessage: string;
 
-  constructor(private userAreaService: UserAreaService, private sharedService: SharedService, private dialog: MatDialog) { }
+  constructor(
+    private userAreaService: UserAreaService,
+    private readImgService: ReadImgService,
+    private dialog: MatDialog,
+    private validatorsService: ValidatorsService
+  ) { }
 
   ngOnInit() {
     this.userAreaService.getRecords();
     this.fileInput = new FormGroup({
-      'evidence': new FormControl(null, [this.sharedService.maxInputFiles, FileValidator.maxContentSize(this.totalMaxFilesSize)])
+      'evidence': new FormControl(null, [this.validatorsService.maxInputFiles, FileValidator.maxContentSize(this.totalMaxFilesSize)])
     })
   }
 
@@ -67,16 +73,16 @@ export class UserAreaComponent implements OnInit {
     this.reportDomIdx = idx
     this.isProcessing = true
     report.evidence = this.fileInput.value.evidence
-    console.log(idx, this.reportDomIdx)
-      this.userAreaService.saveChanges(reportId, report)
-        .subscribe(() => {
-          this.handelResponse('השינויים נשמרו בהצלחה.', 'success');
-        },
-          error => {
-            this.handelResponse('משהו השתבש..., נסה שוב או פנה למפתח האתר.', 'fail');
+    
+    this.userAreaService.saveChanges(reportId, report)
+      .subscribe(() => {
+        this.handelResponse('השינויים נשמרו בהצלחה.', 'success');
+      },
+        error => {
+          this.handelResponse('משהו השתבש..., נסה שוב או פנה למפתח האתר.', 'fail');
 
-          }
-        )
+        }
+      )
   }
 
   private deleteReport(reportId: string, idx: number): void {
@@ -95,20 +101,20 @@ export class UserAreaComponent implements OnInit {
   private deleteEvidence(reportId: string, evidenceUrl: string, idx: number): void {
     this.isProcessing = true
     this.reportDomIdx = idx
-      this.userAreaService.deleteEvidence(reportId, evidenceUrl)
-        .subscribe(() => {
-          this.handelResponse('ההוכחה נמחקה בהצלחה', 'success');
-        },
-          error => {
-            this.handelResponse('משהו השתבש...,נסה שוב או פנה לפתח האתר.', 'fail');
-          })
+    this.userAreaService.deleteEvidence(reportId, evidenceUrl)
+      .subscribe(() => {
+        this.handelResponse('ההוכחה נמחקה בהצלחה', 'success');
+      },
+        error => {
+          this.handelResponse('משהו השתבש...,נסה שוב או פנה לפתח האתר.', 'fail');
+        })
   }
 
   public readEvidence(): void {
     if (this.fileInput.value.evidence) {
       this.readingFiles = true;
       const files = this.fileInput.value.evidence.files;
-      this.sharedService.readFile(files)
+      this.readImgService.readFile(files)
         .subscribe(files => {
           this.readingFiles = false;
           this.fileInput.value.evidence = files;
@@ -137,8 +143,8 @@ export class UserAreaComponent implements OnInit {
     this.dialog.open(EvidenceComponent, { data: [evidence], panelClass: 'evidence' })
   }
 
-  public confirmAction(text: string){
-    const dialogRef = this.dialog.open(ConfirmActionComponent,{data:{text}});
+  public confirmAction(text: string) {
+    const dialogRef = this.dialog.open(ConfirmActionComponent, { data: { text } });
     return dialogRef.afterClosed()
- }
+  }
 }

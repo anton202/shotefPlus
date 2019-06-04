@@ -6,7 +6,8 @@ import { MatDialog, MatDialogRef } from '@angular/material';
 import { SearchBusinessService } from '../search-business/search-business.service';
 import { AppService } from '../app.service';
 import { SignInComponent } from '../sign-in/sign-in.component';
-import { SharedService } from '../shared/services/shared.service';
+import { ReadImgService } from '../shared/services/readImg.service';
+import { ValidatorsService } from '../shared/services/validators.service'
 import { FileValidator } from '../../../node_modules/ngx-material-file-input'
 
 @Component({
@@ -28,7 +29,8 @@ export class SubmitDelayComponent implements OnInit {
     private searchBusinessService: SearchBusinessService,
     private dialog: MatDialog,
     private appService: AppService,
-    private sharedService: SharedService
+    private readImgService: ReadImgService,
+    private validatorsService: ValidatorsService
   ) { }
 
   ngOnInit() {
@@ -38,7 +40,7 @@ export class SubmitDelayComponent implements OnInit {
       'shotef_plus': new FormControl(null, Validators.required),
       'days_of_delay': new FormControl(null, Validators.required),
       'comment': new FormControl(null),
-      'evidence': new FormControl(null, [this.sharedService.maxInputFiles, FileValidator.maxContentSize(this.totalMaxFilesSize)])
+      'evidence': new FormControl(null, [this.validatorsService.maxInputFiles, FileValidator.maxContentSize(this.totalMaxFilesSize)])
     })
   }
 
@@ -47,7 +49,7 @@ export class SubmitDelayComponent implements OnInit {
       const files = this.submitDelayForm.value.evidence.files;
       console.log(files)
       this.readingFiles = true;
-      this.sharedService.readFile(files)
+      this.readImgService.readFile(files)
         .subscribe(files => { this.submitDelayForm.value.evidence = files; this.readingFiles = false }) // this line mutates submitDelayForm object (not good...)
     }
   }
