@@ -8,7 +8,7 @@ import { Observable, Subject } from 'rxjs';
 })
 export class ReadImgService {
  
-  public readFile(files: Array<any>): Observable<any> {
+  public readFile(files: Array<Blob>): Observable<any> {
     return new Observable((observer) => {
       const encodedFiles = [];
       const fileReader = new FileReader();
