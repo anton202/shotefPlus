@@ -11,14 +11,11 @@ export class UserAreaService {
     apiUrl = environment.apiUrl;
     token = localStorage.getItem('token')
     headers = new HttpHeaders().set('Authorization', this.token);
-    errorMessage = 'משהו השתבש, נסה שוב או פנה למפתח האתר.';
-    statusMessage;
-    isReportsFetched;
+
     constructor(private http: HttpClient) { }
 
-    public getRecords(): void {
-        this.http.get(this.apiUrl, { headers: this.headers })
-            .subscribe(() => console.log('success'), error => { this.isReportsFetched = 'fail'; this.statusMessage = this.errorMessage })
+    public getReports(): Observable<any> {
+       return this.http.get(this.apiUrl, { headers: this.headers })   
     }
 
     public saveChanges(reportId: string, report: editReport): Observable<any> {

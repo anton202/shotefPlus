@@ -1,15 +1,16 @@
+<!-- css classes: companyName, firstExpansionPanel, openEvidence are for e2e testing -->
 <div class="userAreaContainer">
   <h1>הדיווחים שלי</h1>
   <div class="main">
-    <app-status-message *ngIf="userAreaService.isReportsFetched" [messageType]="userAreaService.isReportsFetched" [message]="userAreaService.statusMessage" ></app-status-message>
+    <app-status-message *ngIf="!isReportsFetched" [messageType]="reportsFetchingmessageType" [message]="reportsFetchingErrorMessage" ></app-status-message>
     <mat-accordion>
-      <mat-expansion-panel *ngFor="let company of reports">
+      <mat-expansion-panel *ngFor="let company of reports" class="firstExpansionPanel">
         <mat-expansion-panel-header>
-          <mat-panel-title>
+          <mat-panel-title class="companyName">
             {{company.name}}
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <mat-expansion-panel class="test" *ngFor="let report of company.reports; let i = index">
+        <mat-expansion-panel class="secondExpansionPanel" *ngFor="let report of company.reports; let i = index">
           <mat-expansion-panel-header>
             <mat-panel-title>
               דווח בתאריך: {{report.createdAt}} 
@@ -32,7 +33,7 @@
           <div class="form" *ngIf="!isProcessing && !messageStatus">
               <form #f="ngForm">
                 <mat-form-field>
-                  <input matInput type="number" [ngModel]="report.shotefPlus"  name="shotef_plus" placeholder="שוטף פלוס שסוכם בעסקה (30,40,60...)" required>
+                  <input matInput type="number" class="shotefPlus" [ngModel]="report.shotefPlus"  name="shotef_plus" placeholder="שוטף פלוס שסוכם בעסקה (30,40,60...)" required>
                 </mat-form-field>
 
                 <mat-form-field>
@@ -60,7 +61,7 @@
               <div *ngIf="report.evidence">
                 <p style="text-decoration:underline">הוכחות מוצרפות</p>
                 <div class="evidence" *ngFor="let evidence of report.evidence; let x = index">
-                  <span (click)="openEvidence(evidence)">הוכחה {{ x + 1}}</span>
+                  <span class="openEvidence" (click)="openEvidence(evidence)">הוכחה {{ x + 1}}</span>
                   <i class="material-icons deleteIcon" (click)="confirmDeleteEvidence(report._id,report.evidence,i)">
                       delete
                       </i>

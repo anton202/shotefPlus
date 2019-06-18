@@ -11,6 +11,7 @@ import { EvidenceComponent } from '../evidence/evidence.component';
 import { ConfirmActionComponent } from '../shared/confirm-action/confirm-action.component';
 
 
+
 @Component({
   selector: 'app-user-area',
   templateUrl: './user-area.component.html',
@@ -21,13 +22,16 @@ export class UserAreaComponent implements OnInit {
   public messageStatus: string;
   public reports: Array<{}> = data;
   public isProcessing: boolean = false;
-  messageType: string;
+  public messageType: string;
   public fileInput: FormGroup;
-  readingFiles: boolean = false;
+  public readingFiles: boolean = false;
+  public readingFilesErrorMessage: string;
+  public isReportsFetched: boolean = false
+  public reportsFetchingErrorMessage: string;
+  public reportsFetchingmessageType: string;
   private totalMaxFilesSize: number = 10000000;
   private reportDomIdx: number;
-  public readingFilesErrorMessage: string;
-
+  
   constructor(
     private userAreaService: UserAreaService,
     private readImgService: ReadImgService,
@@ -36,7 +40,16 @@ export class UserAreaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.userAreaService.getRecords();
+    this.userAreaService.getReports()
+      .subscribe(reports =>{
+        console.log(reports);
+        //this.reports = reports;
+        this.isReportsFetched = true;
+      },
+      error =>{
+        this.reportsFetchingmessageType = 'fail';
+        this.reportsFetchingErrorMessage = 'משהו השתבש, נסה שוב או פנה לתמיכה טכנית'
+      })
     this.fileInput = new FormGroup({
       'evidence': new FormControl(null, [this.validatorsService.maxInputFiles, FileValidator.maxContentSize(this.totalMaxFilesSize)])
     })

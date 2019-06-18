@@ -1,6 +1,6 @@
 export interface editReport {
     shotefPlus: number,
-    day_of_delay: string,
+    days_of_delay: number,
     comment: string,
     evidence: Array<string>
 }

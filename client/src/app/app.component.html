@@ -3,7 +3,7 @@
   <ul>
     <li (click)="openDialog()">
       <i class="material-icons">account_circle</i>
-      <span>{{appService.isAuthenticated?"אזור אישי":"התחבר"}}</span>
+      <span id="user">{{appService.isAuthenticated?"אזור אישי":"התחבר"}}</span>
     </li>
     <li (click)="openSignUpDialog()">
       <i class="material-icons">person_add</i>

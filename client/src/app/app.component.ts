@@ -20,11 +20,11 @@ export class AppComponent implements OnInit {
     this.appService.authenticateUser();
   }
 
-  openSignUpDialog() {
+  public openSignUpDialog() {
     this.dailog.open(SignUpComponent)
   }
 
-  openDialog() {
+  public openDialog() {
     if (this.appService.isAuthenticated) {
       // user area component
       this.dailog.open(UserAreaComponent,{panelClass:'userArea'})
@@ -33,7 +33,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  private logOut(){
+  public logOut(){
     console.log('logOut')
   }
 

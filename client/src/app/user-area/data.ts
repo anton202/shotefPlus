@@ -43,7 +43,7 @@ export const data = [
         ]
     },
     {
-        name: ' יוזף ובניו תעשיות מלט',
+        name: 'יוזף ובניו תעשיות מלט',
         reports: [
             {
                 shotefPlus: 30,

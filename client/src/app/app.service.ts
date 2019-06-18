@@ -17,6 +17,7 @@ export class AppService {
         //     this.http.get(this.apiUrl, { headers: new HttpHeaders().set('Authorization', token) })
         //         .subscribe(() => this.isAuthenticated = true)
         // }
-        setTimeout((()=>this.isAuthenticated = true),3000)
+         //setTimeout((()=>this.isAuthenticated = true),1000)
+        this.isAuthenticated = true
     }
 }
