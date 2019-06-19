@@ -1,3 +1,4 @@
+<!-- class: searchName is for testing -->
 <div class="container">
   <header>
     <h1>דווח על איחור בתשלום</h1>
@@ -7,7 +8,7 @@
     <p>*ניתן לדווח על תשלום שכן עמד בזמנים. לשם כך הזינו 0 בשורה: "ימיי איחור אחרי תקופת שוטף פלוס" וצרפו לפחות שני קבצי הוכחה.</p>
     <form (ngSubmit)="submitDelay()" [formGroup]="submitDelayForm">
       <mat-form-field>
-        <input (keypress)="searchForCompanyName()" matInput type="search" formControlName="company_name"
+        <input (keypress)="searchForCompanyName()" class="searchName" matInput type="search" formControlName="company_name"
           [matAutocomplete]="auto" placeholder="שם חברה/מספר חברה המאחרת בתשלום" >
         <mat-error *ngIf="submitDelayForm.get('company_name').hasError('companyNameDoesNotExist')">החברה לא נמצאת במאגר
           רשם החברות</mat-error>

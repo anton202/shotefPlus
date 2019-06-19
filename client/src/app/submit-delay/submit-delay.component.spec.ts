@@ -22,6 +22,7 @@ import { FileValidator } from '../../../node_modules/ngx-material-file-input'
 import { SubmitDelayComponent } from './submit-delay.component';
 import { StatusMessageComponent } from '../shared/status-message/status-message.component'
 import { Observable } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 
 describe('Submit-Delay Component', () => {
@@ -67,7 +68,7 @@ describe('Submit-Delay Component', () => {
         maxInputFiles() {
             return null
         },
-        maxContentSize(){
+        maxContentSize() {
             return null
         }
     }
@@ -142,18 +143,38 @@ describe('Submit-Delay Component', () => {
             const message = rootElement.query(By.css('app-status-message'))
             expect(message.nativeElement.innerText).toContain('משהו השתבש בעת הדיווח, נסה שוב או פנה לתמיכה טכנית')
         })
+
     })
 
-    describe('upload evidence',()=>{
-        it('should encode img  ',fakeAsync(()=>{
+    describe('upload evidence', () => {
+        it('should encode img  ', fakeAsync(() => {
             component.submitDelayForm.controls['evidence'].clearValidators();
-             component.submitDelayForm.controls['evidence'].setValue('test')
-             component.onChange();
-             tick(10000);
-             fixture.detectChanges();
-             expect(component.submitDelayForm.value.evidence[0]).toContain('encoded string')
-             
+            component.submitDelayForm.controls['evidence'].setValue('test')
+            component.onChange();
+            tick(10000);
+            fixture.detectChanges();
+            expect(component.submitDelayForm.value.evidence[0]).toContain('encoded string')
+
         }))
+    })
+
+    describe('search for company name', () => {
+        it('should call searchCompanyName', fakeAsync(() => {
+            spyOn(component,'searchForCompanyName');
+            const inputName = rootElement.query(By.css('.searchName'));
+            inputName.triggerEventHandler('keypress',component.searchForCompanyName);
+            expect(component.searchForCompanyName).toHaveBeenCalled()
+        }))
+
+        it('should populate companyNameSuggestion property with suggested names if exist',fakeAsync(()=>{
+            component.submitDelayForm.controls['company_name'].setValue('שלג');
+            component.searchForCompanyName();
+            tick(10000);
+            expect(component.companyNameSuggestion[0]).toEqual({ 'שם חברה': 'שלג הנדסה בעמ' })
+
+        }))
+
+        
     })
 
 })

@@ -18,6 +18,6 @@ export class AppService {
         //         .subscribe(() => this.isAuthenticated = true)
         // }
          //setTimeout((()=>this.isAuthenticated = true),1000)
-        this.isAuthenticated = true
+        this.isAuthenticated = false
     }
 }

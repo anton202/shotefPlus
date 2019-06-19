@@ -23,6 +23,7 @@ export class SubmitDelayComponent implements OnInit {
   public submitionStatus: string;
   public statusMessage: string
   private totalMaxFilesSize: number = 10000000;
+ 
 
   constructor(
     private submitDelayService: SubmitDelayService,
@@ -53,7 +54,7 @@ export class SubmitDelayComponent implements OnInit {
     }
   }
 
-  public submitDelay(): MatDialogRef<SignInComponent> {
+  public submitDelay(): MatDialogRef<SignInComponent> | void {
     // check if user is loged in. if not prompt sign-in dialog
     if (!this.appService.isAuthenticated) {
       return this.dialog.open(SignInComponent)
@@ -78,6 +79,7 @@ export class SubmitDelayComponent implements OnInit {
       },
         error => {
           console.log(error)
+          
         })
   }
 
