@@ -14,6 +14,7 @@ import { SearchBusinessComponent } from './search-business.component';
 import { SearchBusinessService } from './search-business.service';
 import { StatusMessageComponent } from '../shared/status-message/status-message.component'
 import { Observable, Subject } from 'rxjs';
+import { async } from 'q';
 
 describe('search business component test',()=>{
     let fixture: ComponentFixture<SearchBusinessComponent>;
@@ -21,12 +22,21 @@ describe('search business component test',()=>{
     let rootElement: DebugElement;
 
     const searchBusinessServiceStub = {
+        reports: new Subject(),
         requestCompanyNameFromApi(nameOrNumber){
             return new Observable((observer)=>{
                 if(nameOrNumber === undefined){
                     observer.error(false)
                 }
                 observer.next({result:{records:[{'שם חברה':'שלג הנדסה בעמ'}]}});
+            })
+        },
+        getCompnayReports(companyName){
+            return new Observable((observer)=>{
+                if(companyName === 'fail'){
+                    return observer.error(false)
+                }
+                observer.next([{companyName:'test',shotefPlus:30,delay:60}])
             })
         }
     }
@@ -51,6 +61,16 @@ describe('search business component test',()=>{
             component.searchForCompanyName();
             expect(component.companyNameSuggestion).toEqual([{'שם חברה':'שלג הנדסה בעמ'}])
         })
+
+        // it('should call requestCompanyNameFromApi',fakeAsync(()=>{
+        //     component.searchCompanyNameForm.controls['company_name'].setValue('שלג')
+        //     let spy = spyOn(searchBusinessServiceStub,'');
+            
+        //     component.searchForCompanyName();
+        //     tick(1000)
+        //     fixture.detectChanges()
+        //     expect(spy).toHaveBeenCalled()
+        // }))
     })
 
    describe('form validity',()=>{
@@ -73,10 +93,24 @@ describe('search business component test',()=>{
         
         expect(searchCompanyInput.valid).toBeFalsy()
     })
-
    })
    
+   describe('submit search',()=>{
+       it('should submit search',fakeAsync(()=>{
+           let spy = spyOn(searchBusinessServiceStub.reports,"next")
+           component.onSearchSubmit()
+           tick(10000)
+          expect(spy).toHaveBeenCalledWith([{companyName:'test',shotefPlus:30,delay:60}])
+       }))
 
+       it('should display error message if search failed',fakeAsync(()=>{
+        component.searchCompanyNameForm.controls['company_name'].setValue('fail')
+        component.onSearchSubmit();
+        fixture.detectChanges();
+        const errorMessage = rootElement.query(By.css('app-status-message'))
+        expect(errorMessage.nativeElement.innerText).toContain('משהו השתבש בחיפוש נסה שוב או פנה לתיכה טכנית')
+       }))
 })
 
 
+})

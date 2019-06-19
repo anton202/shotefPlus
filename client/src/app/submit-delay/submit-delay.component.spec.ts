@@ -23,6 +23,7 @@ import { SubmitDelayComponent } from './submit-delay.component';
 import { StatusMessageComponent } from '../shared/status-message/status-message.component'
 import { Observable } from 'rxjs';
 
+
 describe('Submit-Delay Component', () => {
     let fixture: ComponentFixture<SubmitDelayComponent>
     let component: SubmitDelayComponent;
@@ -55,7 +56,7 @@ describe('Submit-Delay Component', () => {
     }
 
     const readImgServiceStub = {
-        readFiles() {
+        readFile() {
             return new Observable((observer) => {
                 observer.next(['encoded string'])
             })
@@ -64,6 +65,9 @@ describe('Submit-Delay Component', () => {
 
     const validatorsServiceStub = {
         maxInputFiles() {
+            return null
+        },
+        maxContentSize(){
             return null
         }
     }
@@ -138,6 +142,18 @@ describe('Submit-Delay Component', () => {
             const message = rootElement.query(By.css('app-status-message'))
             expect(message.nativeElement.innerText).toContain('משהו השתבש בעת הדיווח, נסה שוב או פנה לתמיכה טכנית')
         })
+    })
+
+    describe('upload evidence',()=>{
+        it('should encode img  ',fakeAsync(()=>{
+            component.submitDelayForm.controls['evidence'].clearValidators();
+             component.submitDelayForm.controls['evidence'].setValue('test')
+             component.onChange();
+             tick(10000);
+             fixture.detectChanges();
+             expect(component.submitDelayForm.value.evidence[0]).toContain('encoded string')
+             
+        }))
     })
 
 })

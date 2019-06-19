@@ -47,7 +47,6 @@ export class SubmitDelayComponent implements OnInit {
   public onChange(): void {
     if (this.submitDelayForm.value.evidence) {
       const files = this.submitDelayForm.value.evidence.files;
-      console.log(files)
       this.readingFiles = true;
       this.readImgService.readFile(files)
         .subscribe(files => { this.submitDelayForm.value.evidence = files; this.readingFiles = false }) // this line mutates submitDelayForm object (not good...)
