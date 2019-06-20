@@ -7,12 +7,10 @@ import { MAT_DIALOG_DATA } from '@angular/material';
   styleUrls: ['./evidence.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class EvidenceComponent implements OnInit {
+export class EvidenceComponent {
   currentImg: number = 0;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
-
-  ngOnInit() {}
 
   changeImg(direction: string): void {
     if (direction === 'forward' && this.currentImg + 1 < this.data.evidence.length) {
