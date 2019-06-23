@@ -1,4 +1,4 @@
-import { browser, by, element, until } from 'protractor';
+import { browser, by, element } from 'protractor';
 import { data } from '../../src/app/user-area/data';
 
 export interface Report {
