@@ -12,7 +12,7 @@ module.exports = function (config) {
       require('karma-coverage-istanbul-reporter'),
       require('@angular-devkit/build-angular/plugins/karma')
     ],
-    reporters: ['junit'],    
+    reporters: ['dots','junit'],    
     junitReporter: { 
  outputDir: 'karma-results',    
  outputFile: 'karma-results.xml',
@@ -32,6 +32,6 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['ChromeHeadless'],
-    singleRun: false
+    singleRun: true
   });
 };
