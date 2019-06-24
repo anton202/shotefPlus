@@ -14,7 +14,7 @@ module.exports = function (config) {
     ],
     reporters: ['dots','junit'],    
     junitReporter: { 
- outputDir: 'karma-results',    
+ //outputDir: 'karma-results',    
  outputFile: 'karma-results.xml',
  suite: 'shotefPlus'    
     },
