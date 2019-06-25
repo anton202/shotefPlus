@@ -1,3 +1,5 @@
+const { SpecReporter } = require('jasmine-spec-reporter');
+
 exports.config = {
   allScriptsTimeout: 11000,
   specs: [
@@ -34,7 +36,7 @@ exports.config = {
       jasmine.getEnv().addReporter(specReporter);
     }
     require('ts-node').register({
-      project: 'e2e/tsconfig.json'
+      project: 'e2e/tsconfig.e2e.json'
     });
   }
 };
