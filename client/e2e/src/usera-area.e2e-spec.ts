@@ -91,23 +91,23 @@ describe('user area', () => {
         })
     })
 
-    // describe('report area',()=>{
-    //     it('should open evidence',()=>{
-    //         let matAccordion = element(by.tagName('mat-accordion'));
-    //         let matExpansionPanel = matAccordion.all(by.className('firstExpansionPanel')); 
-    //         matExpansionPanel.get(0).click();
+    describe('report area',()=>{
+        it('should open evidence',()=>{
+            let matAccordion = element(by.tagName('mat-accordion'));
+            let matExpansionPanel = matAccordion.all(by.className('firstExpansionPanel')); 
+            matExpansionPanel.get(0).click();
             
-    //         expect(element.all(by.className('secondExpansionPanel')).get(0).isPresent()).toBe(true)
+            expect(element.all(by.className('secondExpansionPanel')).get(0).isPresent()).toBe(true)
 
-    //         element.all(by.className('secondExpansionPanel')).get(0).click();
-    //         expect(element(by.tagName('form')).isPresent()).toBe(true)
+            element.all(by.className('secondExpansionPanel')).get(0).click();
+            expect(element(by.tagName('form')).isPresent()).toBe(true)
 
-    //         expect(element(by.className('evidence')).isPresent()).toBe(true)
+            expect(element(by.className('evidence')).isPresent()).toBe(true)
 
-    //         element(by.className('openEvidence')).click();
+            element(by.className('openEvidence')).click();
             
-    //         let evidence = element(by.className('evidenceDialog'))
-    //         expect(evidence.isDisplayed()).toBe(true)    
-    //     })
-    // })
+            let evidence = element(by.className('evidenceDialog'))
+            expect(evidence.isPresent()).toBe(true)    
+        })
+    })
 })

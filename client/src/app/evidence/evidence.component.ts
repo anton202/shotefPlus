@@ -11,7 +11,7 @@ export class EvidenceComponent {
   currentImg: number = 0;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) { 
-    
+    console.log(data.evidence)
   }
 
   changeImg(direction: string): void {
