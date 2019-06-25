@@ -1,5 +1,5 @@
 import { browser, by, element } from 'protractor';
-import { AppService } from '../../src/app/app.service';
+
 
 describe('app component',()=>{
     beforeEach(()=>{

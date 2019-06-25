@@ -10,7 +10,9 @@ import { MAT_DIALOG_DATA } from '@angular/material';
 export class EvidenceComponent {
   currentImg: number = 0;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { 
+    
+  }
 
   changeImg(direction: string): void {
     if (direction === 'forward' && this.currentImg + 1 < this.data.evidence.length) {
