@@ -13,11 +13,10 @@ module.exports = function (config) {
       require('karma-junit-reporter'),
       require('@angular-devkit/build-angular/plugins/karma')
     ],
-    reporters: ['progress','junit'],    
-    junitReporter: { 
- //outputDir: 'karma-results',    
- outputFile: 'karma-results.xml',
- suite: 'shotefPlus'    
+    reporters: ['progress', 'junit'],
+    junitReporter: {
+      outputFile: 'karma-results.xml',
+      suite: 'shotefPlus'
     },
     angularCli: {
       environment: 'dev',
