@@ -41,8 +41,8 @@ export class SearchBusinessComponent implements OnInit {
 
   public searchForCompanyName(): void {
     this.searchBusinessService.requestCompanyNameFromApi(this.searchCompanyNameForm.get('company_name').value)
-      .subscribe(companyRecord => {
-        this.companyNameSuggestion = companyRecord.result.records;
+      .subscribe(companyNames => {
+        this.companyNameSuggestion = companyNames;
       },
         error => {
           console.log(error)
@@ -54,8 +54,8 @@ export class SearchBusinessComponent implements OnInit {
     if (this.companyNameSuggestion.length === 0) {
       return { 'companyNameDoesNotExist': true }
     } else {
-      let isCompanyNameExist = this.companyNameSuggestion.map(companyRecord => {
-        if (companyRecord['שם חברה'] === control.value) {
+      let isCompanyNameExist = this.companyNameSuggestion.map(companyNames => {
+        if (companyNames === control.value) {
           return true;
         }
       })

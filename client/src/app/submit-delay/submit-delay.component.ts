@@ -16,7 +16,7 @@ import { FileValidator } from '../../../node_modules/ngx-material-file-input'
   styleUrls: ['./submit-delay.component.css']
 })
 export class SubmitDelayComponent implements OnInit {
-  public companyNameSuggestion: Array<{}> = []
+  public companyNameSuggestion: Array<string> = []
   public submitDelayForm: FormGroup;
   public isLoading: boolean = false;
   public readingFiles: boolean = false;
@@ -74,8 +74,8 @@ export class SubmitDelayComponent implements OnInit {
 
   public searchForCompanyName(): void {
     this.searchBusinessService.requestCompanyNameFromApi(this.submitDelayForm.get('company_name').value)
-      .subscribe(companyRecord => {
-        this.companyNameSuggestion = companyRecord.result.records;
+      .subscribe(companyNames => {
+        this.companyNameSuggestion = companyNames;
       },
         error => {
           console.log(error)
@@ -96,7 +96,7 @@ export class SubmitDelayComponent implements OnInit {
       return { 'companyNameDoesNotExist': true }
     } else {
       let isCompanyNameExist = this.companyNameSuggestion.map(companyRecord => {
-        if (companyRecord['שם חברה'] === control.value) {
+        if (companyRecord === control.value) {
           return true;
         }
       })
