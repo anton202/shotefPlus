@@ -18,11 +18,12 @@ function byNumber(req, res) {
     const companyNumber = req.params.number
     const companeNamesSuggestion = [];
 
-    for (let i = 0; i < companyNames[excelSheetName].length; i++)
+    for (let i = 0; i < companyNames[excelSheetName].length; i++){
         if (companyNames[excelSheetName][i].number.toString().includes(companyNumber) && companeNamesSuggestion.length <= 10) {
             companeNamesSuggestion.push(companyNames[excelSheetName][i].name)
         }
-    res.send(companeNamesSuggestion);
+    }
+        companeNamesSuggestion.length === 0 ? res.status(404).end() : res.send(companeNamesSuggestion); 
 }
 
 exports.byName = byName;

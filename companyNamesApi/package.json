@@ -9,9 +9,13 @@
     "cors": "^2.8.5",
     "express": "^4.17.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "mocha": "^6.1.4"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "NODE_OPTIONS='--max-old-space-size=4096' ./node_modules/mocha/bin/mocha tests/*.js --reporter spec  "
   },
   "author": "",
   "license": "ISC"
