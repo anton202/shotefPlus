@@ -11,7 +11,7 @@ function byName(req, res) {
             companeNamesSuggestion.push(companyNames[excelSheetName][i].name)
         }
     }
-    res.send(companeNamesSuggestion)
+    companeNamesSuggestion.length === 0 ? res.status(404).end() : res.send(companeNamesSuggestion); 
 }
 
 function byNumber(req, res) {
