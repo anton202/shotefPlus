@@ -1,4 +1,4 @@
-const companyNames = require('../convertedExcel/companyNames');
+const companyNames = require('../data/companyNames.json')
 const excelSheetName = Object.keys(companyNames)[0];
 
 function byName(req, res) {

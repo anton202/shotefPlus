@@ -1,6 +1,6 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const app = require('../index');
+const app = require('../app');
 
 chai.use(chaiHttp);
 chai.should();
@@ -15,7 +15,7 @@ describe('find company', () => {
     })
 
     it('should return 404 if company name dose not exist', (done) => {
-        chai.request(app).get('/findCompany/byName/' + encodeURIComponent('שכלךמדחעמקחנעקםנעמןקמה'))
+        chai.request(app).get('/cefindCompany/byName/' + encodeURIComponent('שכלךמדחעמקחנעקםנעמןקמה'))
             .end((err, res) => {
                 res.should.have.status(404);
                 done();
