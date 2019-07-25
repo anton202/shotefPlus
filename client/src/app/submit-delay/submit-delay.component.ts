@@ -79,7 +79,6 @@ export class SubmitDelayComponent implements OnInit {
       },
         error => {
           console.log(error)
-          
         })
   }
 

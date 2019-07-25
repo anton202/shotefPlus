@@ -14,6 +14,7 @@
   "dependencies": {
     "@angular/animations": "^6.1.0",
     "@angular/cdk": "^6.2.0",
+    "@angular/cli": "^8.1.2",
     "@angular/common": "^6.1.0",
     "@angular/compiler": "^6.1.0",
     "@angular/core": "^6.1.0",
@@ -26,12 +27,12 @@
     "core-js": "^2.5.4",
     "hammerjs": "^2.0.8",
     "ngx-material-file-input": "^1.1.1",
+    "nyc": "^14.1.1",
     "rxjs": "~6.2.0",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.12.4",
-    "@angular/cli": "~6.2.4",
     "@angular/compiler-cli": "^8.1.2",
     "@angular/language-service": "^6.1.0",
     "@types/jasmine": "~2.8.8",
@@ -49,6 +50,6 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
-    "typescript": "~2.9.2"
+    "typescript": "^3.4.5"
   }
 }
