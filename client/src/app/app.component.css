@@ -1,3 +1,12 @@
+  
+  
+  @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    ul>li:nth-child(3) {
+      margin-right: 65%;
+    }
+  }
+
+  
   header {
     color: white;
     background-color: #0086c3;
@@ -51,7 +60,6 @@
     height: auto;
   }
 
-  @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {}
 
 
   @media (min-width: 320px) and (max-width: 480px) {
@@ -68,3 +76,4 @@
     }
 
   }
+  
